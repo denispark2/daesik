@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>2026 광주빵페스타 블로그 후기 50건 — 좋았던 점·아쉬운 점 top 5</title>
+<style>
+body{font-family:sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;color:#0b0b0b;background:#fcfcfb}
+h1{font-size:20px;font-weight:500}h2{font-size:15px;font-weight:500;margin:2rem 0 4px}
+.note{font-size:12px;color:#898781;margin:0 0 8px}.box{position:relative;height:300px}
+</style>
+</head>
+<body>
+<h1>2026 광주빵페스타 블로그 후기 50건 — 좋았던 점·아쉬운 점 top 5</h1>
+<p class="note">자료: reviews.csv (네이버 블로그, 게시일 2026-10-23 ~ 11-13) · 분류: Claude 판단 (analysis.md) · 한 후기가 여러 주제에 들어갈 수 있음</p>
+<h2>좋았던 점 top 5 (언급 수)</h2>
+<p class="note">무료 입장·아이 체험은 4건으로 공동 5위</p>
+<div class="box" style="height:320px"><canvas id="good" role="img" aria-label="좋았던 점: 빵 외 볼거리 8, 시식 7, 유명 빵집 한자리 6, 빵 맛 칭찬 5, 무료 입장 4, 아이 체험 4"></canvas></div>
+<h2>아쉬운 점 top 5 (언급 수)</h2>
+<div class="box" style="height:280px"><canvas id="bad" role="img" aria-label="아쉬운 점: 긴 줄 11, 주차 7, 품절 6, 맛 불만 4, 라인업 3"></canvas></div>
+<h2>비 언급 (차트 외)</h2>
+<p style="font-size:14px;line-height:1.7">14건 (3, 11, 13, 14, 17, 19, 20, 21, 24, 26, 27, 32, 33, 36). 영향은 엇갈림 — 한산·여유 (3, 32), 구경에 큰 불편 없음 (26) / 비 와도 사람 많음 (11, 20, 33), 우산 필요 (24), 아쉬움 (19).</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const vl={id:'vl',afterDatasetsDraw(c){const x=c.ctx;x.save();x.fillStyle='#0b0b0b';x.font='500 13px sans-serif';x.textBaseline='middle';
+c.getDatasetMeta(0).data.forEach((b,i)=>x.fillText(c.data.datasets[0].data[i]+'건',b.x+6,b.y));x.restore();}};
+function make(id,labels,data,color,rows){new Chart(document.getElementById(id),{type:'bar',plugins:[vl],
+data:{labels,datasets:[{data,backgroundColor:color,borderRadius:{topRight:4,bottomRight:4},borderSkipped:'start',barThickness:22}]},
+options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:40}},
+plugins:{legend:{display:false},tooltip:{callbacks:{label:t=>t.raw+'건',afterLabel:t=>'행 번호: '+rows[t.dataIndex]}}},
+scales:{x:{beginAtZero:true,max:12,ticks:{stepSize:2,color:'#898781'},grid:{color:'#e1e0d9'},border:{display:false}},
+y:{ticks:{color:'#0b0b0b',font:{size:13}},grid:{display:false}}}}});}
+make('good',['빵 외 볼거리 (커피·책·플리마켓)','시식','유명 빵집 한자리','특정 빵 맛 칭찬','무료 입장','아이 체험'],[8,7,6,5,4,4],'#2a78d6',
+['2, 7, 31, 38, 40, 42, 46, 49','6, 18, 23, 24, 38, 40, 50','6, 15, 18, 40, 46, 47','14, 22, 25, 30, 38','2, 12, 18, 29','6, 24, 28, 39']);
+make('bad',['인기 부스 긴 줄','주차 어려움','원하는 빵 품절','맛·취향 불만','라인업·규모 아쉬움'],[11,7,6,4,3],'#eb6834',
+['8, 12, 17, 18, 23, 25, 30, 35, 39, 46, 47','7, 11, 17, 20, 24, 48, 49','11, 16, 18, 23, 25, 48','5, 7, 14, 25','41, 45, 49']);
+</script>
+</body>
+</html>
