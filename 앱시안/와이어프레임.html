@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>와이어프레임 — 베이커리 사장님 앱 (핵심 5화면)</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:32px;background:#f2f2f2;color:#222;font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:13px}
+h1{font-size:20px;margin:0 0 4px}
+.sub{color:#666;margin:0 0 24px}
+.tag{display:inline-block;border:1px dashed #999;padding:2px 8px;border-radius:4px;color:#555;font-size:11px;margin-left:6px}
+.row{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;margin-bottom:40px}
+.label{font-weight:bold;margin:0 0 8px;font-size:14px}
+.note{color:#666;font-size:11.5px;margin:8px 0 0;max-width:340px;line-height:1.5}
+.phone{width:340px;background:#fff;border:2px solid #333;border-radius:28px;padding:14px 14px 64px;min-height:680px;position:relative}
+.phone .bar{height:22px;border-bottom:1px solid #ddd;margin:-4px -4px 10px;display:flex;justify-content:space-between;font-size:11px;color:#888;padding:0 8px}
+.web{width:860px;background:#fff;border:2px solid #333;border-radius:8px;overflow:hidden}
+.web .top{height:34px;border-bottom:1px solid #ccc;background:#eee;display:flex;align-items:center;padding:0 12px;gap:6px}
+.web .top i{width:10px;height:10px;border-radius:50%;border:1px solid #999;display:inline-block}
+.web .body{display:flex;min-height:560px}
+.web .side{width:160px;border-right:1px solid #ddd;padding:14px 10px;background:#fafafa}
+.web .side div{padding:7px 8px;border-radius:4px;margin-bottom:2px;color:#555}
+.web .side .on{background:#ddd;color:#111;font-weight:bold}
+.web .main{flex:1;padding:18px 22px}
+.box{border:1px solid #bbb;border-radius:6px;padding:10px 12px;margin-bottom:10px}
+.box.dash{border-style:dashed}
+.h{font-weight:bold;margin:0 0 6px}
+.big{font-size:22px;font-weight:bold}
+.muted{color:#777}
+.grid{display:grid;gap:8px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+table{width:100%;border-collapse:collapse}
+th,td{border-bottom:1px solid #ddd;padding:6px 4px;text-align:left}
+th{color:#666;font-weight:normal;font-size:12px}
+td.n,th.n{text-align:right}
+.btn{display:inline-block;border:1.5px solid #333;border-radius:6px;padding:8px 12px;text-align:center;font-weight:bold}
+.btn.full{display:block;margin-top:10px}
+.btn.ghost{border-style:dashed;color:#555;font-weight:normal}
+.step{display:inline-flex;align-items:center;border:1px solid #999;border-radius:4px}
+.step span{padding:2px 8px}.step b{padding:2px 10px;border-left:1px solid #999;border-right:1px solid #999}
+.ph{background:repeating-linear-gradient(45deg,#eee,#eee 6px,#f8f8f8 6px,#f8f8f8 12px);border:1px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#888}
+.barline{height:10px;background:#ddd;border-radius:3px;position:relative}
+.barline b{position:absolute;left:0;top:0;bottom:0;background:#888;border-radius:3px}
+.tabbar{position:absolute;left:0;right:0;bottom:0;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 0 10px;font-size:11px;color:#777;border-radius:0 0 26px 26px;background:#fff}
+.tabbar .on{color:#111;font-weight:bold}
+.callout{counter-increment:c;display:inline-flex;width:18px;height:18px;border-radius:50%;background:#333;color:#fff;font-size:11px;align-items:center;justify-content:center;margin-right:4px}
+</style>
+</head>
+<body>
+<h1>베이커리 사장님 앱 — 와이어프레임 (핵심 5화면)<span class="tag">와이어프레임 · 디자인 아님</span><span class="tag">숫자는 모두 가상 데이터</span></h1>
+<p class="sub">작성 2026-11-17 · 기준: 앱기획안.md, 앱시안/화면목록.md, 앱시안/가상데이터/ · 화면 구성은 [Claude 제안]</p>
+
+<div class="row">
+<!-- M1 -->
+<div>
+<p class="label">M1 · 홈 (오늘) — 휴대폰</p>
+<div class="phone">
+  <div class="bar"><span>9:00</span><span>가상 빵집</span></div>
+  <div class="box"><span class="muted">11월 17일 (화) · 흐림</span><div class="muted" style="font-size:11px">영업 09:00~20:00</div></div>
+  <div class="grid g2">
+    <div class="box"><div class="muted">오늘 예상 매출</div><div class="big">32.4만</div></div>
+    <div class="box"><div class="muted">오늘 예상 이익</div><div class="big">8.9만</div><div class="muted" style="font-size:11px">재료비·유지비 뺀 값</div></div>
+  </div>
+  <div class="box"><div class="h">오늘 할 일</div>
+    <div>☐ 생산 계획 확정 <span class="muted">(추천 7개 제품)</span></div>
+    <div>☐ 재료 확인 <span class="muted">(발효버터 부족)</span></div>
+    <div>☐ 마감 입력 <span class="muted">(20:00 이후)</span></div>
+  </div>
+  <div class="box dash"><div class="h">알림</div>
+    <div>· 지난주 진단 리포트가 도착했어요</div>
+    <div>· 목요일 비 예보 — 생산 −20% 검토</div>
+  </div>
+  <div class="btn full">오늘 생산 계획 보기 →</div>
+  <div class="tabbar"><span class="on">홈</span><span>생산</span><span>판매</span><span>마감</span><span>더보기</span></div>
+</div>
+<p class="note"><span class="callout">1</span>앱을 열면 오늘 날씨·예상 매출·예상 이익과 할 일 3개만 보여줌. 예상 이익 = 예상 매출 − 재료비(추천 생산량 기준) − 카드 수수료 − 하루 유지비(15.3만).</p>
+</div>
+
+<!-- M2 -->
+<div>
+<p class="label">M2 · 오늘 생산 계획 — 휴대폰</p>
+<div class="phone">
+  <div class="bar"><span>9:01</span><span>생산 계획</span></div>
+  <div class="box"><span class="muted">11/17 (화) · 흐림 → 손님 약 5% 감소 예상</span></div>
+  <table>
+    <tr><th>제품</th><th class="n">지난 화 4번</th><th class="n">추천</th><th class="n">수정</th></tr>
+    <tr><td>소금빵</td><td class="n muted">27·26·25·29</td><td class="n"><b>29</b></td><td class="n"><span class="step"><span>−</span><b>29</b><span>+</span></span></td></tr>
+    <tr><td>크루아상</td><td class="n muted">13·14·11·14</td><td class="n"><b>15</b></td><td class="n"><span class="step"><span>−</span><b>15</b><span>+</span></span></td></tr>
+    <tr><td>단팥빵</td><td class="n muted">12·13·11·13</td><td class="n"><b>14</b></td><td class="n"><span class="step"><span>−</span><b>14</b><span>+</span></span></td></tr>
+    <tr><td>우유식빵</td><td class="n muted">6·9·9·9</td><td class="n"><b>10</b></td><td class="n"><span class="step"><span>−</span><b>10</b><span>+</span></span></td></tr>
+    <tr><td>바게트</td><td class="n muted">7·7·7·8</td><td class="n"><b>9</b></td><td class="n"><span class="step"><span>−</span><b>9</b><span>+</span></span></td></tr>
+    <tr><td>치아바타</td><td class="n muted">9·6·5·7</td><td class="n"><b>8</b></td><td class="n"><span class="step"><span>−</span><b>8</b><span>+</span></span></td></tr>
+    <tr><td>마들렌</td><td class="n muted">16·19·13·18</td><td class="n"><b>18</b></td><td class="n"><span class="step"><span>−</span><b>18</b><span>+</span></span></td></tr>
+  </table>
+  <div class="box dash" style="margin-top:10px"><div class="h">왜 이 수량?</div><div class="muted">소금빵: 지난 화요일 4번 중 2번 품절 → 실제 손님은 판매 수보다 많았다고 보고 올림, 오늘 흐림이라 5% 내림</div></div>
+  <div class="grid g2"><div class="btn ghost">재료 목록 보기</div><div class="btn">이대로 확정</div></div>
+  <div class="tabbar"><span>홈</span><span class="on">생산</span><span>판매</span><span>마감</span><span>더보기</span></div>
+</div>
+<p class="note"><span class="callout">2</span>추천 = 같은 요일 최근 4번 판매(품절된 날은 수요를 높게 보정) × 날씨 반영 + 여유 1개. 사장님이 −/+로 고치고 확정. 확정한 수가 재료 구매 목록(M3)으로 넘어감.</p>
+</div>
+
+<!-- M5 -->
+<div>
+<p class="label">M5 · 마감 입력 — 휴대폰</p>
+<div class="phone">
+  <div class="bar"><span>20:05</span><span>마감</span></div>
+  <div class="box"><span class="muted">11/15 (토) 마감 · 판매 수는 POS에서 자동</span><div style="font-size:11px" class="muted">POS 마지막 동기화 20:01</div></div>
+  <table>
+    <tr><th>제품</th><th class="n">생산</th><th class="n">판매(POS)</th><th class="n">폐기 입력</th><th>품절</th></tr>
+    <tr><td>소금빵</td><td class="n">35</td><td class="n">35</td><td class="n"><span class="step"><b>0</b></span></td><td>16:24</td></tr>
+    <tr><td>크루아상</td><td class="n">25</td><td class="n">25</td><td class="n"><span class="step"><b>0</b></span></td><td class="muted">–</td></tr>
+    <tr><td>단팥빵</td><td class="n">14</td><td class="n">7</td><td class="n"><span class="step"><b>7</b></span></td><td class="muted">–</td></tr>
+    <tr><td>우유식빵</td><td class="n">10</td><td class="n">10</td><td class="n"><span class="step"><b>0</b></span></td><td class="muted">–</td></tr>
+    <tr><td>바게트</td><td class="n">9</td><td class="n">9</td><td class="n"><span class="step"><b>0</b></span></td><td>16:37</td></tr>
+    <tr><td>치아바타</td><td class="n">8</td><td class="n">5</td><td class="n"><span class="step"><b>3</b></span></td><td class="muted">–</td></tr>
+    <tr><td>마들렌</td><td class="n">27</td><td class="n">27</td><td class="n"><span class="step"><b>0</b></span></td><td>18:17</td></tr>
+  </table>
+  <div class="box" style="margin-top:10px"><div class="h">오늘 폐기 손실</div><div class="big">5,619원</div><div class="muted">단팥빵 7개(4,326원) · 치아바타 3개(1,293원)</div></div>
+  <div class="box dash"><div class="muted">품절 시각은 판매 중 "품절" 버튼을 누르면 자동 기록 (M4)</div></div>
+  <div class="btn full">마감 저장 → 오늘 결과 보기</div>
+  <div class="tabbar"><span>홈</span><span>생산</span><span>판매</span><span class="on">마감</span><span>더보기</span></div>
+</div>
+<p class="note"><span class="callout">3</span>POS에는 생산·폐기 정보가 없어서 사장님은 폐기 수만 입력. 폐기 = 생산 − 판매로 미리 채워두고 확인만 하게 해서 입력 시간을 줄임.</p>
+</div>
+</div>
+
+<div class="row">
+<!-- W7 -->
+<div>
+<p class="label">W7 · 주간 경영 진단 리포트 — 웹</p>
+<div class="web">
+  <div class="top"><i></i><i></i><i></i><span class="muted" style="margin-left:10px">가상 빵집 · 사장님 웹</span></div>
+  <div class="body">
+    <div class="side"><div>오늘</div><div>판매 기록</div><div class="on">진단 리포트</div><div>조정 제안</div><div>레시피</div><div>재료 단가</div><div>유지비</div><div>행사 모드</div><div>POS 연결</div></div>
+    <div class="main">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div class="h" style="font-size:16px">지난주 진단 · 11/10(화) ~ 11/15(토) · 영업 6일</div><span class="btn ghost">엑셀 내려받기</span></div>
+      <div class="box dash"><b>한 줄 요약:</b> 이익은 전주보다 6% 늘었지만, <b>7개 제품 모두 주 1번 이상 품절</b>되고 폐기도 10.8% — 남는 날과 모자라는 날이 같이 많아요.</div>
+      <div class="grid g4">
+        <div class="box"><div class="muted">매출</div><div class="big">221.7만</div><div class="muted">전주 대비 +1.9%</div></div>
+        <div class="box"><div class="muted">이익 (유지비 뺀 값)</div><div class="big">73.6만</div><div class="muted">전주 69.4만</div></div>
+        <div class="box"><div class="muted">폐기율 · 손실</div><div class="big">10.8%</div><div class="muted">77개 · 5.3만 원</div></div>
+        <div class="box"><div class="muted">품절된 경우</div><div class="big">20 / 42</div><div class="muted">제품×영업일 기준</div></div>
+      </div>
+      <div class="grid g2">
+        <div class="box"><div class="h">제품별 공헌이익 순위 (판매가 − 재료비)</div>
+          <table>
+            <tr><th>제품</th><th class="n">공헌이익</th><th style="width:40%"></th></tr>
+            <tr><td>소금빵</td><td class="n">55.3만</td><td><div class="barline"><b style="width:100%"></b></div></td></tr>
+            <tr><td>크루아상</td><td class="n">30.1만</td><td><div class="barline"><b style="width:55%"></b></div></td></tr>
+            <tr><td>우유식빵</td><td class="n">19.9만</td><td><div class="barline"><b style="width:36%"></b></div></td></tr>
+            <tr><td>바게트</td><td class="n">16.6만</td><td><div class="barline"><b style="width:30%"></b></div></td></tr>
+            <tr><td>마들렌</td><td class="n">16.5만</td><td><div class="barline"><b style="width:30%"></b></div></td></tr>
+            <tr><td>치아바타</td><td class="n">15.0만</td><td><div class="barline"><b style="width:27%"></b></div></td></tr>
+            <tr><td>단팥빵</td><td class="n">14.2만</td><td><div class="barline"><b style="width:26%"></b></div></td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="box"><div class="h">제품별 상태</div>
+            <table>
+              <tr><th>제품</th><th class="n">원가율</th><th class="n">폐기율</th><th class="n">품절</th></tr>
+              <tr><td>소금빵</td><td class="n">17.5%</td><td class="n">8.0%</td><td class="n">2/6일</td></tr>
+              <tr><td>크루아상</td><td class="n">24.9%</td><td class="n">11.8%</td><td class="n">1/6일</td></tr>
+              <tr><td>단팥빵</td><td class="n">22.1%</td><td class="n"><b>13.9%</b></td><td class="n">3/6일</td></tr>
+              <tr><td>우유식빵</td><td class="n"><b>32.3%</b></td><td class="n">1.8%</td><td class="n">3/6일</td></tr>
+              <tr><td>바게트</td><td class="n">13.0%</td><td class="n">8.5%</td><td class="n"><b>4/6일</b></td></tr>
+              <tr><td>치아바타</td><td class="n">10.8%</td><td class="n"><b>14.0%</b></td><td class="n"><b>4/6일</b></td></tr>
+              <tr><td>마들렌</td><td class="n"><b>31.4%</b></td><td class="n"><b>14.9%</b></td><td class="n">3/6일</td></tr>
+            </table>
+          </div>
+          <div class="grid g2">
+            <div class="box"><div class="muted">손익분기 판매량</div><div class="big">하루 57개</div><div class="muted">지금 평균 110개</div></div>
+            <div class="box"><div class="muted">예측 정확도</div><div class="ph" style="height:46px">앱 사용 후 표시</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="btn">조정 제안 보기 →</div>
+    </div>
+  </div>
+</div>
+<p class="note" style="max-width:860px"><span class="callout">4</span>매주 월요일(휴무일)에 지난주 리포트 생성. 굵게 표시 = 기준을 넘은 값(원가율 30%↑, 폐기율 13%↑, 품절 주 4일↑ — 기준은 가정값, 사장님이 바꿀 수 있게). 손익분기 = 하루 유지비 15.3만 ÷ 1개 평균 공헌이익 2,694원. 예측 정확도는 앱 추천을 쓰기 시작한 뒤부터 계산.</p>
+</div>
+</div>
+
+<div class="row">
+<!-- W8 -->
+<div>
+<p class="label">W8 · 조정 제안 — 웹</p>
+<div class="web">
+  <div class="top"><i></i><i></i><i></i><span class="muted" style="margin-left:10px">가상 빵집 · 사장님 웹</span></div>
+  <div class="body">
+    <div class="side"><div>오늘</div><div>판매 기록</div><div>진단 리포트</div><div class="on">조정 제안</div><div>레시피</div><div>재료 단가</div><div>유지비</div><div>행사 모드</div><div>POS 연결</div></div>
+    <div class="main">
+      <div class="h" style="font-size:16px">이번 주 조정 제안 (지난주 진단 기준)</div>
+      <div class="box"><div class="h">① 생산량 조정</div>
+        <table>
+          <tr><th>제품</th><th>지난주 상태</th><th>제안</th><th class="n">예상 효과 (주)</th><th></th></tr>
+          <tr><td>바게트</td><td>6일 중 4일 품절, 폐기 8.5%</td><td>평일 +1개, 토 +2개</td><td class="n">놓친 매출 약 2.7만 회수</td><td><span class="btn">적용</span> <span class="btn ghost">보류</span></td></tr>
+          <tr><td>단팥빵</td><td>폐기 13.9%, 품절 3일</td><td>토요일만 −3개 (토 폐기 7개)</td><td class="n">폐기 손실 약 1,900원 감소</td><td><span class="btn">적용</span> <span class="btn ghost">보류</span></td></tr>
+          <tr><td>치아바타</td><td>품절 4일 + 폐기 14.0%</td><td>요일별로 나눠 조정 (화·수 −1, 금·토 +1)</td><td class="n">계산 중 <span class="muted">(데이터 4주 더 필요)</span></td><td><span class="btn ghost">자세히</span></td></tr>
+        </table>
+      </div>
+      <div class="box"><div class="h">② 판매가 검토 (원가율 30% 넘는 제품)</div>
+        <table>
+          <tr><th>제품</th><th class="n">지금</th><th class="n">원가율</th><th class="n">검토 가격</th><th class="n">바뀐 원가율</th><th class="n">예상 효과 (주)</th><th></th></tr>
+          <tr><td>우유식빵</td><td class="n">5,500원</td><td class="n">32.3%</td><td class="n">5,900원</td><td class="n">30.1%</td><td class="n">+2.2만 <span class="muted">*</span></td><td><span class="btn ghost">시뮬레이션</span></td></tr>
+          <tr><td>마들렌</td><td class="n">2,000원</td><td class="n">31.4%</td><td class="n">2,200원</td><td class="n">28.5%</td><td class="n">+2.6만 <span class="muted">*</span></td><td><span class="btn ghost">시뮬레이션</span></td></tr>
+        </table>
+        <div class="muted" style="margin-top:6px">* 가격을 올려도 판매 수가 그대로라고 가정한 값. 가격을 바꾼 뒤 2~4주 판매 변화를 보고 다시 진단해요.</div>
+      </div>
+      <div class="box dash"><div class="h">③ 다가오는 일</div>
+        <div>· 이번 주 목요일 비 예보 → 목요일 추천 생산량에 자동 반영 (−20%)</div>
+        <div>· 등록된 행사 없음 <span class="muted">— 행사 모드에서 주변 축제·부스 일정을 등록하면 반영돼요</span></div>
+      </div>
+      <div class="ph" style="height:60px">적용한 제안 기록 (언제 무엇을 바꿨고 결과가 어땠는지)</div>
+    </div>
+  </div>
+</div>
+<p class="note" style="max-width:860px"><span class="callout">5</span>제안은 사장님이 "적용"을 눌러야 다음 주 생산 계획(M2)에 반영. 예상 효과 숫자는 가상 데이터로 계산한 예시: 바게트 = 품절 4일 × 평균 1.5개 × 4,500원, 단팥빵 = 3개 × 618원 (토요일 1번), 가격 효과 = 주간 판매 수(식빵 54개, 마들렌 131개) × 인상액.</p>
+</div>
+</div>
+</body>
+</html>
