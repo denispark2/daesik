@@ -255,3 +255,8 @@
 - 키워드: 뚜레쥬르 빵 수요 예측 AI, CU 스마트발주, GS25 AI 편의점 파트너, Delicious Data Day Planner
 - 출처: CJ뉴스룸, 한국경제(2026-06-18), 지디넷(2024-08-01·2026-08-03), Delicious Data 사례
 - 걸러냄: 비교 그룹 없는 시범 매출 증가, 회사 발표 결품·폐기 수치(표시만)
+
+### 해외 예측 서비스 입력 변수 (수요예측서비스조사.md 8번, 확인 2026-11-17)
+- 키워드: Lineup.ai PredictHQ, 5-Out 변수, Foodforecast 방학 달력, Delicious Data intraday·Day Planner, Prophet 날씨 공변량
+- 출처: PredictHQ 사례, toolbit·5-Out 블로그·aiindigo, Foodforecast 블로그, bakeryinfo(협찬), Delicious Data 빵집·Day Planner·Höflinger Müller, 린츠대 석사논문 MT2604
+- 걸러냄: 98% 신뢰도, 출처마다 다른 필요 기록 기간, 회사 효과 수치
