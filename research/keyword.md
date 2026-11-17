@@ -260,3 +260,8 @@
 - 키워드: Lineup.ai PredictHQ, 5-Out 변수, Foodforecast 방학 달력, Delicious Data intraday·Day Planner, Prophet 날씨 공변량
 - 출처: PredictHQ 사례, toolbit·5-Out 블로그·aiindigo, Foodforecast 블로그, bakeryinfo(협찬), Delicious Data 빵집·Day Planner·Höflinger Müller, 린츠대 석사논문 MT2604
 - 걸러냄: 98% 신뢰도, 출처마다 다른 필요 기록 기간, 회사 효과 수치
+
+### 공공 지원사업 연계 (공공연계조사.md, 확인 2026-11-17)
+- 키워드: 스마트상점 기술보급사업 S/W형, 기술공급기업 모집, 매출분석 S/W, 데이터 제공 의무, 광주 서구 디지털 전환 실증사업, 먼슬리키친, 데이터바우처
+- 출처: 소진공 2026 스마트상점 기술공급기업 모집 공고 PDF(원문 확인), 쿠키뉴스(2026-03-04), 헤럴드경제(2025-12-28), 벤처스퀘어(데이터바우처)
+- 걸러냄: AI 활용지원 블로그 설명, 데이터바우처 규모 블로그 정리, 날짜 불일치 북구 기사
