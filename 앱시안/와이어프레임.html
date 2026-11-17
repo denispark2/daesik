@@ -199,13 +199,16 @@ td.n,th.n{text-align:right}
           <tr><td>치아바타</td><td>품절 4일 + 폐기 14.0%</td><td>요일별로 나눠 조정 (화·수 −1, 금·토 +1)</td><td class="n">계산 중 <span class="muted">(데이터 4주 더 필요)</span></td><td><span class="btn ghost">자세히</span></td></tr>
         </table>
       </div>
-      <div class="box"><div class="h">② 판매가 검토 (원가율 30% 넘는 제품)</div>
+      <div class="box"><div class="h">② 원가율 알림 · 가격 바꿔보기 <span class="muted" style="font-weight:normal">— 앱은 가격을 추천하지 않아요. 사장님이 넣은 가격으로 마진만 계산해요</span></div>
+        <div class="muted" style="margin-bottom:6px">사장님이 정한 원가율 기준 <span class="step"><b>30%</b></span> 를 넘은 제품</div>
         <table>
-          <tr><th>제품</th><th class="n">지금</th><th class="n">원가율</th><th class="n">검토 가격</th><th class="n">바뀐 원가율</th><th class="n">예상 효과 (주)</th><th></th></tr>
-          <tr><td>우유식빵</td><td class="n">5,500원</td><td class="n">32.3%</td><td class="n">5,900원</td><td class="n">30.1%</td><td class="n">+2.2만 <span class="muted">*</span></td><td><span class="btn ghost">시뮬레이션</span></td></tr>
-          <tr><td>마들렌</td><td class="n">2,000원</td><td class="n">31.4%</td><td class="n">2,200원</td><td class="n">28.5%</td><td class="n">+2.6만 <span class="muted">*</span></td><td><span class="btn ghost">시뮬레이션</span></td></tr>
+          <tr><th>제품</th><th class="n">지금 가격</th><th class="n">1개 원가</th><th class="n">원가율</th><th class="n">1개 마진</th><th>사장님 입력 가격</th><th class="n">바뀐 원가율</th><th class="n">1개 마진</th><th class="n">주간 마진 차이 *</th></tr>
+          <tr><td rowspan="2">우유식빵</td><td class="n" rowspan="2">5,500원</td><td class="n" rowspan="2">1,775원</td><td class="n" rowspan="2"><b>32.3%</b></td><td class="n" rowspan="2">3,725원</td><td><span class="step"><b>5,800</b></span></td><td class="n">30.6%</td><td class="n">4,025원</td><td class="n">+1.6만</td></tr>
+          <tr><td><span class="step"><b>6,000</b></span></td><td class="n">29.6%</td><td class="n">4,225원</td><td class="n">+2.7만</td></tr>
+          <tr><td>마들렌</td><td class="n">2,000원</td><td class="n">627원</td><td class="n"><b>31.4%</b></td><td class="n">1,373원</td><td><span class="step"><b class="muted" style="font-weight:normal">가격 입력</b></span></td><td class="n muted">–</td><td class="n muted">–</td><td class="n muted">–</td></tr>
         </table>
-        <div class="muted" style="margin-top:6px">* 가격을 올려도 판매 수가 그대로라고 가정한 값. 가격을 바꾼 뒤 2~4주 판매 변화를 보고 다시 진단해요.</div>
+        <div class="grid g2" style="margin-top:8px"><div class="btn ghost">+ 가격 하나 더 넣어보기</div><div class="btn">이 가격으로 바꾸기 (사장님 결정)</div></div>
+        <div class="muted" style="margin-top:6px">* 지난주 판매 수(식빵 54개)가 그대로라고 가정한 값. 가격을 바꾼 뒤 2~4주 동안 내 가게 판매 변화를 보고 다시 진단해요. 다른 매장 가격은 쓰지 않아요.</div>
       </div>
       <div class="box dash"><div class="h">③ 다가오는 일</div>
         <div>· 이번 주 목요일 비 예보 → 목요일 추천 생산량에 자동 반영 (−20%)</div>
@@ -215,7 +218,7 @@ td.n,th.n{text-align:right}
     </div>
   </div>
 </div>
-<p class="note" style="max-width:860px"><span class="callout">5</span>제안은 사장님이 "적용"을 눌러야 다음 주 생산 계획(M2)에 반영. 예상 효과 숫자는 가상 데이터로 계산한 예시: 바게트 = 품절 4일 × 평균 1.5개 × 4,500원, 단팥빵 = 3개 × 618원 (토요일 1번), 가격 효과 = 주간 판매 수(식빵 54개, 마들렌 131개) × 인상액.</p>
+<p class="note" style="max-width:860px"><span class="callout">5</span>제안은 사장님이 "적용"을 눌러야 다음 주 생산 계획(M2)에 반영. 예상 효과 숫자는 가상 데이터로 계산한 예시: 바게트 = 품절 4일 × 평균 1.5개 × 4,500원, 단팥빵 = 3개 × 618원 (토요일 1번). ② 가격 칸은 추천 없이 사장님이 넣은 가격으로만 계산 (앱기획안.md 10번 결정, 2026-11-17): 주간 마진 차이 = 지난주 판매 수 54개 × (입력 가격 − 지금 가격).</p>
 </div>
 </div>
 </body>
