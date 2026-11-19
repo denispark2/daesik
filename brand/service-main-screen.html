@@ -39,27 +39,43 @@
   <!-- ① -->
   <div class="bar">OUR ACC JOURNEY</div>
   <div class="head">
-    <!-- ACC 역무원 캐릭터 (상상): 역무원 모자 + 제복 + 회중시계 (꼼꼼하게 시간부터 계산) -->
-    <svg width="88" height="104" viewBox="0 0 88 104" style="flex:0 0 auto" stroke-linejoin="round" stroke-linecap="round">
-      <!-- 제복 -->
-      <path d="M8 104 Q10 76 44 73 Q78 76 80 104 Z" fill="#1F2A44"/>
-      <path d="M33 75 L44 90 L55 75 Z" fill="#F5F1E8"/>
-      <path d="M41.5 81 H46.5 L47.5 94 L44 98 L40.5 94 Z" fill="#E8792B"/>
-      <circle cx="26" cy="92" r="1.8" fill="#F5F1E8"/><circle cx="62" cy="92" r="1.8" fill="#F5F1E8"/>
-      <!-- 얼굴 -->
-      <rect x="39" y="66" width="10" height="9" fill="#F5F1E8" stroke="#1F2A44" stroke-width="2"/>
-      <circle cx="44" cy="51" r="20" fill="#F5F1E8" stroke="#1F2A44" stroke-width="2.5"/>
-      <circle cx="37" cy="52" r="2.6" fill="#1F2A44"/><circle cx="51" cy="52" r="2.6" fill="#1F2A44"/>
-      <path d="M38 60 Q44 65 50 60" fill="none" stroke="#1F2A44" stroke-width="2.2"/>
-      <!-- 역무원 모자 -->
-      <path d="M21 38 Q20 17 44 15 Q68 17 67 38 Z" fill="#1F2A44"/>
-      <rect x="21" y="31" width="46" height="7" fill="#F5F1E8" stroke="#1F2A44" stroke-width="1.6"/>
-      <path d="M19 38 Q44 47 69 38 L67 43 Q44 52 21 43 Z" fill="#1F2A44"/>
-      <circle cx="44" cy="24" r="5" fill="#E8792B"/>
-      <!-- 회중시계 -->
-      <path d="M52 86 Q60 80 66 82" fill="none" stroke="#E8792B" stroke-width="1.8"/>
-      <circle cx="72" cy="88" r="10" fill="#F5F1E8" stroke="#E8792B" stroke-width="3"/>
-      <path d="M72 88 V82 M72 88 L76 90" stroke="#1F2A44" stroke-width="2"/>
+    <!-- ACC 역무원 캐릭터 (상상, 만화풍 2등신): 큰 역무원 모자 · 큰 눈 · 손 흔들기 · 회중시계(꼼꼼하게 시간부터 계산) -->
+    <svg width="112" height="124" viewBox="0 0 112 124" style="flex:0 0 auto" stroke-linejoin="round" stroke-linecap="round">
+      <!-- 흔드는 팔 -->
+      <path d="M78 104 Q90 96 94 80" fill="none" stroke="#1F2A44" stroke-width="9"/>
+      <circle cx="95" cy="74" r="7.5" fill="#F5F1E8" stroke="#1F2A44" stroke-width="2.5"/>
+      <path d="M102 62 q4 -3 6 1 M104 70 q4 0 5 3" fill="none" stroke="#E8792B" stroke-width="2.2"/>
+      <!-- 몸 (작게) -->
+      <path d="M30 124 Q31 96 56 94 Q81 96 82 124 Z" fill="#1F2A44"/>
+      <path d="M46 95 L56 106 L66 95 Z" fill="#F5F1E8"/>
+      <path d="M56 104 L48 99 L48 109 Z M56 104 L64 99 L64 109 Z" fill="#E8792B"/>
+      <circle cx="56" cy="104" r="2.6" fill="#E8792B"/>
+      <circle cx="56" cy="115" r="1.8" fill="#F5F1E8"/>
+      <!-- 회중시계 든 손 -->
+      <circle cx="31" cy="108" r="10" fill="#F5F1E8" stroke="#E8792B" stroke-width="3.2"/>
+      <path d="M31 108 V102 M31 108 L35 110" stroke="#1F2A44" stroke-width="2"/>
+      <circle cx="31" cy="96.5" r="2" fill="#E8792B"/>
+      <!-- 머리 (크게) -->
+      <ellipse cx="56" cy="64" rx="31" ry="29" fill="#F5F1E8" stroke="#1F2A44" stroke-width="3"/>
+      <path d="M26 58 q-5 6 1 11 M86 58 q5 6 -1 11" fill="none" stroke="#1F2A44" stroke-width="3"/>
+      <!-- 눈 · 눈썹 -->
+      <path d="M39 58 q5 -4 10 0 M63 58 q5 -4 10 0" fill="none" stroke="#1F2A44" stroke-width="2.4"/>
+      <ellipse cx="44" cy="67" rx="4.6" ry="6.2" fill="#1F2A44"/><circle cx="45.8" cy="64.4" r="1.9" fill="#F5F1E8"/>
+      <ellipse cx="68" cy="67" rx="4.6" ry="6.2" fill="#1F2A44"/><circle cx="69.8" cy="64.4" r="1.9" fill="#F5F1E8"/>
+      <!-- 볼 · 입 -->
+      <ellipse cx="35" cy="77" rx="5.5" ry="3.2" fill="#E8792B" opacity=".35"/>
+      <ellipse cx="77" cy="77" rx="5.5" ry="3.2" fill="#E8792B" opacity=".35"/>
+      <path d="M49 77 Q56 86 63 77 Z" fill="#1F2A44"/>
+      <path d="M52.5 81.5 Q56 84 59.5 81.5" fill="none" stroke="#E8792B" stroke-width="2.2"/>
+      <!-- 역무원 모자 (크게, 살짝 기울임) -->
+      <g transform="rotate(-7 56 34)">
+        <path d="M23 44 Q20 10 56 8 Q92 10 89 44 Z" fill="#1F2A44"/>
+        <rect x="23" y="35" width="66" height="9" rx="2" fill="#F5F1E8" stroke="#1F2A44" stroke-width="2"/>
+        <path d="M20 44 Q56 57 92 44 L89 50 Q56 63 23 50 Z" fill="#1F2A44"/>
+        <path d="M43 21 L50 24 L56 18 L62 24 L69 21 L62 29 H50 Z" fill="#E8792B"/>
+        <circle cx="56" cy="23" r="3" fill="#F5F1E8"/>
+        <path d="M33 18 Q38 13 44 12" fill="none" stroke="#F5F1E8" stroke-width="2" opacity=".5"/>
+      </g>
     </svg>
     <div class="bubble">돌아가는 기차가 몇 시예요?</div>
   </div>
