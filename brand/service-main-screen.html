@@ -12,32 +12,65 @@
   .phone { width:390px; height:844px; background:var(--cream); color:var(--navy); border-radius:36px; overflow:hidden;
            display:flex; flex-direction:column; }
   /* ① 이름 바 */
-  .bar { background:var(--navy); color:var(--cream); padding:50px 20px 14px; font-size:16pt; font-weight:800; letter-spacing:.5px; }
-  .head { display:flex; gap:10px; align-items:center; padding:14px 20px 0; }
+  .bar { background:var(--navy); color:var(--cream); padding:46px 20px 0; font-size:16pt; font-weight:800; letter-spacing:.5px; }
+  .head { display:flex; gap:10px; align-items:center; padding:8px 20px 0; }  .scene { display:block; width:390px; height:84px; margin:6px -20px 0; }
   .bubble { border:2px solid var(--navy); border-radius:16px 16px 16px 4px; padding:10px 14px; font-size:20pt; word-break:keep-all; font-weight:700; line-height:1.3; }
-  .guide { font-size:16pt; word-break:keep-all; line-height:1.4; padding:10px 20px 0; }
+  .guide { font-size:16pt; word-break:keep-all; line-height:1.4; padding:6px 20px 0; }
   /* ② 남은 시간 */
-  .wheel { margin:14px 20px 0; border:2px solid var(--navy); border-radius:16px; display:flex; justify-content:center; align-items:center; gap:56px; padding:4px 0; }
+  .wheel { margin:10px 20px 0; border:2px solid var(--navy); border-radius:16px; display:flex; justify-content:center; align-items:center; gap:56px; padding:4px 0; }
   .col { display:flex; flex-direction:column; align-items:center; }
   .col span { font-size:16pt; color:var(--dim); line-height:1.35; }
   .col span.sel { font-size:42pt; font-weight:800; color:var(--orange); line-height:1.1; }
-  .label { font-size:16pt; color:var(--dim); padding:12px 20px 6px; }
+  .label { font-size:16pt; color:var(--dim); padding:8px 20px 4px; }
   .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:0 20px; }
   .chip { height:52px; border:2px solid var(--navy); border-radius:12px; background:var(--cream); color:var(--navy);
           font-size:18pt; font-family:inherit; }
   /* ③ 동행 */
-  .title { font-size:20pt; font-weight:700; padding:16px 20px 8px; }
+  .title { font-size:20pt; font-weight:700; padding:10px 20px 6px; }
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0 20px; }
   /* ④ 코스 받기 */
-  .foot { margin-top:auto; padding:0 20px 30px; }
+  .foot { margin-top:auto; padding:0 20px 22px; }
   .go { width:100%; height:58px; border:0; border-radius:14px; background:var(--dim); color:var(--cream);
         font-size:18pt; font-weight:700; font-family:inherit; }
+  /* 위쪽 바: ACC 외관 일러스트 */
+  .phone { position:relative; }
 </style>
 </head>
 <body>
 <div class="phone">
+
   <!-- ① -->
-  <div class="bar">OUR ACC JOURNEY</div>
+  <div class="bar">OUR ACC JOURNEY
+    <!-- ACC 외관 일러스트 (상상, 글 없음): 1번 게이트 건물(흰 건물·가운데 큰 통로) · 시계탑 · 땅 아래 아시아문화광장 · 지붕 채광창 · 나무 · 해 -->
+    <svg class="scene" viewBox="0 0 390 84" aria-hidden="true">
+      <circle cx="338" cy="22" r="13" fill="#E8792B"/>
+      <!-- 지붕 정원 + 채광창 -->
+      <path d="M0 64 H130 M262 64 H390" stroke="#F5F1E8" stroke-opacity=".5" stroke-width="2"/>
+      <g fill="none" stroke="#F5F1E8" stroke-opacity=".6" stroke-width="1.6">
+        <path d="M16 64 v-10 l9 -5 l9 5 v10"/><path d="M46 64 v-14 l11 -6 l11 6 v14"/><path d="M82 64 v-9 l7 -4 l7 4 v9"/>
+      </g>
+      <g fill="#E8792B" opacity=".75"><rect x="20" y="56" width="10" height="5"/><rect x="51" y="53" width="12" height="7"/><rect x="85" y="57" width="8" height="4"/></g>
+      <!-- 나무 -->
+      <g fill="#F5F1E8" opacity=".35"><circle cx="114" cy="46" r="11"/><circle cx="105" cy="52" r="7"/><rect x="112" y="52" width="3" height="12"/></g>
+      <!-- 땅 아래 아시아문화광장 -->
+      <path d="M130 64 L142 84 M262 64 L250 84" stroke="#F5F1E8" stroke-opacity=".5" stroke-width="2"/>
+      <g fill="#F5F1E8" opacity=".35"><rect x="154" y="72" width="8" height="12" rx="1.5"/><rect x="168" y="72" width="8" height="12" rx="1.5"/><rect x="216" y="72" width="8" height="12" rx="1.5"/><rect x="230" y="72" width="8" height="12" rx="1.5"/></g>
+      <circle cx="196" cy="76" r="2.6" fill="#E8792B"/><path d="M196 78.5 v5.5" stroke="#E8792B" stroke-width="2"/>
+      <!-- 시계탑 -->
+      <rect x="270" y="20" width="10" height="44" fill="#F5F1E8" opacity=".9"/>
+      <path d="M267 20 L275 10 L283 20 Z" fill="#F5F1E8" opacity=".9"/>
+      <circle cx="275" cy="29" r="3.6" fill="#1F2A44"/><circle cx="275" cy="29" r="1.6" fill="#E8792B"/>
+      <!-- 1번 게이트 건물 -->
+      <rect x="290" y="30" width="96" height="34" fill="#F5F1E8" opacity=".95"/>
+      <rect x="322" y="25" width="30" height="5" fill="#F5F1E8" opacity=".95"/>
+      <g fill="#1F2A44" opacity=".55">
+        <rect x="295" y="34" width="7" height="6"/><rect x="306" y="34" width="7" height="6"/><rect x="317" y="34" width="7" height="6"/><rect x="328" y="34" width="7" height="6"/><rect x="339" y="34" width="7" height="6"/><rect x="350" y="34" width="7" height="6"/><rect x="361" y="34" width="7" height="6"/><rect x="372" y="34" width="7" height="6"/>
+        <rect x="295" y="44" width="7" height="6"/><rect x="306" y="44" width="7" height="6"/><rect x="361" y="44" width="7" height="6"/><rect x="372" y="44" width="7" height="6"/>
+        <rect x="295" y="54" width="7" height="6"/><rect x="306" y="54" width="7" height="6"/><rect x="361" y="54" width="7" height="6"/><rect x="372" y="54" width="7" height="6"/>
+      </g>
+      <rect x="320" y="44" width="34" height="20" fill="#1F2A44"/>
+    </svg>
+  </div>
   <div class="head">
     <!-- ACC 역무원 캐릭터 (상상, 만화풍 2등신): 큰 역무원 모자 · 큰 눈 · 손 흔들기 · 회중시계(꼼꼼하게 시간부터 계산) -->
     <svg width="112" height="124" viewBox="0 0 112 124" style="flex:0 0 auto" stroke-linejoin="round" stroke-linecap="round">
