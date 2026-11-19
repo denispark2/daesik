@@ -3,68 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OUR ACC JOURNEY — 첫 화면 시안 (ACC 길라잡이 앱 느낌)</title>
-<!-- 참고: 구글 플레이 'ACC 길라잡이(ACC Guide)' 앱 스크린샷 (2026-11-19 확인) — 짙은 남보라 위쪽 바(#313868), 밤의 ACC 사진을 크게 쓴 첫 화면, 흰 바탕, 가는 선 아이콘, 연한 회색 둥근 버튼.
-     첫 화면 사진은 ACC 길라잡이 앱 구글 플레이 스크린샷(전당 투어 화면)에서 잘라 씀 — 저작권: 국립아시아문화전당, 팀 시안 확인용. 역무원은 모자만 실사 느낌으로 새로 그림. 화면 글은 팀 brand/service-prompt.md 그대로 -->
+<title>OUR ACC JOURNEY — 첫 화면 시안 (Google Arts &amp; Culture 느낌)</title>
+<!-- 참고: 구글 플레이 'Google Arts & Culture' 앱 스크린샷 (2026-11-19 확인) — 흰 위쪽 바와 가는 회색 글씨, 작품 사진을 화면 끝까지 크게, 흰 바탕·가는 회색 구분선, 모서리 작은(4~8px) 테두리 버튼, 옅은 그림자 카드, 고리 두른 동그라미 사진.
+     위쪽 사진: ACC 길라잡이 앱 구글 플레이 스크린샷(전당 투어 화면)에서 잘라 씀 — 저작권 국립아시아문화전당, 팀 시안 확인용. 역무원은 모자만 새로 그림. 화면 글은 팀 brand/service-prompt.md 그대로 -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<!-- 글자체: ACC 길라잡이 앱 화면처럼 굵기를 낮춘 고딕(Noto Sans KR 300~500). 굵은 800 대신 400·500으로, 제목만 500 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --indigo:#313868; --indigo2:#232A56; --ink:#16181F; --sub:#7A7E8C; --line:#E6E7EE; --soft:#F5F6F9; --orange:#E8792B; }
+  :root { --ink:#202124; --sub:#5F6368; --line:#DADCE0; --soft:#F1F3F4; --orange:#E8792B; }
   * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:#1B1F3A; display:flex; justify-content:center; padding:24px 0;
-         font-family:"Noto Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; -webkit-font-smoothing:antialiased; }
-  .phone { width:390px; height:844px; background:#FFFFFF; color:var(--ink); border-radius:36px; overflow:hidden; display:flex; flex-direction:column; }
+  body { background:#E8EAED; display:flex; justify-content:center; padding:24px 0;
+         font-family:"Roboto","Noto Sans KR","Malgun Gothic",sans-serif; -webkit-font-smoothing:antialiased; }
+  .phone { width:390px; height:844px; background:#fff; color:var(--ink); border-radius:36px; overflow:hidden; display:flex; flex-direction:column; }
 
-  .bar { background:var(--indigo2); color:#fff; padding:50px 20px 14px; font-size:12pt; font-weight:500; letter-spacing:3px; }
+  /* 위쪽 바: 흰 바탕, 가는 회색 글씨, 아래 가는 선 */
+  .bar { padding:48px 20px 14px; font-size:14pt; font-weight:400; color:#3C4043; letter-spacing:.4px; border-bottom:1px solid var(--line); text-align:center; }
+  .bar b { font-weight:500; color:var(--ink); }
+
+  /* 사진: 화면 끝까지, 덮개 없이 */
   .hero { position:relative; height:196px; flex:0 0 auto; }
-  .hero img.scene { position:absolute; inset:0; width:390px; height:196px; object-fit:cover; }
-  .hero .shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(35,42,86,.35) 0%,rgba(35,42,86,0) 35%,rgba(20,24,56,.5) 100%); }
-  .hero .who { position:absolute; left:16px; bottom:-34px; width:100px; height:100px; border-radius:50%; background:#fff;
-               display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px rgba(20,24,60,.16); border:1px solid var(--line); }
-  .hero .bubble { position:absolute; right:16px; bottom:-30px; width:236px; background:#fff; border-radius:18px; padding:14px 18px;
-                  font-size:17pt; font-weight:500; line-height:1.35; letter-spacing:-.3px; word-break:keep-all;
-                  border:1px solid var(--line); box-shadow:0 8px 24px rgba(20,24,60,.12); }
+  .hero img { position:absolute; inset:0; width:390px; height:196px; object-fit:cover; }
 
-  .guide { font-size:13pt; font-weight:300; color:#4A4E5C; line-height:1.55; padding:42px 20px 0; letter-spacing:-.2px; word-break:keep-all; }
+  /* 역무원 모자: 고리 두른 동그라미 */
+  .who { position:absolute; left:16px; bottom:-40px; width:88px; height:88px; border-radius:50%; background:#fff;
+         display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15); }
+  .who::after { content:""; position:absolute; inset:-5px; border-radius:50%; border:3px solid var(--orange); border-left-color:transparent; border-bottom-color:transparent; transform:rotate(-20deg); }
+  /* 말풍선: 옅은 그림자 카드 */
+  .bubble { position:absolute; right:16px; bottom:-34px; width:250px; background:#fff; border-radius:8px; padding:14px 18px;
+            font-family:"Noto Sans KR",sans-serif; font-size:16pt; font-weight:500; line-height:1.4; letter-spacing:-.3px; word-break:keep-all;
+            box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15); }
 
-  /* 시간 휠: 가운데 줄만 연한 띠로 표시 */
-  .wheel { position:relative; margin:10px 16px 0; height:110px; display:flex; justify-content:center; align-items:center; gap:72px; }
-  .wheel::before { content:""; position:absolute; left:0; right:0; top:50%; height:58px; transform:translateY(-50%);
-                   background:var(--soft); border:1px solid var(--line); border-radius:16px; }
-  .col { position:relative; display:flex; flex-direction:column; align-items:center; }
-  .col span { font-size:13pt; font-weight:300; color:#B3B6C2; line-height:1.4; }
-  .col span.sel { font-size:40pt; font-weight:500; color:var(--orange); line-height:1.15; letter-spacing:1px; }
+  .guide { font-family:"Noto Sans KR",sans-serif; font-size:12.5pt; font-weight:300; color:var(--sub); line-height:1.6; padding:50px 20px 0; word-break:keep-all; }
 
-  .label { font-size:11pt; font-weight:400; color:var(--sub); padding:6px 20px 8px; letter-spacing:.5px; }
-  /* 머물 시간: 한 줄 묶음 버튼 */
-  .seg { margin:0 16px; display:grid; grid-template-columns:1fr 1fr 1fr; background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:4px; }
-  .seg button { height:44px; border:0; background:transparent; font-family:inherit; font-size:15pt; font-weight:400; color:var(--ink); position:relative; }
-  .seg button + button::before { content:""; position:absolute; left:0; top:12px; bottom:12px; width:1px; background:var(--line); }
+  /* 시간: 가운데 줄 위아래 가는 선 */
+  .wheel { position:relative; margin:8px 20px 0; height:108px; display:flex; justify-content:center; align-items:center; gap:80px; }
+  .wheel::before, .wheel::after { content:""; position:absolute; left:0; right:0; height:1px; background:var(--line); }
+  .wheel::before { top:24px; } .wheel::after { bottom:24px; }
+  .col { display:flex; flex-direction:column; align-items:center; }
+  .col span { font-family:"Roboto",sans-serif; font-size:12pt; font-weight:300; color:#BDC1C6; line-height:1.4; }
+  .col span.sel { font-size:40pt; font-weight:400; color:var(--orange); line-height:1.15; }
 
-  .title { font-size:15pt; font-weight:500; padding:12px 20px 8px; color:var(--ink); letter-spacing:-.2px; }
-  /* 동행: 가는 선 아이콘 + 글, 연한 테두리 카드 */
-  .grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0 16px; }
-  .card { height:52px; border:1px solid var(--line); border-radius:14px; background:#fff; display:flex; align-items:center; gap:10px; padding:0 14px;
-          font-family:inherit; font-size:15pt; font-weight:400; color:var(--ink); text-align:left; }
-  .card svg { flex:0 0 auto; }
-  .foot { margin-top:auto; padding:0 16px 22px; }
-  .go { width:100%; height:56px; border:0; border-radius:14px; background:rgba(49,56,104,.38); color:#fff; font-size:16pt; font-weight:500; letter-spacing:1px; font-family:inherit; }
+  .label { font-family:"Noto Sans KR",sans-serif; font-size:10.5pt; font-weight:400; color:var(--sub); padding:4px 20px 8px; }
+  /* 머물 시간: 모서리 작은 테두리 버튼 */
+  .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:0 20px; }
+  .ob { height:44px; border:1px solid var(--line); border-radius:4px; background:#fff; font-family:"Noto Sans KR",sans-serif; font-size:13.5pt; font-weight:400; color:#3C4043; }
+
+  .title { font-family:"Noto Sans KR",sans-serif; font-size:14pt; font-weight:500; padding:12px 20px 8px; color:var(--ink); }
+  /* 동행: 옅은 그림자 카드, 위에 선 아이콘 */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 20px; }
+  .card { height:52px; border:0; border-radius:8px; background:#fff; display:flex; align-items:center; gap:12px; padding:0 16px;
+          font-family:"Noto Sans KR",sans-serif; font-size:14pt; font-weight:400; color:var(--ink);
+          box-shadow:0 1px 2px rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15); }
+  .foot { margin-top:auto; padding:0 20px 22px; }
+  .go { width:100%; height:52px; border:0; border-radius:4px; background:rgba(60,64,67,.12); color:rgba(60,64,67,.5);
+        font-family:"Noto Sans KR",sans-serif; font-size:15pt; font-weight:500; letter-spacing:.5px; }
 </style>
 </head>
 <body>
 <div class="phone">
-  <!-- ① 이름 -->
-  <div class="bar">OUR ACC JOURNEY</div>
-
-  <!-- 첫 화면 그림: 밤의 ACC (상상) — 1번 게이트 건물(가운데 큰 통로) · 시계탑 · 땅 아래 광장 불빛 · 채광창 -->
+  <!-- ① 이름 · 사진 · 모자 · 말풍선 · 안내 한 줄 -->
+  <div class="bar"><b>OUR</b> ACC JOURNEY</div>
   <div class="hero">
-    <img class="scene" src="screen-draft-hero.jpg" alt="">
-    <div class="shade"></div>
-
+    <img src="screen-draft-hero.jpg" alt="">
     <div class="who">
-      <!-- 역무원 모자 (실사 느낌, 새로 그림): 남색 천 크라운 · 검은 광택 챙 · 금색 끈 · 휘장 -->
-      <svg width="92" height="70" viewBox="0 0 184 140" stroke-linejoin="round">
+      <svg width="70" height="54" viewBox="0 0 184 140" stroke-linejoin="round">
         <defs>
           <radialGradient id="crown" cx=".45" cy=".3" r=".8"><stop offset="0" stop-color="#4A5490"/><stop offset=".55" stop-color="#2B3366"/><stop offset="1" stop-color="#161B3A"/></radialGradient>
           <linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E2448"/><stop offset="1" stop-color="#0F1330"/></linearGradient>
@@ -93,10 +94,8 @@
         </g>
       </svg>
     </div>
-
     <div class="bubble">돌아가는 기차가<br>몇 시예요?</div>
   </div>
-
   <div class="guide">남은 시간만 알려 주세요.<br>그 안에 볼 것을 골라 드려요.</div>
 
   <!-- ② 남은 시간 -->
@@ -105,18 +104,18 @@
     <div class="col"><span>50</span><span class="sel">00</span><span>10</span></div>
   </div>
   <div class="label">기차가 아니면</div>
-  <div class="seg"><button>1시간</button><button>2시간</button><button>반나절</button></div>
+  <div class="row3"><button class="ob">1시간</button><button class="ob">2시간</button><button class="ob">반나절</button></div>
 
-  <!-- ③ 동행 (아이콘: 가는 선, 공식 앱 메뉴 아이콘처럼) -->
+  <!-- ③ 동행 -->
   <div class="title">누구와 왔어요?</div>
   <div class="grid">
-    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#313868" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.2-3.6 4-5.2 7-5.2s5.8 1.6 7 5.2"/></svg>혼자</button>
-    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#313868" stroke-width="1.6" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="3"/><circle cx="16" cy="8.5" r="3"/><path d="M2.5 19.5c.9-3 3.2-4.5 6-4.5s5 1.5 6 4.5M14 15.2c.6-.1 1.3-.2 2-.2 2.8 0 5 1.5 6 4.5"/></svg>친구·연인</button>
-    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#313868" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="7" r="3.2"/><circle cx="17.5" cy="12" r="2.2"/><path d="M3 20c.9-3.4 3.2-5.2 6-5.2 1.8 0 3.4.7 4.5 2M14 20c.5-2 1.8-3.2 3.5-3.2S20.5 18 21 20"/></svg>아이와</button>
-    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#313868" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="8" r="2.6"/><circle cx="12" cy="6.5" r="2.6"/><circle cx="17.5" cy="8" r="2.6"/><path d="M2 19c.6-2.8 2.3-4.3 4.5-4.3M7.5 19.5c.7-3.2 2.4-4.8 4.5-4.8s3.8 1.6 4.5 4.8M17.5 14.7c2.2 0 3.9 1.5 4.5 4.3"/></svg>부모님과</button>
+    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.2-3.6 4-5.2 7-5.2s5.8 1.6 7 5.2"/></svg>혼자</button>
+    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="1.6" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="3"/><circle cx="16" cy="8.5" r="3"/><path d="M2.5 19.5c.9-3 3.2-4.5 6-4.5s5 1.5 6 4.5M14 15.2c.6-.1 1.3-.2 2-.2 2.8 0 5 1.5 6 4.5"/></svg>친구·연인</button>
+    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="7" r="3.2"/><circle cx="17.5" cy="12" r="2.2"/><path d="M3 20c.9-3.4 3.2-5.2 6-5.2 1.8 0 3.4.7 4.5 2M14 20c.5-2 1.8-3.2 3.5-3.2S20.5 18 21 20"/></svg>아이와</button>
+    <button class="card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5F6368" stroke-width="1.6" stroke-linecap="round"><circle cx="6.5" cy="8" r="2.6"/><circle cx="12" cy="6.5" r="2.6"/><circle cx="17.5" cy="8" r="2.6"/><path d="M2 19c.6-2.8 2.3-4.3 4.5-4.3M7.5 19.5c.7-3.2 2.4-4.8 4.5-4.8s3.8 1.6 4.5 4.8M17.5 14.7c2.2 0 3.900 1.5 4.5 4.3"/></svg>부모님과</button>
   </div>
 
-  <!-- ④ 코스 받기 (고르기 전, 흐리게) -->
+  <!-- ④ 코스 받기 (고르기 전, 비활성) -->
   <div class="foot"><button class="go">코스 받기</button></div>
 </div>
 </body>
