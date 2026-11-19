@@ -52,3 +52,8 @@
 - 출처: 정선아/reviews (N7, B5, B6, B10, B24, B32, B37, B45, B49), 신희연/brand/naver_blog.json (B30, B78, B84), 조민식/archive 영상 2개, brand/segments.md·persona.md·persona_Detail.md
 - 미확인: 마감·저녁 운영 시각, 짐 보관 위치, 송정역→ACC 이동 시간
 - 참고: 팀 brand/persona2.md → persona_Detail.md로 이름 바뀜 (my-world-bible.md 참조도 고침)
+
+## 브랜드 스킬 (brand/my-brand-skill.md, 2026-11-19)
+- 키워드: AI가 읽는 규칙 파일, ACC 역무원, 해요체, 40자, 숫자 규칙(확인된 숫자만), 감탄·이모지 금지, 핵심 메시지, 쓰지 않는 말, 사실처럼 쓰면 안 되는 것, 파일 없이/있이 시험
+- 출처: ADS_team4 brand/persona.md·persona_Detail.md, 정선아/자료/reviews_kakao.csv(카카오#1), 신희연/brand/naver_blog.json(B30·B78)
+- 미확인: 수·토 저녁 마감 시각, 짐 보관 위치, 송정역→ACC 이동 시간, 공식 운영시간·관람료
