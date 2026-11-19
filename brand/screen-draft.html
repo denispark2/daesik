@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUR ACC JOURNEY — 첫 화면 시안 (겨울 테마 느낌)</title>
+<!-- 참고: 박대식이 보내 준 카카오톡 겨울 테마 화면 2장의 분위기(옅은 하늘색 바탕, 눈송이, 눈 덮인 언덕과 나무, 둥근 알약 버튼, 반투명 흰 카드, 통통한 캐릭터)만 따름. 그림·캐릭터는 새로 그림 (상상) -->
+<style>
+  :root { --ink:#1C1C1E; --sub:#6B7280; --sky:#D5E4F4; --card:rgba(255,255,255,.72); --pill:#F4F6F9; --orange:#E8792B; --navy:#1F2A44; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#9FB6CF; display:flex; justify-content:center; padding:24px 0;
+         font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+  .phone { width:390px; height:844px; background:var(--sky); color:var(--ink); border-radius:36px; overflow:hidden;
+           position:relative; display:flex; flex-direction:column; }
+  .snow, .land { position:absolute; left:0; pointer-events:none; }
+  .snow { top:0; width:390px; height:844px; z-index:0; }
+  .land { bottom:0; width:390px; height:270px; z-index:0; }
+  .phone > .c { position:relative; z-index:1; }
+
+  .top { padding:50px 20px 0; font-size:17pt; font-weight:800; letter-spacing:.2px; }
+  .hello { margin:12px 16px 0; background:var(--card); border-radius:24px; padding:12px 16px 14px; }
+  .hello .row { display:flex; align-items:center; gap:10px; }
+  .bubble { background:#fff; border-radius:20px 20px 20px 6px; padding:10px 14px; font-size:19pt; font-weight:800; line-height:1.28;
+            word-break:keep-all; box-shadow:0 2px 0 rgba(28,28,30,.06); }
+  .guide { font-size:14pt; color:var(--sub); line-height:1.45; margin-top:8px; word-break:keep-all; }
+
+  .wheel { margin:12px 16px 0; background:var(--card); border-radius:24px; display:flex; justify-content:center; gap:64px; padding:4px 0; }
+  .col { display:flex; flex-direction:column; align-items:center; }
+  .col span { font-size:15pt; color:#A0A9B6; line-height:1.3; }
+  .col span.sel { font-size:42pt; font-weight:800; color:var(--orange); line-height:1.1; }
+
+  .label { font-size:14pt; color:var(--sub); padding:12px 20px 6px; font-weight:600; }
+  .pills { display:grid; gap:8px; padding:0 16px; }
+  .pills.three { grid-template-columns:1fr 1fr 1fr; }
+  .pills.two { grid-template-columns:1fr 1fr; }
+  .pill { height:52px; border:0; border-radius:999px; background:var(--pill); color:var(--ink); font-size:16pt; font-weight:700; font-family:inherit;
+          box-shadow:0 2px 0 rgba(28,28,30,.06); }
+  .title { font-size:17pt; font-weight:800; padding:14px 20px 8px; }
+  .foot { margin-top:auto; padding:0 16px 22px; }
+  .go { width:100%; height:58px; border:0; border-radius:999px; background:#A9B4C2; color:#fff; font-size:18pt; font-weight:800; font-family:inherit; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <!-- 눈송이 -->
+  <svg class="snow" id="snow" viewBox="0 0 390 844" aria-hidden="true"></svg>
+
+  <!-- 눈 덮인 언덕 + ACC (상상): 1번 게이트 건물(가운데 큰 통로) · 시계탑 · 지붕 채광창 · 나무 -->
+  <svg class="land" viewBox="0 -48 390 270" aria-hidden="true">
+    <!-- 먼 언덕 -->
+    <path d="M0 120 Q90 70 190 104 T390 92 V270 H0 Z" fill="#E6EEF7"/>
+    <!-- ACC 1번 게이트 건물 -->
+    <g transform="translate(232 58)">
+      <rect x="0" y="16" width="118" height="54" rx="4" fill="#FFFFFF"/>
+      <rect x="40" y="8" width="38" height="10" rx="3" fill="#FFFFFF"/>
+      <path d="M-3 18 Q59 6 121 18 L121 22 Q59 12 -3 22 Z" fill="#FFFFFF"/>
+      <g fill="#B9CBE0">
+        <rect x="7" y="26" width="9" height="8" rx="1.5"/><rect x="20" y="26" width="9" height="8" rx="1.5"/><rect x="33" y="26" width="9" height="8" rx="1.5"/><rect x="46" y="26" width="9" height="8" rx="1.5"/><rect x="63" y="26" width="9" height="8" rx="1.5"/><rect x="76" y="26" width="9" height="8" rx="1.5"/><rect x="89" y="26" width="9" height="8" rx="1.5"/><rect x="102" y="26" width="9" height="8" rx="1.5"/>
+        <rect x="7" y="40" width="9" height="8" rx="1.5"/><rect x="20" y="40" width="9" height="8" rx="1.5"/><rect x="89" y="40" width="9" height="8" rx="1.5"/><rect x="102" y="40" width="9" height="8" rx="1.5"/>
+        <rect x="7" y="54" width="9" height="8" rx="1.5"/><rect x="20" y="54" width="9" height="8" rx="1.5"/><rect x="89" y="54" width="9" height="8" rx="1.5"/><rect x="102" y="54" width="9" height="8" rx="1.5"/>
+      </g>
+      <rect x="38" y="42" width="42" height="28" rx="3" fill="#9DB5D0"/>
+    </g>
+    <!-- 시계탑 -->
+    <g transform="translate(206 34)">
+      <rect x="0" y="12" width="14" height="82" rx="3" fill="#FFFFFF"/>
+      <path d="M-3 13 L7 0 L17 13 Z" fill="#FFFFFF"/>
+      <circle cx="7" cy="26" r="4.6" fill="#E8792B"/><circle cx="7" cy="26" r="1.8" fill="#FFFFFF"/>
+    </g>
+    <!-- 가까운 눈 언덕 -->
+    <path d="M0 150 Q110 112 210 136 T390 128 V270 H0 Z" fill="#F7FAFD"/>
+    <!-- 지붕 채광창 (눈 덮임) -->
+    <g transform="translate(26 120)">
+      <path d="M0 22 V10 L12 2 L24 10 V22 Z" fill="#CFE0F1"/><path d="M-2 11 L12 1 L26 11 L24 8 L12 -1 L0 8 Z" fill="#FFFFFF"/>
+      <rect x="6" y="12" width="12" height="7" rx="1.5" fill="#F8C79A"/>
+    </g>
+    <g transform="translate(62 112)">
+      <path d="M0 28 V12 L15 3 L30 12 V28 Z" fill="#CFE0F1"/><path d="M-2 13 L15 2 L32 13 L30 10 L15 0 L0 10 Z" fill="#FFFFFF"/>
+      <rect x="7" y="15" width="16" height="9" rx="1.5" fill="#F8C79A"/>
+    </g>
+    <!-- 눈 덮인 나무 -->
+    <g fill="#7FA9B9">
+      <path d="M120 128 l12 -26 l12 26 Z"/><path d="M116 140 l16 -26 l16 26 Z"/>
+      <path d="M352 120 l10 -22 l10 22 Z"/><path d="M348 132 l14 -22 l14 22 Z"/>
+      <path d="M186 132 l8 -16 l8 16 Z"/>
+    </g>
+    <g fill="#FFFFFF">
+      <path d="M126 114 l6 -12 l6 12 q-6 -3 -12 0 Z"/><path d="M356 108 l6 -10 l6 10 q-6 -3 -12 0 Z"/>
+    </g>
+  </svg>
+
+  <!-- ① 이름 · 캐릭터 · 말풍선 · 안내 한 줄 -->
+  <div class="c top">OUR ACC JOURNEY</div>
+  <div class="c hello">
+    <div class="row">
+      <!-- ACC 역무원 캐릭터 (상상): 통통한 몸, 동그란 얼굴, 점 눈, 역무원 모자, 목도리, 회중시계 -->
+      <svg width="96" height="104" viewBox="0 0 96 104" style="flex:0 0 auto" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="48" cy="99" rx="30" ry="4" fill="#1C1C1E" opacity=".08"/>
+        <!-- 몸 -->
+        <path d="M20 98 Q16 66 48 64 Q80 66 76 98 Z" fill="#2B3A5C" stroke="#1C1C1E" stroke-width="2.4"/>
+        <circle cx="48" cy="80" r="2" fill="#F5F1E8"/><circle cx="48" cy="90" r="2" fill="#F5F1E8"/>
+        <!-- 목도리 -->
+        <path d="M27 66 Q48 76 69 66 L68 72 Q48 82 28 72 Z" fill="#E8792B" stroke="#1C1C1E" stroke-width="2.2"/>
+        <path d="M60 72 L64 88 L56 88 L54 74 Z" fill="#E8792B" stroke="#1C1C1E" stroke-width="2.2"/>
+        <!-- 손 + 회중시계 -->
+        <circle cx="20" cy="84" r="7" fill="#FFE4C4" stroke="#1C1C1E" stroke-width="2.2"/>
+        <circle cx="78" cy="80" r="10" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="2.4"/>
+        <path d="M78 80 V74 M78 80 L82 82" stroke="#E8792B" stroke-width="2.2"/>
+        <circle cx="84" cy="88" r="6.5" fill="#FFE4C4" stroke="#1C1C1E" stroke-width="2.2"/>
+        <!-- 얼굴 -->
+        <ellipse cx="48" cy="44" rx="30" ry="27" fill="#FFE4C4" stroke="#1C1C1E" stroke-width="2.6"/>
+        <ellipse cx="38" cy="47" rx="3" ry="3.6" fill="#1C1C1E"/><ellipse cx="58" cy="47" rx="3" ry="3.6" fill="#1C1C1E"/>
+        <ellipse cx="30" cy="55" rx="5.5" ry="3.4" fill="#FF9E8A" opacity=".55"/><ellipse cx="66" cy="55" rx="5.5" ry="3.4" fill="#FF9E8A" opacity=".55"/>
+        <path d="M44 55 Q48 59 52 55" fill="none" stroke="#1C1C1E" stroke-width="2.2"/>
+        <!-- 역무원 모자 (눈 살짝 얹음) -->
+        <path d="M21 30 Q20 6 48 5 Q76 6 75 30 Z" fill="#2B3A5C" stroke="#1C1C1E" stroke-width="2.4"/>
+        <rect x="21" y="24" width="54" height="7" rx="3" fill="#FFFFFF" stroke="#1C1C1E" stroke-width="2"/>
+        <path d="M19 31 Q48 40 77 31 L74 36 Q48 44 22 36 Z" fill="#2B3A5C" stroke="#1C1C1E" stroke-width="2.2"/>
+        <circle cx="48" cy="15" r="5" fill="#E8792B" stroke="#1C1C1E" stroke-width="1.8"/>
+        <path d="M30 9 Q40 2 52 4 Q46 9 36 11 Z" fill="#FFFFFF"/>
+      </svg>
+      <div class="bubble">돌아가는 기차가<br>몇 시예요?</div>
+    </div>
+    <div class="guide">남은 시간만 알려 주세요. 그 안에 볼 것을 골라 드려요.</div>
+  </div>
+
+  <!-- ② 남은 시간 -->
+  <div class="c wheel">
+    <div class="col"><span>4</span><span class="sel">5</span><span>6</span></div>
+    <div class="col"><span>50</span><span class="sel">00</span><span>10</span></div>
+  </div>
+  <div class="c label">기차가 아니면</div>
+  <div class="c pills three"><button class="pill">1시간</button><button class="pill">2시간</button><button class="pill">반나절</button></div>
+
+  <!-- ③ 동행 -->
+  <div class="c title">누구와 왔어요?</div>
+  <div class="c pills two">
+    <button class="pill">혼자</button><button class="pill">친구·연인</button>
+    <button class="pill">아이와</button><button class="pill">부모님과</button>
+  </div>
+
+  <!-- ④ 코스 받기 (고르기 전, 흐리게) -->
+  <div class="c foot"><button class="go">코스 받기</button></div>
+</div>
+<script>
+  // 눈송이: 매번 같은 자리에 찍히도록 고정 난수
+  let seed=7; const rnd=()=>((seed=(seed*9301+49297)%233280)/233280);
+  const g=document.getElementById('snow'); let h='';
+  for(let i=0;i<70;i++){ const x=rnd()*390, y=rnd()*844, r=1+rnd()*2.2; h+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="#fff" opacity="${(0.55+rnd()*0.4).toFixed(2)}"/>`; }
+  g.innerHTML=h;
+</script>
+</body>
+</html>
