@@ -100,3 +100,8 @@
 - 키워드: 문화관광 목적, 주 방문지, 관심 관광지, 외지인 인기 관광지, 양림역사문화마을, 펭귄마을공예거리, 5·18 기념공원, 전일빌딩245, 국립5·18민주묘지, 5·18민주화운동기록관, 국립광주박물관, ACC 방문객 300만, 주요 관광지점 입장객, 한국관광 데이터랩
 - 출처: 광남일보 2023-08-01 https://www.gjdream.com/news/articleView.html?idxno=631453 · 한국경제 2022-11-02 https://www.hankyung.com/amp/2022110226191 · 아시아경제 2025-12-28 https://www.asiae.co.kr/article/2025122809483259537 · 한국경제 2024-11-25 https://www.hankyung.com/article/2024112533421 · 파이낸셜뉴스 2022-02-22 https://www.fnnews.com/news/202202221541220549 · 관광지식정보시스템 https://know.tour.go.kr/stat/visitStatDis/report.do
 - 미확인: 문화관광 목적별 방문지 교차 통계(실태조사 원문), 2025 주요관광지점 입장객통계 지점별 수치
+
+## 무등산 모노레일 교통 (무등산모노레일교통조사.md, 2026-11-19)
+- 키워드: 무등산 모노레일, 지산유원지, 리프트, 빛고을역 승강장, 팔각정, 광주송정역, 문화전당역, 두암81, 1000번, 호남맨션, 법원 환승, 시내버스 개편
+- 출처: 지산유원지 공식 http://www.jisanpark.co.kr/15 · 광주시 관광 https://tour.gwangju.go.kr/home/tour/info/sports.cs?act=view&infoId=29 · ktriptips https://www.ktriptips.com/kor/tourspot/2755042 · 여기어때 https://www.yeogi.com/content/tripholic-dom-ko-gwangju-mudeungsan-lift-monorail · MTN뉴스 2026-09-23 https://news.mtn.co.kr/news-detail/2026092310395291819 · 광주교통공사 노선검색(송정역→문화전당역 24분, 앞 항목)
+- 미확인: 개편(2026-10-31) 후 버스 번호, 문화전당역→지산유원지 갈아타는 버스·시간, 택시 시간
