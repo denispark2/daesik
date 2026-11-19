@@ -46,3 +46,9 @@
 - 미확인: 짐 보관·우산 대여 장소, 공식 지도. 시각 톤은 근거 없는 제안
 - 2026-11-19 수정(세계관 v2): 팀 공유 brand/persona.md "ACC 역무원" 기준으로 다시 씀. 키워드 추가: ACC 역무원, 광주 여행의 환승역, 기차 시간, 남은 시간, 해요체 40자, 행사 원정 여행자, 다음 역(주변 장소). 출처 추가: ADS_team4 brand/persona.md·persona2.md·segments.md
 - 2026-11-19 수정(세계관 v3): persona2.md·팀원 아이디어·아카이브 참고해 상세화. 키워드 추가: 대합실 광장, 승강장, 막차 연장(수·토 저녁), 빅도어 시네마, 역의 동료(짐꾼·전시장 길잡이·해설사 선배·땅속 집주인·동네 친구), 기억을 존중, 상황별 말투, 장면 예시. 출처 추가: 신희연/brand/naver_blog.json(B1·B14·B30·B55·B78·B84), 신희연/archive/video-acc-hidden-space.md, 조민식/archive/video-acc-awareness-talk-show.md·video-acc-asia-devices-visitors.md, 정선아/자료/reviews_kakao.csv
+
+## 한 장 기획서 (brand/my-one-page-plan.md, 2026-11-19)
+- 키워드: 한 장 기획서, 기차 시간 맞춤 ACC 코스(가제), 타깃 B, 끼워 넣은 방문, 남은 시간, 다음 역, 혼잡 예측, 데이터 필요, 성공 기준(가정), 화면 시안 요청문
+- 출처: 정선아/reviews (N7, B5, B6, B10, B24, B32, B37, B45, B49), 신희연/brand/naver_blog.json (B30, B78, B84), 조민식/archive 영상 2개, brand/segments.md·persona.md·persona_Detail.md
+- 미확인: 마감·저녁 운영 시각, 짐 보관 위치, 송정역→ACC 이동 시간
+- 참고: 팀 brand/persona2.md → persona_Detail.md로 이름 바뀜 (my-world-bible.md 참조도 고침)
