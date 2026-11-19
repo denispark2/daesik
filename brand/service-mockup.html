@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUR ACC JOURNEY — 앱 시안</title>
+<style>
+  :root { --navy:#1F2A44; --cream:#F5F1E8; --orange:#E8792B; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; background:var(--navy); color:var(--navy); }
+  header.page { color:var(--cream); padding:24px 32px 8px; }
+  header.page h1 { font-size:22px; }
+  header.page p { font-size:14px; opacity:.7; margin-top:6px; line-height:1.6; }
+  .row { display:flex; gap:32px; padding:24px 32px 40px; overflow-x:auto; align-items:flex-start; }
+  .slot { flex:0 0 auto; }
+  .slot .label { color:var(--cream); font-size:13px; margin-bottom:8px; opacity:.8; }
+  .phone { width:390px; height:844px; background:var(--cream); border-radius:36px; overflow:hidden; position:relative;
+           display:flex; flex-direction:column; outline:4px solid transparent; transition:outline-color .3s; }
+  .phone.flash { outline-color:var(--orange); }
+  .bar { background:var(--navy); color:var(--cream); padding:52px 20px 16px; display:flex; align-items:center; gap:10px; }
+  .bar .name { font-size:20px; font-weight:700; letter-spacing:.5px; }
+  .bar svg { flex:0 0 auto; }
+  .body { flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:16px; }
+  .foot { padding:12px 20px 34px; display:flex; flex-direction:column; gap:10px; }
+  .btn { height:56px; border-radius:14px; font-size:18px; font-weight:700; border:2px solid var(--navy);
+         background:var(--cream); color:var(--navy); cursor:pointer; font-family:inherit; width:100%; }
+  .btn.main { background:var(--orange); border-color:var(--orange); color:var(--cream); }
+  .btn.off { background:rgba(31,42,68,.5); border-color:transparent; color:var(--cream); cursor:not-allowed; }
+  .btn-row { display:flex; gap:10px; }
+  .btn-row .btn { font-size:16px; }
+  .bubble { background:var(--navy); color:var(--cream); border-radius:16px 16px 16px 4px; padding:14px 16px; font-size:18px; font-weight:700; }
+  .h { font-size:20px; font-weight:700; }
+  .sub { font-size:14px; color:rgba(31,42,68,.5); }
+  .t16 { font-size:16px; line-height:1.5; }
+  .tabs { display:flex; border:2px solid var(--navy); border-radius:12px; overflow:hidden; }
+  .tabs button { flex:1; height:44px; font-size:16px; border:0; background:var(--cream); color:var(--navy); font-family:inherit; cursor:pointer; }
+  .tabs button.on { background:var(--navy); color:var(--cream); font-weight:700; }
+  .wheel { display:flex; justify-content:center; align-items:center; gap:6px; border:2px solid var(--navy); border-radius:16px; padding:6px 0; }
+  .wheel .col { display:flex; flex-direction:column; align-items:center; }
+  .wheel .col span { font-size:22px; color:rgba(31,42,68,.5); line-height:1.5; cursor:pointer; }
+  .wheel .col span.sel { font-size:48px; font-weight:800; color:var(--orange); line-height:1.15; }
+  .wheel .colon { font-size:44px; font-weight:800; color:var(--orange); }
+  .chips { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .chips.three { grid-template-columns:1fr 1fr 1fr; }
+  .chip { height:52px; border-radius:12px; border:2px solid var(--navy); background:var(--cream); font-size:16px; font-family:inherit; color:var(--navy); cursor:pointer; }
+  .chip.on { background:var(--navy); color:var(--cream); font-weight:700; }
+  .where { display:flex; justify-content:space-between; align-items:center; font-size:14px; border-top:1px solid rgba(31,42,68,.5); padding-top:10px; }
+  .where b { border-bottom:1px dashed var(--navy); }
+  .need { display:inline-block; font-size:12px; border:1px solid var(--orange); color:var(--orange); border-radius:6px; padding:1px 6px; margin-left:6px; vertical-align:middle; white-space:nowrap; }
+  .topfix { background:var(--navy); color:var(--cream); padding:52px 20px 14px; }
+  .topfix .big { display:flex; align-items:baseline; gap:10px; }
+  .topfix .big b { font-size:44px; color:var(--orange); font-weight:800; }
+  .topfix .big span { font-size:16px; }
+  .topfix .left { margin-top:4px; font-size:16px; }
+  .topfix .left b { color:var(--orange); font-size:22px; }
+  .warn { background:var(--orange); color:var(--cream); font-size:18px; font-weight:700; padding:14px 20px; }
+  .line { position:relative; padding-left:34px; }
+  .line::before { content:""; position:absolute; left:11px; top:10px; bottom:10px; width:4px; background:var(--navy); border-radius:2px; }
+  .stop { position:relative; padding:8px 0 12px; }
+  .stop::before { content:""; position:absolute; left:-30px; top:12px; width:16px; height:16px; border-radius:50%; background:var(--cream); border:4px solid var(--navy); }
+  .stop.past { opacity:.5; }
+  .stop.past::before { background:var(--navy); }
+  .stop.now::before { background:var(--orange); border-color:var(--orange); }
+  .stop .tm { font-size:28px; font-weight:800; }
+  .stop .nm { font-size:16px; font-weight:700; }
+  .stop .du { font-size:14px; }
+  .stop.exit .tm { color:var(--orange); font-size:40px; }
+  .stop.exit .msg { color:var(--orange); font-size:18px; font-weight:700; }
+  .card { border:2px solid var(--navy); border-radius:14px; padding:12px 14px; background:var(--cream); }
+  .card.fill { background:var(--navy); color:var(--cream); }
+  .card.dim { border-color:rgba(31,42,68,.5); color:rgba(31,42,68,.5); }
+  .card .ct { font-size:14px; font-weight:700; margin-bottom:4px; }
+  .pick { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .pick .card { min-height:150px; cursor:pointer; display:flex; flex-direction:column; justify-content:space-between; }
+  .pick .card.on { border-color:var(--orange); border-width:3px; }
+  .pick .card .nm { font-size:20px; font-weight:800; }
+  .steps { display:flex; flex-direction:column; gap:6px; }
+  .step { display:flex; gap:12px; align-items:center; border:2px solid var(--navy); border-radius:14px; padding:14px; }
+  .step .n { width:36px; height:36px; border-radius:50%; background:var(--navy); color:var(--cream); font-weight:800; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .step.last .n { background:var(--orange); }
+  .arrow { text-align:center; font-size:18px; line-height:1; }
+  .alert { margin:12px 12px 0; background:var(--orange); color:var(--cream); border-radius:16px; padding:14px 16px; }
+  .alert .sm { font-size:13px; opacity:.9; }
+  .alert .big { font-size:24px; font-weight:800; margin-top:2px; }
+  .swipe { display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; scroll-snap-type:x mandatory; }
+  .swipe .card { flex:0 0 250px; min-height:170px; scroll-snap-align:start; cursor:pointer; }
+  .swipe .card.on { border-color:var(--orange); border-width:3px; }
+  .swipe .card .nm { font-size:22px; font-weight:800; margin-bottom:6px; }
+  .dots { display:flex; gap:6px; justify-content:center; }
+  .dots i { width:8px; height:8px; border-radius:50%; background:rgba(31,42,68,.5); }
+  .dots i.on { background:var(--orange); }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .grid .card { min-height:160px; display:flex; flex-direction:column; justify-content:space-between; }
+  .grid .card .v { font-size:18px; font-weight:800; }
+  details summary { cursor:pointer; list-style:none; }
+  details summary::-webkit-details-marker { display:none; }
+  .check { color:var(--cream); padding:0 32px 48px; }
+  .check h2 { font-size:18px; margin-bottom:10px; }
+  .check table { border-collapse:collapse; font-size:13px; width:100%; max-width:900px; }
+  .check th, .check td { border:1px solid rgba(245,241,232,.3); padding:5px 8px; text-align:left; }
+  .check td.ng { color:var(--orange); font-weight:700; }
+</style>
+</head>
+<body>
+
+<header class="page">
+  <h1>OUR ACC JOURNEY — 앱 시안 (390×844, 6장)</h1>
+  <p>바탕: 팀 brand/one-page-plan.md · 문구 규칙: brand/brand-skill.md · 프롬프트: 박대식/brand/service-prompt.md<br>
+  화면 속 기차 5:00 · 지금 2:00 · 나갈 시각 3:30 · 전시 60분은 예시 (상상). 버튼을 누르면 해당 화면으로 넘어가요.</p>
+</header>
+
+<div class="row">
+
+  <!-- 화면 1 -->
+  <div class="slot"><div class="label">화면 1 — 첫 화면 (입력)</div>
+  <div class="phone" id="s1">
+    <div class="bar">
+      <svg width="30" height="24" viewBox="0 0 30 24" fill="none" stroke="#F5F1E8" stroke-width="2"><path d="M3 14 Q15 2 27 14 Z"/><path d="M1 18 H29"/><path d="M12 9 H18"/></svg>
+      <span class="name">OUR ACC JOURNEY</span>
+    </div>
+    <div class="body">
+      <div class="bubble c">돌아가는 기차가 몇 시예요?</div>
+      <div class="tabs" id="tabs">
+        <button class="on" data-tab="train">기차 시간</button>
+        <button data-tab="stay">기차가 아니에요</button>
+      </div>
+      <div id="pane-train">
+        <div class="wheel">
+          <div class="col" data-col="h"><span>4</span><span class="sel">5</span><span>6</span></div>
+          <div class="colon">:</div>
+          <div class="col" data-col="m"><span>30</span><span class="sel">00</span><span>30</span></div>
+        </div>
+        <div class="sub" style="margin-top:6px">숫자를 눌러 골라요 · <span class="c">지금 2:00</span></div>
+      </div>
+      <div id="pane-stay" style="display:none">
+        <div class="t16 c" style="margin-bottom:8px">얼마나 머물 수 있어요?</div>
+        <div class="chips three">
+          <button class="chip" data-stay>1시간</button>
+          <button class="chip" data-stay>2시간</button>
+          <button class="chip" data-stay>반나절</button>
+        </div>
+        <div class="sub" style="margin-top:6px"><span class="c">지금 2:00</span></div>
+      </div>
+      <div>
+        <div class="t16 c" style="margin-bottom:8px">누구와 왔어요?</div>
+        <div class="chips">
+          <button class="chip on" data-who>혼자</button>
+          <button class="chip" data-who>친구·연인</button>
+          <button class="chip" data-who>아이와</button>
+          <button class="chip" data-who>부모님과</button>
+        </div>
+      </div>
+      <div class="where"><span>지금 있는 곳</span><b id="where">문화전당역</b></div>
+    </div>
+    <div class="foot">
+      <button class="btn off" id="go" data-go="s2" disabled>코스 받기</button>
+    </div>
+  </div></div>
+
+  <!-- 화면 2 -->
+  <div class="slot"><div class="label">화면 2 — 코스 결과</div>
+  <div class="phone" id="s2">
+    <div class="topfix">
+      <div class="big"><span>기차</span><b>5:00</b></div>
+      <div class="left">나갈 때까지 <b id="left">1시간 30분</b></div>
+    </div>
+    <div class="body">
+      <div class="line">
+        <div class="stop past"><div class="nm">광주송정역</div></div>
+        <div class="stop past"><div class="nm">지하철 1호선</div><div class="du">24분</div></div>
+        <div class="stop now"><div class="tm">2:00</div><div class="nm">문화전당역 · 지금 여기</div><div class="du">전시장까지 걷는 시간<span class="need">확인 필요</span></div></div>
+        <div class="stop">
+          <details>
+            <summary><div class="nm" style="font-size:20px">전시 A ▾</div><div class="du">60분 머물러요</div></summary>
+            <div class="card" style="margin-top:8px">
+              <div class="t16 c">좋았다는 후기: 리뷰 한 줄이 들어가요.</div>
+              <div class="t16 c">아쉽다는 후기: 리뷰 한 줄이 들어가요.</div>
+            </div>
+          </details>
+        </div>
+        <div class="stop exit"><div class="tm">3:30</div><div class="msg c">3시 반에는 나가요.</div></div>
+        <div class="stop"><div class="nm">동네 B</div><div class="du">이동 시간<span class="need">확인 필요</span></div></div>
+        <div class="stop"><div class="nm">지하철 1호선</div><div class="du">24분</div></div>
+        <div class="stop"><div class="tm">5:00</div><div class="nm">광주송정역 · 기차</div></div>
+      </div>
+      <div class="card dim"><div class="ct">혼잡 예측</div><div class="t16 c">예측 데이터가 생기면 보여 드려요.</div></div>
+      <div class="card fill"><div class="ct">짐 보관</div>
+        <div class="t16 c">짐은 방문자센터에 맡겨요.</div>
+        <div class="t16 c">6시에 닫아요.</div>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="btn-row">
+        <button class="btn" data-go="s21">다른 전시로 바꾸기</button>
+        <button class="btn main" data-go="s3">길 안내 보기</button>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- 화면 2-1 -->
+  <div class="slot"><div class="label">화면 2-1 — 시간이 모자랄 때</div>
+  <div class="phone" id="s21">
+    <div class="topfix">
+      <div class="big"><span>기차</span><b>3:30</b></div>
+      <div class="left">남은 시간 <b>1시간 30분</b></div>
+    </div>
+    <div class="warn c">시간이 짧아요. 전시 하나만 골라요.</div>
+    <div class="body">
+      <div class="t16 c">둘 중 하나를 눌러 골라요.</div>
+      <div class="pick">
+        <div class="card" data-pick><div class="nm">전시 A</div><div class="sub">걷는 시간<span class="need">확인 필요</span></div></div>
+        <div class="card" data-pick><div class="nm">전시 B</div><div class="sub">걷는 시간<span class="need">확인 필요</span></div></div>
+      </div>
+      <div class="card dim"><div class="t16 c">못 본 전시는 다음에 천천히 와요.</div></div>
+      <div class="sub">예시: 기차 3:30 · 지금 2:00 (상상)</div>
+    </div>
+    <div class="foot">
+      <button class="btn off" id="pickgo" data-go="s2" disabled>이 전시로 코스 받기</button>
+    </div>
+  </div></div>
+
+  <!-- 화면 3 -->
+  <div class="slot"><div class="label">화면 3 — 길 안내</div>
+  <div class="phone" id="s3">
+    <div class="bar"><span class="name">길 안내</span></div>
+    <div class="body">
+      <div class="h c">처음이면 길부터 알려 드려요.</div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><div class="t16"><b>문화전당역</b></div><div class="sub"><span class="c">역 안내도에서 확인해요.</span><span class="need">확인 필요</span></div></div></div>
+        <div class="arrow">↓</div>
+        <div class="step"><div class="n">2</div><div class="t16"><b>ACC 입구</b></div></div>
+        <div class="arrow">↓</div>
+        <div class="step"><div class="n">3</div><div><div class="t16"><b>하늘마당 옆 에스컬레이터</b></div><div class="sub c">땅 아래 전시장으로 내려가요.</div></div></div>
+        <div class="arrow">↓</div>
+        <div class="step last"><div class="n">4</div><div class="t16"><b>전시장</b></div></div>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn main" data-go="s2">코스로 돌아가기</button>
+    </div>
+  </div></div>
+
+  <!-- 화면 4 -->
+  <div class="slot"><div class="label">화면 4 — 나갈 시간 알림 + 다음 갈 곳</div>
+  <div class="phone" id="s4">
+    <div class="bar" style="padding-bottom:12px"><span class="name">다음 갈 곳</span></div>
+    <div class="alert"><div class="sm">OUR ACC JOURNEY · 3:00</div><div class="big c">30분 뒤에 나가요.</div></div>
+    <div class="body">
+      <div class="h c">ACC에서 끝나지 않아요.</div>
+      <div class="t16 c">다음 갈 곳을 하나 골라요.</div>
+      <div class="swipe">
+        <div class="card on" data-next><div class="nm">동네 A</div><div class="t16 c">후기가 있어요.</div><div class="sub" style="margin-top:20px">이동 시간<span class="need">확인 필요</span></div></div>
+        <div class="card" data-next><div class="nm">동네 B</div><div class="t16 c">후기가 있어요.</div><div class="sub" style="margin-top:20px">이동 시간<span class="need">확인 필요</span></div></div>
+        <div class="card" data-next><div class="nm">동네 C</div><div class="t16 c">후기가 있어요.</div><div class="sub" style="margin-top:20px">이동 시간<span class="need">확인 필요</span></div></div>
+      </div>
+      <div class="dots"><i class="on"></i><i></i><i></i></div>
+      <div class="card fill"><div class="ct">짐</div><div class="t16 c">짐은 6시 전에 찾아요.</div></div>
+    </div>
+    <div class="foot">
+      <button class="btn main" data-go="s2">여기로 갈게요</button>
+    </div>
+  </div></div>
+
+  <!-- 화면 5 -->
+  <div class="slot"><div class="label">화면 5 — 운영자 화면</div>
+  <div class="phone" id="s5">
+    <div class="bar"><span class="name">운영자 화면</span></div>
+    <div class="body">
+      <div class="t16">기준 날짜: <b>YYYY-MM-DD</b></div>
+      <div class="card"><div class="t16 c">여기 숫자는 예측값이에요.</div></div>
+      <div class="grid">
+        <div class="card dim"><div class="ct">전시별 혼잡</div><div class="v">데이터 필요</div></div>
+        <div class="card dim"><div class="ct">전시별 관람 수요</div><div class="v">데이터 필요</div></div>
+        <div class="card dim"><div class="ct">외지 방문객 비율</div><div class="v">데이터 필요</div></div>
+        <div class="card dim"><div class="ct">근방 이동 비율</div><div class="v">데이터 필요</div></div>
+      </div>
+      <div class="sub c">데이터가 쌓이면 카드에 값이 나와요.</div>
+    </div>
+  </div></div>
+
+</div>
+
+<section class="check">
+  <h2>문구 점검 (화면 속 문장 자동 계산)</h2>
+  <table><thead><tr><th>화면</th><th>문구</th><th>글자 수</th><th>40자 이하</th><th>느낌표·습니다 없음</th></tr></thead><tbody id="ck"></tbody></table>
+</section>
+
+<script>
+  // 화면 이동
+  function go(id){ const el=document.getElementById(id); if(!el) return;
+    el.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1200); }
+  document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{ if(!b.disabled) go(b.dataset.go); }));
+
+  // 화면 1: 시간을 고르면 '코스 받기'가 켜짐
+  const goBtn=document.getElementById('go');
+  function enable(){ goBtn.disabled=false; goBtn.classList.remove('off'); goBtn.classList.add('main'); }
+  document.querySelectorAll('.wheel .col').forEach(col=>col.querySelectorAll('span').forEach(s=>s.addEventListener('click',()=>{
+    col.querySelectorAll('span').forEach(x=>x.classList.remove('sel')); s.classList.add('sel'); enable(); })));
+  document.querySelectorAll('[data-stay]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-stay]').forEach(x=>x.classList.remove('on')); b.classList.add('on'); enable(); }));
+  document.querySelectorAll('[data-who]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-who]').forEach(x=>x.classList.remove('on')); b.classList.add('on'); }));
+  document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+    document.getElementById('pane-train').style.display=b.dataset.tab==='train'?'':'none';
+    document.getElementById('pane-stay').style.display=b.dataset.tab==='stay'?'':'none'; }));
+  const places=['문화전당역','광주송정역','ACC 도착']; let pi=0;
+  document.getElementById('where').addEventListener('click',e=>{ pi=(pi+1)%places.length; e.target.textContent=places[pi]; });
+
+  // 화면 2-1: 전시 고르기
+  document.querySelectorAll('[data-pick]').forEach(c=>c.addEventListener('click',()=>{
+    document.querySelectorAll('[data-pick]').forEach(x=>x.classList.remove('on')); c.classList.add('on');
+    const p=document.getElementById('pickgo'); p.disabled=false; p.classList.remove('off'); p.classList.add('main'); }));
+  // 화면 4: 다음 갈 곳
+  document.querySelectorAll('[data-next]').forEach((c,i)=>c.addEventListener('click',()=>{
+    document.querySelectorAll('[data-next]').forEach(x=>x.classList.remove('on')); c.classList.add('on');
+    document.querySelectorAll('.dots i').forEach((d,j)=>d.classList.toggle('on',i===j)); }));
+
+  // 문구 점검표
+  const ck=document.getElementById('ck');
+  document.querySelectorAll('.phone').forEach(ph=>{
+    const name=ph.parentElement.querySelector('.label').textContent.split(' — ')[0];
+    ph.querySelectorAll('.c').forEach(el=>{
+      const t=el.textContent.trim(); const n=[...t].length;
+      const ok40=n<=40, okEx=!/[!！]|습니다/.test(t);
+      ck.insertAdjacentHTML('beforeend',`<tr><td>${name}</td><td>${t}</td><td>${n}</td><td class="${ok40?'':'ng'}">${ok40?'통과':'넘음'}</td><td class="${okEx?'':'ng'}">${okEx?'통과':'있음'}</td></tr>`);
+    });
+  });
+</script>
+</body>
+</html>

@@ -72,3 +72,4 @@
 - 키워드: 앱 시안, 프롬프트, OUR ACC JOURNEY, 화면 5장, 시간 부족 상태, 남색·크림·주황, 기대치 카드, 운영자 화면, 데이터 필요, 점검표
 - 출처: 팀 brand/one-page-plan.md(팀 통합 기획서) · brand/brand-skill.md · brand/persona.md · brand/my-brand-skill.md(확인된 운영 정보)
 - 미확인: 걷는 시간, 출구 번호, 동네 이동 시간, 혼잡 데이터. 시안 도구는 HTML로 제안(미정)
+- 2026-11-19 앱 시안 HTML (brand/service-mockup.html): service-prompt.md 그대로 화면 6장(1·2·2-1·3·4·5) 제작. 문구 26개 자동 점검(40자·느낌표·습니다) 모두 통과. 기대치 카드 문장·전시 위치·출구·이동 시간은 자리만 두고 지어내지 않음. 키워드 추가: 앱 시안 HTML, 타임라인, 문구 점검
