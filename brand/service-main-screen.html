@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUR ACC JOURNEY — 첫 화면 시안 (팀 brand/service-prompt.md)</title>
+<style>
+  :root { --navy:#1F2A44; --cream:#F5F1E8; --orange:#E8792B; --dim:rgba(31,42,68,.5); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--navy); display:flex; justify-content:center; padding:24px 0;
+         font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+  .phone { width:390px; height:844px; background:var(--cream); color:var(--navy); border-radius:36px; overflow:hidden;
+           display:flex; flex-direction:column; }
+  /* ① 이름 바 */
+  .bar { background:var(--navy); color:var(--cream); padding:50px 20px 14px; font-size:16pt; font-weight:800; letter-spacing:.5px; }
+  .head { display:flex; gap:12px; align-items:flex-start; padding:18px 20px 0; }
+  .bubble { border:2px solid var(--navy); border-radius:16px 16px 16px 4px; padding:10px 14px; font-size:20pt; word-break:keep-all; font-weight:700; line-height:1.3; }
+  .guide { font-size:16pt; word-break:keep-all; line-height:1.4; padding:10px 20px 0; }
+  /* ② 남은 시간 */
+  .wheel { margin:14px 20px 0; border:2px solid var(--navy); border-radius:16px; display:flex; justify-content:center; align-items:center; gap:56px; padding:4px 0; }
+  .col { display:flex; flex-direction:column; align-items:center; }
+  .col span { font-size:16pt; color:var(--dim); line-height:1.35; }
+  .col span.sel { font-size:42pt; font-weight:800; color:var(--orange); line-height:1.1; }
+  .label { font-size:16pt; color:var(--dim); padding:12px 20px 6px; }
+  .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:0 20px; }
+  .chip { height:52px; border:2px solid var(--navy); border-radius:12px; background:var(--cream); color:var(--navy);
+          font-size:18pt; font-family:inherit; }
+  /* ③ 동행 */
+  .title { font-size:20pt; font-weight:700; padding:16px 20px 8px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0 20px; }
+  /* ④ 코스 받기 */
+  .foot { margin-top:auto; padding:0 20px 30px; }
+  .go { width:100%; height:58px; border:0; border-radius:14px; background:var(--dim); color:var(--cream);
+        font-size:18pt; font-weight:700; font-family:inherit; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <!-- ① -->
+  <div class="bar">OUR ACC JOURNEY</div>
+  <div class="head">
+    <svg width="40" height="34" viewBox="0 0 40 34" fill="none" stroke="#1F2A44" stroke-width="2.4" stroke-linejoin="round" style="flex:0 0 auto;margin-top:10px">
+      <path d="M6 20 Q20 2 34 20 Z"/><path d="M2 25 H38"/><path d="M16 12 H24"/>
+    </svg>
+    <div class="bubble">돌아가는 기차가 몇 시예요?</div>
+  </div>
+  <div class="guide">남은 시간만 알려 주세요. 그 안에 볼 것을 골라 드려요.</div>
+
+  <!-- ② -->
+  <div class="wheel">
+    <div class="col"><span>4</span><span class="sel">5</span><span>6</span></div>
+    <div class="col"><span>50</span><span class="sel">00</span><span>10</span></div>
+  </div>
+  <div class="label">기차가 아니면</div>
+  <div class="row3">
+    <button class="chip">1시간</button><button class="chip">2시간</button><button class="chip">반나절</button>
+  </div>
+
+  <!-- ③ -->
+  <div class="title">누구와 왔어요?</div>
+  <div class="grid">
+    <button class="chip">혼자</button><button class="chip">친구·연인</button>
+    <button class="chip">아이와</button><button class="chip">부모님과</button>
+  </div>
+
+  <!-- ④ -->
+  <div class="foot"><button class="go">코스 받기</button></div>
+</div>
+</body>
+</html>
