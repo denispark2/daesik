@@ -118,3 +118,8 @@
 - 출처: ACC투어 https://www.acc.go.kr/main/contents.do?PID=060107 · 전시해설 https://www.acc.go.kr/main/contents.do?PID=060108 (둘 다 직접 확인) · ACC 길라잡이 구글 플레이 · 성신여대 게시판 외국인 초청 투어 · 여행 정보 사이트
 - 결론: 정해진 시간·코스의 투어·해설·앱 코스는 있음. 남은 시간·동행·현재 전시로 코스를 짜 주는 서비스는 찾지 못함(검색 기준)
 - 새로 확인: 도슨트(전시해설) 정기 11·14·15·16시, 문화창조원 복합전시관 수·토 18·19시 추가, 30분~1시간 → 이전 '도슨트 시간 미확인' 해소
+
+## 전시 예상 관람 시간 산정 방법 (전시관람시간조사.md, 2026-11-19)
+- 키워드: 예상 관람 시간, 타이밍·트래킹, 체류 시간(dwell time), Sweep Rate Index(SRI), 성실 관람객 비율(%DV), Beverly Serrell, 평균 20분, 100㎡당 4.07분, 작품당 27~29초, visitor trails, 대표유물해설
+- 출처: Informal Science(Serrell 2010) https://www.informalscience.org/news-views/paying-more-attention-paying-attention · Exploratorium https://informalscience.org/wp-content/uploads/2019/02/Seeing_tracking_and_timing.pdf · Sandifer https://tigerweb.towson.edu/csandife/jrst2003.pdf · Smith·Smith·Tinio 2017 https://researchwith.montclair.edu/en/publications/time-spent-viewing-art-and-reading-labels/ · 루브르 https://www.louvre.fr/en/explore/visitor-trails · 국립중앙박물관 https://www.museum.go.kr/MUSEUM/contents/M0203030000.do
+- 미확인: 국내 기관 소요시간 산정 기준 문서, ACC 전시관별 면적·작품 수
