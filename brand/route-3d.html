@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUR ACC JOURNEY — 3D 길 안내 시안 (가상 추천 코스)</title>
+<!-- 바탕: 박대식이 보낸 약도 2장(ACC 전체 조감도, 문화창조원 층별 안내도)의 배치를 단순한 3D 블록으로 다시 그림 (축척 아님).
+     방향은 받은 조감도와 같게(위쪽이 남쪽). 문화전당역 위치·5·6번 출입구: ACC 오시는길. 코스·시각은 가상(상상) — brand/service-prompt.md '약도로 짜는 전시 추천 코스'.
+     걷는 길·층 이동 수단은 확인 필요라 선은 '가는 순서'만 나타냄. 디자인: screen-draft와 같은 인상파 포스터 색 -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --deep:#2D353A; --deep2:#414C50; --sage:#748077; --mist:#9BA191; --ivory:#F2EFE8; --pale:#CBC8C4; --rose:#D58FA2; --rose2:#C9637F; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#C9CCC4; display:flex; justify-content:center; padding:24px 0;
+         font-family:"Noto Sans KR","Malgun Gothic",sans-serif; -webkit-font-smoothing:antialiased; }
+  .phone { width:390px; height:1210px; background:var(--ivory); color:var(--deep); border-radius:36px; overflow:hidden; position:relative; }
+  .head { padding:50px 20px 0; display:flex; align-items:center; justify-content:space-between; }
+  .head h1 { font-size:17pt; font-weight:500; letter-spacing:.5px; }
+  .here { display:flex; align-items:center; gap:6px; background:var(--deep); color:#F7F5EF; border-radius:999px; padding:5px 12px 5px 8px; font-size:9.5pt; }
+  .here i { width:10px; height:10px; border-radius:50%; background:var(--rose); box-shadow:0 0 0 3px rgba(213,143,162,.35); }
+  .sub { padding:6px 20px 0; font-size:10.5pt; font-weight:300; color:var(--deep2); }
+  .sec { padding:14px 20px 0; font-size:11pt; font-weight:500; color:var(--sage); letter-spacing:1px; display:flex; justify-content:space-between; }
+  .sec span { font-weight:300; color:var(--mist); letter-spacing:0; font-size:9pt; }
+  svg.map { display:block; margin:0 auto; }
+  .steps { margin:8px 14px 0; background:rgba(255,255,255,.55); border:1px solid var(--pale); border-radius:18px; padding:6px 14px; }
+  .st { display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-bottom:1px solid rgba(203,200,196,.6); font-size:10pt; letter-spacing:-.3px; font-weight:400; }
+  .st:last-child { border-bottom:0; }
+  .st b { flex:0 0 auto; width:22px; height:22px; border-radius:50%; background:var(--rose2); color:#fff; font-size:9pt; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .st .t { flex:0 0 auto; width:40px; color:var(--sage); font-weight:500; }
+  .st small { display:block; font-size:8.5pt; color:var(--mist); font-weight:300; }
+  .note { padding:10px 20px 0; font-size:8.5pt; color:var(--mist); font-weight:300; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="head"><h1>길 안내</h1><div class="here"><i></i>지금 문화전당역</div></div>
+  <div class="sub">5시 기차면 4시에는 나가요.</div>
+
+  <div class="sec">ACC 전체<span>위쪽이 남쪽 · 축척 아님</span></div>
+  <svg class="map" id="over" width="390" height="270" viewBox="0 0 390 270"></svg>
+
+  <div class="sec">문화창조원 층별<span>B2 · B3 · B4</span></div>
+  <svg class="map" id="floors" width="390" height="400" viewBox="0 0 390 400"></svg>
+
+  <div class="steps">
+    <div class="st"><b>1</b><span class="t">2:00</span><div>문화전당역 5·6번 출입구로 나와요.</div></div>
+    <div class="st"><b>2</b><span class="t">2:10</span><div>짐은 방문자센터에 맡겨요. 6시에 닫아요.</div></div>
+    <div class="st"><b>3</b><span class="t">2:20</span><div>문화창조원 B3 복합전시 2-6관 입구로 가요.<small>입구 옆에 안내소가 있어요</small></div></div>
+    <div class="st"><b>4</b><span class="t">2:25</span><div>6관을 보고 바로 옆 7관으로 이어 봐요.<small>관람 60분 (예시)</small></div></div>
+    <div class="st"><b>5</b><span class="t">3:30</span><div>시간이 남으면 B4 창제작센터 스튜디오도 봐요.<small>층 이동 방법 확인 필요</small></div></div>
+    <div class="st"><b>6</b><span class="t">3:50</span><div>짐을 찾고 4시에 문화전당역으로 가요.</div></div>
+  </div>
+  <div class="note">시각은 예시예요. 걷는 길과 시간은 확인이 필요해요.<br>민주평화교류원은 다음에 천천히 와요.</div>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+function el(svg,tag,attrs,text){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); if(text!=null) e.textContent=text; svg.appendChild(e); return e; }
+function makeIso(ox,oy,s){ const c=Math.cos(Math.PI/6), si=Math.sin(Math.PI/6);
+  return (x,y,z=0)=>[ox+(x-y)*c*s, oy+(x+y)*si*s - z*s]; }
+function pts(P,arr){ return arr.map(p=>P(...p).map(v=>v.toFixed(1)).join(',')).join(' '); }
+function shade(hex,f){ const n=parseInt(hex.slice(1),16); let r=n>>16,g=(n>>8)&255,b=n&255; r=Math.round(r*f);g=Math.round(g*f);b=Math.round(b*f); return `rgb(${r},${g},${b})`; }
+// 직육면체 블록 (평면 사각형 x0..x1, y0..y1, 높이 z0..z1)
+function box(svg,P,x0,y0,x1,y1,z0,z1,color,opt={}){
+  const g=el(svg,'g',{opacity:opt.op??1});
+  // 보이는 옆면: y=y1 면(오른쪽 아래), x=x1 면(왼쪽 아래)
+  el(g,'polygon',{points:pts(P,[[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]]),fill:shade(color,.82),stroke:'#2D353A','stroke-opacity':.25,'stroke-width':.6});
+  el(g,'polygon',{points:pts(P,[[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]]),fill:shade(color,.7),stroke:'#2D353A','stroke-opacity':.25,'stroke-width':.6});
+  el(g,'polygon',{points:pts(P,[[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]]),fill:color,stroke:'#2D353A','stroke-opacity':.3,'stroke-width':.6});
+  return g;
+}
+function flat(svg,P,poly,z,attrs){ return el(svg,'polygon',Object.assign({points:pts(P,poly.map(p=>[p[0],p[1],z]))},attrs)); }
+function label(svg,P,x,y,z,text,opt={}){
+  const [sx,sy]=P(x,y,z);
+  const t=el(svg,'text',{x:sx,y:sy,'text-anchor':'middle','font-size':opt.size??9,'font-weight':opt.w??500,fill:opt.fill??'#2D353A','font-family':'Noto Sans KR'},text);
+  if(opt.halo){ t.setAttribute('paint-order','stroke'); t.setAttribute('stroke','#F2EFE8'); t.setAttribute('stroke-width',3); }
+  return t;
+}
+function stepDot(svg,P,x,y,z,n){ const [sx,sy]=P(x,y,z);
+  el(svg,'circle',{cx:sx,cy:sy,r:9,fill:'#C9637F',stroke:'#fff','stroke-width':1.6});
+  el(svg,'text',{x:sx,y:sy+3.3,'text-anchor':'middle','font-size':9,'font-weight':700,fill:'#fff','font-family':'Noto Sans KR'},n); }
+function route(svg,P,pts3,opt={}){
+  const d=pts3.map((p,i)=>(i?'L':'M')+P(...p).map(v=>v.toFixed(1)).join(' ')).join(' ');
+  el(svg,'path',{d,fill:'none',stroke:'#fff','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.9});
+  el(svg,'path',{d,fill:'none',stroke:opt.color??'#C9637F','stroke-width':3,'stroke-linecap':'round','stroke-linejoin':'round','stroke-dasharray':opt.dash??'none','marker-end':'url(#arr)'});
+}
+function defs(svg){ const d=el(svg,'defs',{}); const m=el(d,'marker',{id:'arr',viewBox:'0 0 10 10',refX:6,refY:5,markerWidth:5,markerHeight:5,orient:'auto'}); el(m,'path',{d:'M0 0 L10 5 L0 10 Z',fill:'#C9637F'});
+  const r=el(d,'radialGradient',{id:'pulse'}); el(r,'stop',{offset:0,'stop-color':'#D58FA2','stop-opacity':.55}); el(r,'stop',{offset:1,'stop-color':'#D58FA2','stop-opacity':0}); }
+
+/* ===== ACC 전체 (받은 조감도와 같은 방향: 위쪽 남쪽) ===== */
+(()=>{ const svg=document.getElementById('over'); defs(svg); const P=makeIso(184,46,1.6);
+  // 땅
+  flat(svg,P,[[-6,-6],[112,-6],[112,118],[-6,118]],0,{fill:'#E7E3DA',stroke:'#CBC8C4'});
+  // 도로 + 지하철 (서쪽 = 화면 오른쪽 바깥)
+  flat(svg,P,[[112,-6],[124,-6],[124,118],[112,118]],0,{fill:'#D6D2C8'});
+  // 아시아문화광장 (땅 아래, 낮게 파임)
+  flat(svg,P,[[26,26],[92,26],[92,58],[26,58]],0,{fill:'#D9D5CB',stroke:'#B9B5AB'});
+  flat(svg,P,[[28,28],[90,28],[90,56],[28,56]],-4,{fill:'#CFCAC0'});
+  label(svg,P,38,48,-4,'아시아문화광장',{size:8,w:400,fill:'#6F7672',halo:true});
+  // 건물
+  box(svg,P,0,30,22,100,0,9,'#8C9A8F');        // 문화창조원
+  box(svg,P,22,0,62,24,0,7,'#A7B09C');         // 문화정보원
+  box(svg,P,66,0,92,16,0,8,'#D8C9A2');         // 어린이문화원
+  box(svg,P,58,38,92,58,0,10,'#93A6B1');       // 민주평화교류원
+  box(svg,P,32,70,52,86,0,8,'#C48E8C');        // 예술극장
+  box(svg,P,2,100,24,116,0,4,'#B7C2A8',{op:.9}); // 하늘마당
+  // 방문자센터 (광장 북쪽 가장자리, 작은 블록)
+  box(svg,P,40,24,54,30,0,4,'#F2EFE8');
+  // 5·18 민주광장 분수
+  const [fx,fy]=P(100,66,0); el(svg,'ellipse',{cx:fx,cy:fy,rx:12,ry:6,fill:'none',stroke:'#9BA191','stroke-width':1.2});
+  // 이름
+  label(svg,P,11,65,9,'문화창조원',{size:9,w:700,fill:'#F7F5EF'});
+  label(svg,P,42,12,7,'문화정보원',{size:8.5,w:500,halo:true});
+  label(svg,P,79,8,8,'어린이문화원',{size:8,w:500,halo:true});
+  label(svg,P,78,52,10,'민주평화교류원',{size:8,w:500,halo:true});
+  label(svg,P,42,78,8,'예술극장',{size:8,w:500,halo:true});
+  label(svg,P,13,108,4,'하늘마당',{size:7.5,w:400,halo:true});
+  label(svg,P,47,27,4,'방문자센터',{size:7.5,w:700,fill:'#C9637F',halo:true});
+  label(svg,P,100,72,0,'5·18 민주광장',{size:7,w:400,fill:'#748077',halo:true});
+  // 문화전당역 + 출입구
+  const st=[118,48]; const [sx,sy]=P(st[0],st[1],0);
+  el(svg,'circle',{cx:sx,cy:sy,r:22,fill:'url(#pulse)'});
+  el(svg,'rect',{x:sx-26,y:sy+10,width:52,height:16,rx:8,fill:'#2D353A'});
+  el(svg,'text',{x:sx,y:sy+21.5,'text-anchor':'middle','font-size':8,'font-weight':500,fill:'#F7F5EF','font-family':'Noto Sans KR'},'문화전당역');
+  // 핀
+  el(svg,'path',{d:`M${sx} ${sy} c-8 -10 -11 -14 -11 -20 a11 11 0 0 1 22 0 c0 6 -3 10 -11 20 z`,fill:'#C9637F',stroke:'#fff','stroke-width':1.6});
+  el(svg,'circle',{cx:sx,cy:sy-20,r:4,fill:'#fff'});
+  label(svg,P,126,36,0,'5·6번 출입구',{size:7,w:400,fill:'#414C50',halo:true});
+  // 루트: 1 역 → 2 방문자센터 → 3 문화창조원 B3 입구
+  route(svg,P,[[112,44,0],[100,32,0],[56,28,0]]);
+  route(svg,P,[[42,28,0],[30,30,0],[23,40,0]]);
+  // 돌아가는 길 (점선)
+  route(svg,P,[[24,52,0],[34,36,0],[60,33,0],[98,35,0],[112,46,0]],{dash:'3 4',color:'#9BA191'});
+  stepDot(svg,P,112,52,0,'1'); stepDot(svg,P,58,30,4,'2'); stepDot(svg,P,22,40,9,'3'); stepDot(svg,P,84,35,0,'6');
+  // 문화창조원 강조 테두리
+  flat(svg,P,[[0,30],[22,30],[22,100],[0,100]],9,{fill:'none',stroke:'#C9637F','stroke-width':1.6,'stroke-dasharray':'4 3'});
+})();
+
+/* ===== 문화창조원 층별 (위 B2 · 가운데 B3 · 아래 B4) ===== */
+(()=>{ const svg=document.getElementById('floors'); defs(svg); const P=makeIso(164,236,1.45);
+  const Z={B2:140,B3:76,B4:10};
+  function plate(z,name,active){
+    box(svg,P,0,0,100,60,z-3,z,active?'#F7F5EF':'#ECE9E1',{op:active?1:.75});
+    const [lx,ly]=P(0,60,z-3); el(svg,'rect',{x:lx-30,y:ly-6,width:26,height:15,rx:4,fill:active?'#2D353A':'#9BA191'});
+    el(svg,'text',{x:lx-17,y:ly+5,'text-anchor':'middle','font-size':9,'font-weight':700,fill:'#F7F5EF','font-family':'Noto Sans KR'},name);
+  }
+  function room(x0,y0,x1,y1,z,name,col,op=1){ box(svg,P,x0,y0,x1,y1,z,z+3,col,{op}); label(svg,P,(x0+x1)/2,(y0+y1)/2,z+3,name,{size:7.5,w:500,halo:true}); }
+  // B4 (맨 아래)
+  plate(Z.B4,'B4',true);
+  room(2,18,30,46,Z.B4,'','#B9C7B4');
+  room(32,24,60,56,Z.B4,'복합전시 1관','#C8C3D2',.8);
+  room(66,34,96,58,Z.B4,'극장 1','#D9B3B1',.8);
+  // B3
+  plate(Z.B3,'B3',true);
+  room(18,34,34,50,Z.B3,'미디어','#C8C3D2',.8);
+  room(52,28,80,56,Z.B3,'','#9FB0A2');
+  room(80,28,98,56,Z.B3,'','#9FB0A2');
+  // 대나무정원 (빗금 대신 옅은 띠)
+  flat(svg,P,[[40,6],[48,6],[48,24],[40,24]],Z.B3,{fill:'#B7C2A8',opacity:.8});
+  // B3 입구
+  const [ex,ey]=P(40,44,Z.B3); el(svg,'rect',{x:ex-6,y:ey-10,width:12,height:12,rx:2,fill:'none',stroke:'#C9637F','stroke-width':2});
+  label(svg,P,40,52,Z.B3,'2-6관 입구',{size:7.5,w:700,fill:'#C9637F',halo:true});
+  // B2 (맨 위, 흐리게: 이번 코스에서 안 감)
+  plate(Z.B2,'B2',false);
+  room(2,4,38,40,Z.B2,'복합전시 2관','#D3D0C7',.7);
+  room(40,4,58,22,Z.B2,'3관','#D3D0C7',.7);
+  room(60,4,78,22,Z.B2,'4관','#D3D0C7',.7);
+  room(80,4,98,22,Z.B2,'5관','#D3D0C7',.7);
+  // 루트: B3 입구 → 6관 → 7관 → (층 이동) → B4 스튜디오
+  route(svg,P,[[40,44,Z.B3+3],[60,38,Z.B3+3],[90,38,Z.B3+3]]);
+  route(svg,P,[[92,30,Z.B3+3],[60,22,Z.B3+3],[30,22,Z.B3+3],[30,22,Z.B4+5],[18,26,Z.B4+4]],{dash:'5 4'});
+  stepDot(svg,P,40,44,Z.B3+12,'3'); stepDot(svg,P,64,36,Z.B3+12,'4'); stepDot(svg,P,16,30,Z.B4+12,'5');
+  label(svg,P,66,50,Z.B3+3,'6관',{size:8.5,w:700,halo:true}); label(svg,P,90,50,Z.B3+3,'7관',{size:8.5,w:700,halo:true});
+  label(svg,P,16,40,Z.B4+3,'창제작센터 스튜디오',{size:7.5,w:700,halo:true});
+  // 층 이동 표시
+  const [mx,my]=P(30,22,(Z.B3+Z.B4)/2+3);
+  el(svg,'rect',{x:mx-80,y:my-9,width:68,height:15,rx:7.5,fill:'#F2EFE8',stroke:'#C9637F','stroke-width':1});
+  el(svg,'text',{x:mx-46,y:my+1.5,'text-anchor':'middle','font-size':7.5,'font-weight':500,fill:'#C9637F','font-family':'Noto Sans KR'},'층 이동 확인 필요');
+})();
+</script>
+</body>
+</html>
