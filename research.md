@@ -165,3 +165,7 @@
 - 키워드: ACC 현재전시 13개, 네이버 블로그 전시별 검색, 네이버 플레이스 방문자 리뷰 295개 전시명 검색
 - 결과: 블로그 후기가 0인 전시는 없음. 가장 적은 것은 미디어파사드(전용 관람 글 없음)·사변적 공동체(11.19 개막). 플레이스는 13개 중 10개가 언급 0 (인상파 3, 식객 5, 어린이체험관 7)
 - 출처: https://www.acc.go.kr/main/exhibition.do?PID=0202 · https://m.place.naver.com/attraction/37039338/review/visitor (ego-browser)
+
+## NOL 티켓 ACC 전시 리뷰 (전시추천서비스조사.md 8-1, 2026-11-20)
+- 키워드: NOL에서 판매 중인 ACC 전시는 인상파 1개, 리뷰 4개 평점 5.0 (예매인증), 식객 등 다른 전시는 NOL에 없음
+- 출처: https://nol.yanolja.com/ticket/places/26000968/products/26011839 (ego-browser)
