@@ -214,3 +214,9 @@
 ## 한국관광 데이터랩 공식 다운로드 (project/datalab/, 2026-11-20)
 - 키워드: 데이터랩 로그인 후 전체 다운로드(광주광역시 종합분석·방문자·숙박/체류시간·유입유출·인기관광지, ACC 관광지별), 국민여행조사 당일·숙박 횟수 xlsx, 화면 값과 대조 결과 모두 일치, ACC 평균 체류 56분은 다운로드 파일에 없음, 광주 유입 비율 전남 76.1·전북 12.7·경기 2.8·서울 1.0(AI 관광 분석)
 - 출처: https://datalab.visitkorea.or.kr/datalab/portal/loc/getAreaDataForm.do · https://datalab.visitkorea.or.kr/datalab/portal/loc/getTourDataFormViewBeta.do?contId=2009775&sggCd=12210 · https://stat.mcst.go.kr/portal/subject/subject04/STBL-1014282/stat/STBL-1029221 · https://stat.mcst.go.kr/portal/subject/subject04/STBL-1014282/stat/STBL-1029220 (조회기간 2025.11~2026.10)
+
+## 스파크(SPAC) 자세히·벤치마킹 점검 (전시추천서비스조사.md 13·14번, 2026-11-20)
+- 키워드: 서울예술정보플랫폼(2025-07-18 서울예술지원정보포털 → 2026-09-04 개편), 예술작품의 서재, 예술취향지표 SAT(관람 성향 진단 설문 v1, 16문항 2지선다, 4축 S/P·A/T·C/E·O/F, 축별 동점 깨기 문항, 16유형, 실존 인물 대표 인물), 키워드 작품 큐레이션(L1 장르·형식, L2 감성 스펙트럼, L3 관람 맥락[동반자 유형·관람 시간 적합성·계절·시즌·상황·목적], L5 주제·테마, 화면에 없는 L4 접근성 편의[배리어프리·경제적 접근성·러닝타임]), 4단계 코드 나무, 그룹 교집합 필터(1,055건 → 혼자 157 · 연인 78 · 둘 다 56), 조건 없음 안내, 내 큐레이션 저장, 스마트 작품등록, 리뷰/비평(필자 비평 글), SPAF 박본/국립아시아문화전당 〈세 번째 전쟁〉
+- 벤치마킹(제안): 동반자 유형 분류, 전시별 태그 표(코드 나무), 러닝타임→예상 관람 시간, 교집합+조건 풀기, 배리어프리 동행 조건, O/F 한 문항, 코스 이름 붙이기 / 안 할 것: 긴 설문, 실존 인물 유형, 로그인 저장, 기준 없는 'AI 추천'
+- 출처: https://spac.sfac.or.kr/ · https://spac.sfac.or.kr/contents/introduction · https://spac.sfac.or.kr/contents/guide/ · https://spac.sfac.or.kr/curation · https://spac.sfac.or.kr/review · https://spac.sfac.or.kr/art-space · 공개 API /api/curation/tree · /api/curation/list · /api/mbr/sat/survey · https://www.sfac.or.kr/info/press.do?cbIdx=966&bcIdx=138653 · https://www.yna.co.kr/view/AKR20260904051400004 · https://www.imaginarypocus.com/news/519699 (ego-browser 직접 확인)
+- 미확인: SAT 결과 → 큐레이션 키워드 연결 방식, 작품 태그를 붙이는 주체, 순위 규칙, 사용 AI 모델, 일반 관람객 후기 기능
