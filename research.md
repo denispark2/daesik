@@ -160,3 +160,8 @@
 - 키워드: 지역 다중 선택 1문항 + 성향 5문항(보기 4개 중 1개), 성향 축 5개(외향/내향·활동적/수동적·감각적/이성적·계획적/즉흥적·함께/혼자), 콘텐츠마다 같은 축 점수, 코사인 유사도 상위 9개, 지역 필터, 설문 없으면 종료일 순
 - 출처: GitHub https://github.com/JECT-Study/MyCODE (앱) · https://github.com/JECT-Study/JECT-1-BE (서버) 코드 직접 확인, 구글 플레이 https://play.google.com/store/apps/details?id=com.ject3.mycode (ego-browser)
 - 미확인: 문항-축 연결(DB, 내용으로 추정), 보기별 점수, 콘텐츠 점수를 누가 매기는지. 앱스토어 페이지는 404
+
+## ACC 현재 전시별 네이버 후기 현황 (전시추천서비스조사.md 8번, 2026-11-20)
+- 키워드: ACC 현재전시 13개, 네이버 블로그 전시별 검색, 네이버 플레이스 방문자 리뷰 295개 전시명 검색
+- 결과: 블로그 후기가 0인 전시는 없음. 가장 적은 것은 미디어파사드(전용 관람 글 없음)·사변적 공동체(11.19 개막). 플레이스는 13개 중 10개가 언급 0 (인상파 3, 식객 5, 어린이체험관 7)
+- 출처: https://www.acc.go.kr/main/exhibition.do?PID=0202 · https://m.place.naver.com/attraction/37039338/review/visitor (ego-browser)
