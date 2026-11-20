@@ -196,3 +196,7 @@
 - 키워드: Smartify CIC(런던 사회적기업, 2016), 1,200+ 기관, 시드 150만 파운드(2025-01), 추천 세 갈래(①위치·스캔·즐겨찾기·구매 등으로 도시 단위 추천 ②AI 개인 투어: 관심사+must-see+가진 시간 → 작품 매칭+거리 계산 ③기관용 행동 데이터 알림), 알고리즘 비공개, Premium 연 9,500파운드부터 AI 투어, 함부르크 쿤스트할레 사례
 - 시사점: 시간 안 경로는 Smartify도 함 → 우리 차별점은 기차 시간 역산 + 동행 + 건물 밖 이동
 - 출처: https://smartify.org/partners/solutions/enhance-with-ai · https://smartify.org/privacy · https://smartify.org/partners/pricing (ego-browser), 검색 요약
+
+## Smartify 벤치마킹 → ACC 적용 분석 (전시추천서비스조사.md 12번, 2026-11-20)
+- 키워드: 제휴 없음 → 전시 단위·공개 정보로, 코스 엔진(기차 시간 역산 + 동행 태그 + 전시 간 도보 그래프 + 운영·입장 마감), '꼭 볼래요' 고정, 관람 후 2문항으로 관람 시간 수집, 나갈 시각 알림, 운영자 화면, 스캔·제3자 데이터·앱 설치 강요는 안 함
+- 근거: 전시추천서비스조사.md 11번(Smartify), 팀 brand/one-page-plan.md
