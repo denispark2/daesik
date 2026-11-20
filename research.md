@@ -169,3 +169,7 @@
 ## NOL 티켓 ACC 전시 리뷰 (전시추천서비스조사.md 8-1, 2026-11-20)
 - 키워드: NOL에서 판매 중인 ACC 전시는 인상파 1개, 리뷰 4개 평점 5.0 (예매인증), 식객 등 다른 전시는 NOL에 없음
 - 출처: https://nol.yanolja.com/ticket/places/26000968/products/26011839 (ego-browser)
+
+## ACC 누리집 리뷰 (전시추천서비스조사.md 8-2, 2026-11-20)
+- 키워드: 전시 상세에 후기·별점·댓글 없음, 후기 게시판 없음, 참여의 전당(국민제안·문의 게시판, 제목 열람 가능)
+- 출처: https://www.acc.go.kr/main/board/board.do?PID=070901 (ego-browser)
