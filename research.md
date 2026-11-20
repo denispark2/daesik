@@ -211,6 +211,6 @@
 - 출처: https://datalab.visitkorea.or.kr/datalab/portal/loc/getAreaDataForm.do · https://datalab.visitkorea.or.kr/datalab/portal/loc/getTourDataFormViewBeta.do?contId=2009775&sggCd=12210 · https://stat.mcst.go.kr/portal/subject/subject04/STBL-1014282/stat/STBL-1029221 · https://stat.mcst.go.kr/portal/subject/subject04/STBL-1014282/stat/STBL-1029220 (ego-browser, 로그인 없이 화면 값 확인, 조회기간 2025.11~2026.10)
 - 미확인: 교통수단 비율, 요일·시간대별 방문자, ACC 미분류 27.9%의 정체, 국민여행조사에 광주 시민의 광주 안 여행 포함 여부, ACC가 유료관광지점 집계에 없는 이유
 
-## 한국관광 데이터랩 공식 다운로드 (data/datalab/, 2026-11-20)
+## 한국관광 데이터랩 공식 다운로드 (project/datalab/, 2026-11-20)
 - 키워드: 데이터랩 로그인 후 전체 다운로드(광주광역시 종합분석·방문자·숙박/체류시간·유입유출·인기관광지, ACC 관광지별), 국민여행조사 당일·숙박 횟수 xlsx, 화면 값과 대조 결과 모두 일치, ACC 평균 체류 56분은 다운로드 파일에 없음, 광주 유입 비율 전남 76.1·전북 12.7·경기 2.8·서울 1.0(AI 관광 분석)
 - 출처: https://datalab.visitkorea.or.kr/datalab/portal/loc/getAreaDataForm.do · https://datalab.visitkorea.or.kr/datalab/portal/loc/getTourDataFormViewBeta.do?contId=2009775&sggCd=12210 · https://stat.mcst.go.kr/portal/subject/subject04/STBL-1014282/stat/STBL-1029221 · https://stat.mcst.go.kr/portal/subject/subject04/STBL-1014282/stat/STBL-1029220 (조회기간 2025.11~2026.10)
