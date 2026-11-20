@@ -124,3 +124,10 @@
 - 출처: Informal Science(Serrell 2010) https://www.informalscience.org/news-views/paying-more-attention-paying-attention · Exploratorium https://informalscience.org/wp-content/uploads/2019/02/Seeing_tracking_and_timing.pdf · Sandifer https://tigerweb.towson.edu/csandife/jrst2003.pdf · Smith·Smith·Tinio 2017 https://researchwith.montclair.edu/en/publications/time-spent-viewing-art-and-reading-labels/ · 루브르 https://www.louvre.fr/en/explore/visitor-trails · 국립중앙박물관 https://www.museum.go.kr/MUSEUM/contents/M0203030000.do
 - 미확인: 국내 기관 소요시간 산정 기준 문서, ACC 전시관별 면적·작품 수
 - 2026-11-19 기획전시가 바뀌는 ACC용 방법 추가 (전시관람시간조사.md 4번): 관별 기본값(면적 고정) + 전시별 보정(작품 수·영상) + 이용자 입장·나감 기록으로 고치기 + 같은 관 지난 전시 재사용. 키워드 추가: 기획전시, 관별 기본값, 전시별 보정. 출처 추가: 서울신문 2016-03-21 https://m.go.seoul.co.kr/news/2016/03/21/20160321012001 (연면적 약 16만㎡) · 문체부 보도자료 https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pSeq=13883 (복합전시관 용도). 미확인: 관별 면적(㎡)
+
+## 국립중앙박물관 면적 추정 vs 자체 안내 비교 (전시관람시간조사.md 5번, 2026-11-20)
+- 키워드: 선사·고대관 1,613.38㎡, 전시 면적 26,781㎡, 7개 관 39개 실 9,884점, 각 전시관별 해설 약 1시간, 대표유물해설 약 1시간, 정원산책 1시간 10분, 관 단위 추정
+- 결과: 관 1개(1,613㎡) 면적 추정 58~66분 ≈ 자체 안내 약 1시간 / 전체(26,781㎡) 16~18시간 vs 대표유물해설 1시간 → 큰 규모에선 면적 추정 못 씀
+- 출처: 국립중앙박물관 정기해설 https://www.museum.go.kr/MUSEUM/contents/M0102010100.do · 층별 안내 https://www.museum.go.kr/MUSEUM/contents/M0201010000.do · 다음(2025-02-14) https://v.daum.net/v/20250214134043133 · 주간경향 https://weekly.khan.co.kr/article/10769
+- 고침: 앞 항목의 국립중앙박물관 출처 M0203030000은 실감2관 페이지 → 대표유물해설은 M0102010100
+- 미확인: 상설전시관만의 면적, 다른 관별 면적, 개인 관람객 실측 시간
