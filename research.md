@@ -220,3 +220,7 @@
 - 벤치마킹(제안): 동반자 유형 분류, 전시별 태그 표(코드 나무), 러닝타임→예상 관람 시간, 교집합+조건 풀기, 배리어프리 동행 조건, O/F 한 문항, 코스 이름 붙이기 / 안 할 것: 긴 설문, 실존 인물 유형, 로그인 저장, 기준 없는 'AI 추천'
 - 출처: https://spac.sfac.or.kr/ · https://spac.sfac.or.kr/contents/introduction · https://spac.sfac.or.kr/contents/guide/ · https://spac.sfac.or.kr/curation · https://spac.sfac.or.kr/review · https://spac.sfac.or.kr/art-space · 공개 API /api/curation/tree · /api/curation/list · /api/mbr/sat/survey · https://www.sfac.or.kr/info/press.do?cbIdx=966&bcIdx=138653 · https://www.yna.co.kr/view/AKR20260904051400004 · https://www.imaginarypocus.com/news/519699 (ego-browser 직접 확인)
 - 미확인: SAT 결과 → 큐레이션 키워드 연결 방식, 작품 태그를 붙이는 주체, 순위 규칙, 사용 AI 모델, 일반 관람객 후기 기능
+
+## 국내 서비스 사례 정리 (project/국내서비스사례.md, 2026-11-20)
+- 키워드: 스파크(SPAC) 분석(개요·SAT 16유형·키워드 큐레이션 L1~L5·태그 교집합 필터·알고리즘 공개 여부·수익 모델·한계·비교), 벤치마킹 제안(동반자 유형·전시별 태그 표·예상 관람 시간·조건 풀기·배리어프리·O/F 한 문항·코스 이름), 안 할 것, 스파크 vs Smartify 역할 나누기
+- 출처: 전시추천서비스조사.md 10·13·14번 (출처 (51)·(56) 그대로), 짝 파일 project/해외서비스사례.md
