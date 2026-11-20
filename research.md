@@ -191,3 +191,8 @@
 - 키워드: 서울문화재단 스파크(SPAC) 예술취향지표(SAT) 설문·키워드 작품 추천·스마트 작품등록(2026-09-04 개편), NOL '발견' 피드·AI 노리, 스테이지픽 AI 맞춤 추천, 추천 없는 통합 정보 서비스(스테이지 파인더·PickShow·ONSTAGY·오아라이브), 문화포털
 - 결론: 설문·행동 기록으로 도시 단위 추천. 남은 시간·동행·장소 안 순서를 따지는 서비스는 못 찾음
 - 출처: https://www.imaginarypocus.com/news/519699 (ego-browser), 네이버 뉴스 검색, WebSearch 요약
+
+## Smartify 추천 기준·알고리즘 (전시추천서비스조사.md 11번, 2026-11-20)
+- 키워드: Smartify CIC(런던 사회적기업, 2016), 1,200+ 기관, 시드 150만 파운드(2025-01), 추천 세 갈래(①위치·스캔·즐겨찾기·구매 등으로 도시 단위 추천 ②AI 개인 투어: 관심사+must-see+가진 시간 → 작품 매칭+거리 계산 ③기관용 행동 데이터 알림), 알고리즘 비공개, Premium 연 9,500파운드부터 AI 투어, 함부르크 쿤스트할레 사례
+- 시사점: 시간 안 경로는 Smartify도 함 → 우리 차별점은 기차 시간 역산 + 동행 + 건물 밖 이동
+- 출처: https://smartify.org/partners/solutions/enhance-with-ai · https://smartify.org/privacy · https://smartify.org/partners/pricing (ego-browser), 검색 요약
