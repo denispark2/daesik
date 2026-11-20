@@ -252,3 +252,6 @@
 ## 리서치 분담 표 기준으로 CSV 교체 (design/my-sample-smartify.csv, 2026-11-20)
 - 키워드: 팀 리서치 표(광주 여행=대식, 타기관 국내1·해외1=모두) 기준, 열 10개(리서치 항목·조사 대상·인원·담당·조사할 내용·조사 방법·입력 데이터값(정보 수집 방법)·서비스 기획 시 인사이트·남은 과제·결과 파일), 행 3개(광주 여행 데이터랩 / 스파크 / Smartify). 기존 Smartify 벤치마킹 제안 표 11행은 사용자 선택으로 교체(원본은 project/해외서비스사례.md 2-1에 남아 있음). ACC SNS(민식) 행은 넣지 않음
 - 출처: 광주관광데이터랩조사.md, project/datalab/, project/광주여행.md(팀 저장소), project/국내서비스사례.md, project/해외서비스사례.md, 전시추천서비스조사.md 6-3·10~14번
+
+## 파일 이름 변경 (2026-11-20)
+- design/my-sample-smartify.csv → design/my-sample.csv (내용 같음, 사용자 요청). 위 기록의 my-sample-smartify.csv는 지금의 my-sample.csv임
