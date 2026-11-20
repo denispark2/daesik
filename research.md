@@ -173,3 +173,7 @@
 ## ACC 누리집 리뷰 (전시추천서비스조사.md 8-2, 2026-11-20)
 - 키워드: 전시 상세에 후기·별점·댓글 없음, 후기 게시판 없음, 참여의 전당(국민제안·문의 게시판, 제목 열람 가능)
 - 출처: https://www.acc.go.kr/main/board/board.do?PID=070901 (ego-browser)
+
+## Fever·Artsy·Smartify 관람 후기 수집 (전시추천서비스조사.md 6-3, 2026-11-20)
+- 키워드: Fever 공개 verified reviews(별점·분포·관람 월·도움돼요), Artsy 이용자 전시 후기 기능 못 찾음, Smartify 관람 중 설문(NPS·만족도, 제휴 기관만)
+- 출처: https://feverup.com/m/323754/reviews · https://smartify.org/partners/solutions/connect-with-your-visitors (ego-browser), Artsy는 검색 요약
