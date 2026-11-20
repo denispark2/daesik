@@ -177,3 +177,7 @@
 ## Fever·Artsy·Smartify 관람 후기 수집 (전시추천서비스조사.md 6-3, 2026-11-20)
 - 키워드: Fever 공개 verified reviews(별점·분포·관람 월·도움돼요), Artsy 이용자 전시 후기 기능 못 찾음, Smartify 관람 중 설문(NPS·만족도, 제휴 기관만)
 - 출처: https://feverup.com/m/323754/reviews · https://smartify.org/partners/solutions/connect-with-your-visitors (ego-browser), Artsy는 검색 요약
+
+## Fever의 ACC 리뷰 (전시추천서비스조사.md 6-3, 2026-11-20)
+- 키워드: Fever ACC 장소 페이지, 캔들라이트 콘서트 3개(극장2)만 판매, ACC 전시 상품 없음, 리뷰 569·126·74개는 공연 리뷰, 주차 불편 언급
+- 출처: https://feverup.com/ko/gwangju/venue/national-asian-culture-center (ego-browser)
