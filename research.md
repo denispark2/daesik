@@ -255,3 +255,8 @@
 
 ## 파일 이름 변경 (2026-11-20)
 - design/my-sample-smartify.csv → design/my-sample.csv (내용 같음, 사용자 요청). 위 기록의 my-sample-smartify.csv는 지금의 my-sample.csv임
+
+## 관광데이터랩 외 공공기관 ACC 데이터 (ACC공공데이터조사.md, 2026-11-20)
+- 키워드: 공공데이터포털 ACC 검색 21건, 방문객 현황(연도별·원별, 무인계수카메라, 월별 없음), 공연 정보·예매 정보·공연별 일일 좌석·거래채널별 월 거래건수, 재단 공연 정보(2024.1~2025.9)·강좌 정보, 국내네트워크, 행사일정 연계 API(1478), 거주지 비율 광주 약 69%·서울 11%·전남 10%대(전당장 인터뷰), 2025 방문객 359만 4천 명, 2023 SNS 만족도 1,606명 87% 긍정, 광주전남연구원 블로그 분석(2016), 아시아문화중심도시 3.0 연구용역(광주연구원, 2026.7), 예술극장 가동률 72.5%(2024)·70%(2025)
+- 출처: https://www.data.go.kr/data/15123618/fileData.do · https://www.data.go.kr/data/15150379/fileData.do · https://www.data.go.kr/data/15151223/fileData.do · https://www.data.go.kr/data/15152824/fileData.do · https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=국립아시아문화전당 · https://www.data.go.kr/data/1478/linkedData.do · https://view.asiae.co.kr/article/2026041414571116789 · https://www.acc.go.kr/main/board/board.do?PID=0703&boardID=REFERECEROOM&action=Read&idx=1210 · https://m.go.seoul.co.kr/news/2016/04/27/20160427500065 · https://news.mtn.co.kr/news-detail/2026072814471034866 · https://dl.nanet.go.kr/detail/MONO1201422811 · https://www.hankyung.com/article/202603126399h
+- 미확인: 거주지 비율 조사 방법·기준 시점, ACC 월별 방문객(정보공개청구 필요), 관람객 만족도 보고서, 광주시 관광객 실태조사 ACC 결과, KOPIS ACC 공연별 관객 수
