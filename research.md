@@ -284,3 +284,13 @@
 ## 내셔널 갤러리 유료 셀프 투어 2% 전환 해석 (project/해외서비스사례.md 1-10, 2026-11-23)
 - 키워드: 구매 전환율(무료→유료 전환 아님), 하루 평균 방문객 10,000명, 약 2%≈하루 200건(계산), 하루 수백 건 유료 투어 구매, Sainsbury Wing 재개관, 상설 소장품 유료 셀프 투어, 1차 데이터 확보, 사전 방문 채널 판매 50%, 개인 기기 35%, 투어 가격·매출 미공개
 - 출처: https://smartify.org/partners/case-studies/the-national-gallery (ego-browser 원문 재확인, 회사 발표 사례)
+
+## 2026-11-23 Smartify 최근 활동·운영 상태
+
+- 파일: project/해외서비스사례.md 1-11
+- 키워드: Smartify 최근 소식, Smartify Free, Museums + Heritage Business of the Year 2026, 10주년, 운영 상태, 파트너 수 불일치
+- 출처:
+  - https://smartify.org/partners/articles
+  - https://smartify.org/partners/articles/smartify-turns-10-celebrating-a-decade-of-digital-culture-and-innovation
+  - https://smartify.org/partners/articles/introducing-smartify-free-visitor-engagement-tools-for-every-cultural-venue
+  - https://smartify.org/partners/articles/museums-heritage-business-of-the-year-2026
