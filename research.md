@@ -330,3 +330,8 @@
 - 2026-11-23 네이버 검색 API 확인: 신규 등록 안 받음("검색 API와 한글인명로마자 변환 신규 제휴는 받지 않습니다", 개발자센터 등록 화면 스크립트), 이용 조건에 데이터 저장·AI 입력 금지. 키워드 추가: 네이버 검색 API, 신규 제휴 중단. 출처: https://developers.naver.com/apps/ · https://developers.naver.com/docs/serviceapi/search/blog/blog.md
 - 2026-11-23 고침: 네이버 검색 API는 NAVER API HUB(네이버 클라우드 플랫폼)로 옮겨짐 — 한시적 무료, 월 775,000건(문서마다 하루 25,000회와 다름). 키워드 추가: NAVER API HUB, 네이버 클라우드 플랫폼. 출처: https://api.ncloud-docs.com/docs/naver-api-hub-search-blog · https://guide.ncloud-docs.com/docs/apihub-overview. 미확인: API HUB 약관의 저장·AI 입력 조항
 - 2026-11-23 NAVER API HUB 결제: 네이버 클라우드 가입 때 결제수단(카드) 등록 필수(공식 요금 안내), 등록만으로 결제되지 않음. API HUB는 한시적 무료, 유료 전환 시 사전 공지(공식). 블로그 검색 월 775,000건·하루 25,000건까지 0원(제3자 블로그, 공식 요금표 미확인). 출처: https://www.gov-ncloud.com/charge/price · https://guide.ncloud-docs.com/docs/apihub-overview · https://keywordcockpit.com/naver-api-hub-migration/
+
+## ACC 전시관별 관람 시간 1년치 (전시관람시간조사.md 6-6, 2026-11-23)
+- 키워드: NAVER API HUB, 블로그 3,436개, ACC 전시 글 1,803개, 관람 시간 글 79개, 인상파 가운데값 60분(13개), 아시아의 장치들 120분(복합전시 2관), 폴란드 포스터전 침묵 그 고요한 외침 75분(복합전시 1관), 김한용 사진전 18분, 식객 45분(어린이문화원 다목적홀), 어린이체험관 120분, ACC 전체 2~3시간
+- 출처: 네이버 블로그 79개 글(주소는 로컬 data/acc_blog/viewing_time.tsv, 깃허브 제외) · ACC 공식 전시 상세(현재전시 bnkey EM_0000009913·9927·9929·9948·9132·7015·10065)
+- 미확인: 블로그에만 적힌 전시관 번호, 글 1~2개 전시의 대표성
