@@ -294,3 +294,15 @@
   - https://smartify.org/partners/articles/smartify-turns-10-celebrating-a-decade-of-digital-culture-and-innovation
   - https://smartify.org/partners/articles/introducing-smartify-free-visitor-engagement-tools-for-every-cultural-venue
   - https://smartify.org/partners/articles/museums-heritage-business-of-the-year-2026
+
+## 2026-11-23 Smartify 회사 발표 외부 근거 확인
+
+- 파일: project/해외서비스사례.md 1-12
+- 키워드: 외부 검증, Museums + Heritage Awards 2026, Webby Awards 2026 후보, Bodleian 오디오 트레일, Horniman AR, 회사 발표만 있는 숫자
+- 출처:
+  - https://awards.museumsandheritage.com/?p=9955
+  - https://awards.museumsandheritage.com/?p=9609
+  - https://winners.webbyawards.com/2026/apps-software-immersive/immersive-experiences/best-use-of-augmented-reality/373874/turning-londons-skyline-into-an-interactive-vista-with-breakthrough-ar-technology-at-horizon-22
+  - https://visit.bodleian.ox.ac.uk/tours/audio-guide
+  - https://www.horniman.ac.uk/story/animals-everywhere-horniman-and-smartify-collaborate-on-innovative-ar-experience/
+  - https://businesscloud.co.uk/news/museum-app-with-2m-users-secures-1-5m-backing/
