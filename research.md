@@ -270,3 +270,8 @@
 - 키워드: 월평균 = 관람객 ÷ 집계 일수 × 30.44, 료지 이케다 160일 월 약 19,200명, 봄의 선언 101일 월 약 25,800명, 아시아의 장치들 144일 월 약 21,100명, 김아영 101,803명(2024.8~2025.2.16)·애호가의 편지 134,101명(2025.3~8.24), 대형 기획전 월 2만 명 안팎, 검색량 월평균 8,706(2025.11~12) → 4,098(2026.03~08) -52.9%, 대표 전시 월평균 +10%, 상관관계 확인 불가(비교점 2~3개), 0.86은 광주 전체 방문자와의 상관, ACC 월평균 2025 약 299,600·문화창조원 약 112,600
 - 출처: https://www.acc.go.kr/main/board/board.do?PID=0703&boardID=REFERECEROOM&action=Read&idx=1714 · https://www.acc.go.kr/main/board/board.do?PID=0703&boardID=REFERECEROOM&action=Read&idx=1865 · project/datalab/ACC_국립아시아문화전당_202511-202610/ 내비게이션 목적지 검색량 추이.csv · project/공공데이터포털/국립아시아문화전당_방문객현황.csv
 - 미확인: 김아영·애호가의 편지 정확한 개막일, 2026년 다른 전시 관람객 수, ACC 월별 관람인원(정보공개청구 필요)
+
+## 광주 여행패스 앱 (광주여행패스앱조사.md, 2026-11-23)
+- 키워드: "광주 여행패스" 이름의 앱 없음, 광주투어버스(관광 DRT, 앱 호출, 1회 1,700원·1일권 3,000원 24시간 무제한, 2024.7.23~12.13·소년버스 2025.5.16~30·2025.9.1~11.30, 국립아시아문화전당·광주송정역·광주역·종합버스터미널 정류장, 2025.12.30 운영 중단(나무위키), 중단 이유: 앱 접근성·긴 배차 간격·호출 지역 제한), 광주 아트패스(동구, 2024.8 출시, 가입자 약 1만 2,000명·가맹점 264곳·매출 1억 721만 원(2025.9), 미미패스·동명 커피패스, 숙박 최대 30%), JG TOUR(2026.7 JN TOUR 개편, 광주 5개 자치구 미포함), 농촌투어패스 1만 7,900원
+- 출처: https://www.namdonews.com/news/articleView.html?idxno=780927 · https://biz.heraldcorp.com/article/10484989 · https://namu.wiki/w/%EA%B4%91%EC%A3%BC%20%EB%B2%84%EC%8A%A4%20%EA%B4%80%EA%B4%9101 · https://www.asiae.co.kr/en/article/2025042416393500889 · https://www.gjdream.com/news/articleView.html?idxno=661369 · https://www.gjdream.com/news/articleView.html?idxno=661397 · https://www.khan.co.kr/article/202608052058045/ · https://intro.jeonnamtour.kr/
+- 미확인: 광주투어버스 이용객 수·중단 공식 발표·2026 재운행, 아트패스 2026 현황·패스 가격, JG TOUR 광주 정보 추가 시점
