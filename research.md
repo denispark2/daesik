@@ -328,3 +328,4 @@
 - 수집: 408개 → ACC 태그·장소+전시 203개 → 시간 문장 27개 → 관람 시간 14개
 - 한계: 네이버 캡차로 검색 막힘(우회 안 함) → 2026년 3~11월 글 없음. 미확인: 블로그에 적힌 전시관 번호의 공식 확인
 - 2026-11-23 네이버 검색 API 확인: 신규 등록 안 받음("검색 API와 한글인명로마자 변환 신규 제휴는 받지 않습니다", 개발자센터 등록 화면 스크립트), 이용 조건에 데이터 저장·AI 입력 금지. 키워드 추가: 네이버 검색 API, 신규 제휴 중단. 출처: https://developers.naver.com/apps/ · https://developers.naver.com/docs/serviceapi/search/blog/blog.md
+- 2026-11-23 고침: 네이버 검색 API는 NAVER API HUB(네이버 클라우드 플랫폼)로 옮겨짐 — 한시적 무료, 월 775,000건(문서마다 하루 25,000회와 다름). 키워드 추가: NAVER API HUB, 네이버 클라우드 플랫폼. 출처: https://api.ncloud-docs.com/docs/naver-api-hub-search-blog · https://guide.ncloud-docs.com/docs/apihub-overview. 미확인: API HUB 약관의 저장·AI 입력 조항
