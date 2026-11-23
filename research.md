@@ -306,3 +306,18 @@
   - https://visit.bodleian.ox.ac.uk/tours/audio-guide
   - https://www.horniman.ac.uk/story/animals-everywhere-horniman-and-smartify-collaborate-on-innovative-ar-experience/
   - https://businesscloud.co.uk/news/museum-app-with-2m-users-secures-1-5m-backing/
+
+## 2026-11-23 스파크 언론 기사·이용자 수·외부 근거
+
+- 파일: project/국내서비스사례.md 3-5
+- 키워드: 스파크 언론 기사, 보도자료 재배포, 이용자 수 미공개, 서울예술정보플랫폼 개편, 행정사무감사, 외부 근거
+- 출처:
+  - https://www.newdaily.co.kr/site/data/html/2025/07/18/2025071800038.html
+  - https://www.jungle.co.kr/magazine/206915
+  - https://supple.kr/news/cmtm93fk2005t12e71a8cqz7t
+  - https://www.asiatoday.co.kr/kn/view.php?key=20260904010001782
+  - https://www.m-i.kr/news/articleView.html?idxno=1410032
+  - https://www.nnewss.com/news/articleView.html?idxno=6424
+  - https://www.imaginarypocus.com/news/519699
+  - https://clik.nanet.go.kr/clikr-collection/minutes/002001/11/2025/CLIKC8550281870215823_1.pdf
+  - https://go.seoul.co.kr/news/newsView.php?id=20261116500237
