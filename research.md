@@ -280,3 +280,7 @@
 - 키워드: 서비스 수익 없음(무료), 스파크 사업비·방문자 수 미공개, 서울문화재단 2026 총 사업비 1,481억 원(지원 317·바우처 739·공간운영 280, 수탁 포함 약 1,700억), 재단 예산총괄표 본예산 세출 610억 7,935만 원(2025년 대비 -1.3%), 연 약 170억 원·약 500편 지원작, 홍보비 부담 완화·티켓 판매 유통 경로, 등록 작품 1,055건, 4단계 키워드 574개, 이벤트 2회 각 100명 추첨, 스파크(스팍) 포커스상 신설, 광역문화재단 5곳 협약 계획(미확인), 우리 프로젝트 성과 지표 제안
 - 출처: https://www.sctoday.co.kr/news/articleView.html?idxno=47269 · https://www.sfac.or.kr/info/management/present_list.do · https://m.blog.naver.com/i_sfac/223920189267 · https://m.blog.naver.com/i_sfac/223936760177 · https://www.segye.com/newsView/20250410515579 · https://spac.sfac.or.kr/news (ego-browser 직접 확인. 당첨자 명단은 개인정보라 옮기지 않음)
 - 미확인: 스파크 구축·운영비, 방문자·회원 수, 추천→예매 전환율, 광역문화재단 협약 체결 실적
+
+## 내셔널 갤러리 유료 셀프 투어 2% 전환 해석 (project/해외서비스사례.md 1-10, 2026-11-23)
+- 키워드: 구매 전환율(무료→유료 전환 아님), 하루 평균 방문객 10,000명, 약 2%≈하루 200건(계산), 하루 수백 건 유료 투어 구매, Sainsbury Wing 재개관, 상설 소장품 유료 셀프 투어, 1차 데이터 확보, 사전 방문 채널 판매 50%, 개인 기기 35%, 투어 가격·매출 미공개
+- 출처: https://smartify.org/partners/case-studies/the-national-gallery (ego-browser 원문 재확인, 회사 발표 사례)
