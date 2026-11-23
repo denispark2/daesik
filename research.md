@@ -275,3 +275,8 @@
 - 키워드: "광주 여행패스" 이름의 앱 없음, 광주투어버스(관광 DRT, 앱 호출, 1회 1,700원·1일권 3,000원 24시간 무제한, 2024.7.23~12.13·소년버스 2025.5.16~30·2025.9.1~11.30, 국립아시아문화전당·광주송정역·광주역·종합버스터미널 정류장, 2025.12.30 운영 중단(나무위키), 중단 이유: 앱 접근성·긴 배차 간격·호출 지역 제한), 광주 아트패스(동구, 2024.8 출시, 가입자 약 1만 2,000명·가맹점 264곳·매출 1억 721만 원(2025.9), 미미패스·동명 커피패스, 숙박 최대 30%), JG TOUR(2026.7 JN TOUR 개편, 광주 5개 자치구 미포함), 농촌투어패스 1만 7,900원
 - 출처: https://www.namdonews.com/news/articleView.html?idxno=780927 · https://biz.heraldcorp.com/article/10484989 · https://namu.wiki/w/%EA%B4%91%EC%A3%BC%20%EB%B2%84%EC%8A%A4%20%EA%B4%80%EA%B4%9101 · https://www.asiae.co.kr/en/article/2025042416393500889 · https://www.gjdream.com/news/articleView.html?idxno=661369 · https://www.gjdream.com/news/articleView.html?idxno=661397 · https://www.khan.co.kr/article/202608052058045/ · https://intro.jeonnamtour.kr/
 - 미확인: 광주투어버스 이용객 수·중단 공식 발표·2026 재운행, 아트패스 2026 현황·패스 가격, JG TOUR 광주 정보 추가 시점
+
+## 스파크 수익 구조와 성과 (project/국내서비스사례.md 3번, 2026-11-23)
+- 키워드: 서비스 수익 없음(무료), 스파크 사업비·방문자 수 미공개, 서울문화재단 2026 총 사업비 1,481억 원(지원 317·바우처 739·공간운영 280, 수탁 포함 약 1,700억), 재단 예산총괄표 본예산 세출 610억 7,935만 원(2025년 대비 -1.3%), 연 약 170억 원·약 500편 지원작, 홍보비 부담 완화·티켓 판매 유통 경로, 등록 작품 1,055건, 4단계 키워드 574개, 이벤트 2회 각 100명 추첨, 스파크(스팍) 포커스상 신설, 광역문화재단 5곳 협약 계획(미확인), 우리 프로젝트 성과 지표 제안
+- 출처: https://www.sctoday.co.kr/news/articleView.html?idxno=47269 · https://www.sfac.or.kr/info/management/present_list.do · https://m.blog.naver.com/i_sfac/223920189267 · https://m.blog.naver.com/i_sfac/223936760177 · https://www.segye.com/newsView/20250410515579 · https://spac.sfac.or.kr/news (ego-browser 직접 확인. 당첨자 명단은 개인정보라 옮기지 않음)
+- 미확인: 스파크 구축·운영비, 방문자·회원 수, 추천→예매 전환율, 광역문화재단 협약 체결 실적
