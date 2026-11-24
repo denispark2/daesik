@@ -367,3 +367,4 @@
 - 출처:
   - https://view.asiae.co.kr/article/2026041414571116789
   - https://www.acc.go.kr/main/contents.do?PID=060101
+- 2026-11-24 파일 이름 변경: Smartify 가치사슬 my-chain → my-company-chain(.md/.pdf), 우리 프로젝트 가치사슬 our-chain → my-chain(.md/.pdf)
