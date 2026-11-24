@@ -425,3 +425,10 @@
   - https://www.acc.go.kr/main/board/board.do?PID=0701&boardID=NOTICE&category=1&action=Read&idx=1813
   - https://www.acc.go.kr/child/contents.do?PID=020101
   - https://www.acc.go.kr/main/contents.do?PID=06040302
+
+## 2026-11-24 밸류체인 지도 (map.html)
+
+- 파일: valuechain/map.html (팀: 박대식/valuechain/map.html)
+- 근거: 팀 valuechain/team-chain.png · to-check.md (9단계 표·인사이트·체크리스트), valuechain/my-chain.md, my-company-chain.md, project/국내서비스사례.md (새 조사 없음)
+- 내용: 9단계마다 병목(막히면 다음 단계로 못 감)·기회(Smartify·스파크가 잘한 것)·비용(팀 시간·돈), 돈의 줄·데이터의 줄 따로 (확보 실선·필요 주황·미정/상상 점선), 계획만 있는 단계(④·⑧)는 점선 테두리
+- 키워드: 밸류체인 지도, 병목, 기회, 비용, 돈의 줄, 데이터의 줄, 시간 데이터 병목

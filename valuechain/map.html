@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>OUR ACC JOURNEY 밸류체인 지도 — 박대식</title>
+<style>
+@font-face { font-family: "NotoKR"; src: local("Noto Sans KR"), url("file:///C:/Windows/Fonts/NotoSansKR-VF.ttf"); font-weight: 100 900; }
+:root { --navy:#1f2a44; --cream:#f7f3ec; --panel:#f1ebe1; --orange:#e8792b; --green:#2e7d4f; --gray:#8a8a8a; --line:#d9d2c5; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "NotoKR","Noto Sans KR","Malgun Gothic",sans-serif; background: var(--cream); color: var(--navy); padding: 40px 48px 36px; min-width: 1840px; }
+h1 { font-size: 34px; font-weight: 800; }
+.sub { margin-top: 8px; font-size: 16px; color: #555; }
+.legend { margin-top: 14px; display: flex; gap: 22px; flex-wrap: wrap; font-size: 13.5px; color: #444; align-items: center; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { display: inline-block; width: 34px; height: 0; border-top: 4px solid var(--green); }
+.sw.need { border-top-color: var(--orange); }
+.sw.dash { border-top: 3px dashed var(--gray); }
+.bx { display:inline-block; width: 26px; height: 16px; border: 2px solid var(--navy); border-radius: 4px; }
+.bx.dash { border-style: dashed; }
+.bx.core { border-color: var(--orange); border-width: 3px; }
+.tg { font-size: 11.5px; font-weight: 700; padding: 1px 7px; border-radius: 9px; }
+.tg.b { background:#fde3d3; color:#b4461a; } .tg.o { background:#dcefe3; color:var(--green); } .tg.c { background:#e4e7ef; color:var(--navy); }
+
+/* grid: label column + 9 step columns */
+.grid { margin-top: 22px; display: grid; grid-template-columns: 112px repeat(9, 1fr); column-gap: 10px; row-gap: 10px; }
+.rowlab { font-size: 15px; font-weight: 800; display: flex; align-items: center; }
+.rowlab small { display:block; font-size: 11px; font-weight: 500; color:#777; }
+.phase { grid-row: 1; background: var(--panel); border-radius: 10px 10px 0 0; padding: 8px 12px; font-size: 15px; font-weight: 800; display:flex; justify-content: space-between; }
+.phase em { font-style: normal; font-size: 12px; font-weight: 500; color: #777; }
+.step { background: #fff; border: 2px solid var(--navy); border-radius: 12px; padding: 12px 13px; min-height: 168px; }
+.step.dash { border-style: dashed; }
+.step.core { border: 3px solid var(--orange); }
+.step .n { color: var(--orange); font-size: 13px; font-weight: 700; }
+.step h3 { font-size: 18px; font-weight: 800; margin: 2px 0 6px; line-height: 1.25; }
+.step .who { font-size: 12.5px; color: #666; margin-bottom: 6px; }
+.step .st { font-size: 11.5px; font-weight: 700; display:inline-block; padding: 1px 8px; border-radius: 9px; background:#dcefe3; color: var(--green); }
+.step .st.gray { background: #eee; color: #666; border: 1px dashed #999; }
+.step .st.or { background: #fde3d3; color: #b4461a; }
+
+.cell { border-radius: 9px; padding: 9px 11px; font-size: 13.2px; line-height: 1.45; background: #fff; border: 1px solid var(--line); }
+.cell.none { color: #aaa; background: transparent; border: 1px dashed #d9d2c5; text-align: center; }
+.cell.b { border-left: 5px solid #e8792b; }
+.cell.o { border-left: 5px solid var(--green); }
+.cell.c { border-left: 5px solid var(--navy); }
+.cell .src { display:block; margin-top: 3px; font-size: 11px; color: #888; }
+
+/* flow lanes */
+.lane { position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 86px; }
+.lane .bar { height: 0; border-top: 5px solid var(--green); margin: 0 -10px 0 0; }
+.lane .bar.need { border-top-color: var(--orange); }
+.lane .bar.dash { border-top: 4px dashed var(--gray); }
+.lane .bar.end { margin-right: 0; }
+.lane .dot { position:absolute; left: -2px; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: var(--navy); }
+.lane .t { font-size: 12.8px; line-height: 1.4; margin-top: 7px; }
+.lane .t:first-child { margin: 0 0 7px; }
+.lane .k { font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 9px; margin-right: 4px; }
+.k.have { background:#dcefe3; color: var(--green); }
+.k.need { background:#fde3d3; color:#b4461a; }
+.k.tbd { background:#eee; color:#666; border: 1px dashed #999; }
+
+.foot { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.box { background:#fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; font-size: 14px; line-height: 1.6; }
+.box h4 { font-size: 16px; margin-bottom: 6px; }
+.box b { color: var(--orange); }
+.src-all { margin-top: 14px; font-size: 11.5px; color: #777; line-height: 1.6; }
+</style>
+</head>
+<body>
+<h1>OUR ACC JOURNEY 밸류체인 지도 — 병목 · 기회 · 비용</h1>
+<div class="sub">팀 취합본(valuechain/team-chain.png · to-check.md 1번 표, 2026-11-24)의 9단계 위에 병목·기회·비용과 돈·데이터 줄을 올린 지도 · 박대식</div>
+<div class="legend">
+  <span><span class="tg b">병목</span> 막히면 다음 단계로 못 넘어감</span>
+  <span><span class="tg o">기회</span> 비슷한 기업(Smartify·스파크)이 잘한 것</span>
+  <span><span class="tg c">비용</span> 팀에 시간·돈이 필요한 것</span>
+  <span><span class="sw"></span> 이미 확보</span>
+  <span><span class="sw need"></span> 필요 (아직 없음)</span>
+  <span><span class="sw dash"></span> 미정·상상</span>
+  <span><span class="bx core"></span> 핵심 단계</span>
+  <span><span class="bx dash"></span> 계획만 있는 단계</span>
+</div>
+
+<div class="grid">
+  <!-- phases -->
+  <div></div>
+  <div class="phase" style="grid-column: 2 / span 3">만들기 <em>우리 팀 + AI</em></div>
+  <div class="phase" style="grid-column: 5 / span 4">만나기·쓰기 <em>타깃 = 다른 일정 중 광주에 들른 외지 방문객</em></div>
+  <div class="phase" style="grid-column: 9 / span 2">사용 뒤 <em>타깃 → ACC·지역</em></div>
+
+  <!-- steps -->
+  <div class="rowlab">단계</div>
+  <div class="step"><div class="n">①</div><h3>데이터 모으기</h3><div class="who">정선아 · 신희연 · 박대식</div><span class="st">파일에 있음</span></div>
+  <div class="step"><div class="n">②</div><h3>리뷰 정리·태그</h3><div class="who">AI · 신희연(검수) · 등록자 미정</div><span class="st gray">일부 미정</span></div>
+  <div class="step core"><div class="n">③ 핵심</div><h3>코스 엔진</h3><div class="who">우리 서비스 · 개발 담당 미정</div><span class="st or">시간 데이터 필요</span></div>
+  <div class="step dash"><div class="n">④</div><h3>알리기·유입</h3><div class="who">미정</div><span class="st gray">계획만 있음</span></div>
+  <div class="step"><div class="n">⑤</div><h3>코스 받기</h3><div class="who">타깃</div><span class="st">파일에 있음</span></div>
+  <div class="step"><div class="n">⑥</div><h3>ACC 관람</h3><div class="who">타깃 · ACC · ACC재단</div><span class="st">파일에 있음</span></div>
+  <div class="step"><div class="n">⑦</div><h3>다음 갈 곳</h3><div class="who">타깃 → 지역 가게</div><span class="st">파일에 있음</span></div>
+  <div class="step dash"><div class="n">⑧</div><h3>관람 후 2문항·공유</h3><div class="who">타깃</div><span class="st gray">계획</span></div>
+  <div class="step core"><div class="n">⑨ 핵심</div><h3>운영자 화면·리뷰 대시보드</h3><div class="who">4팀 → ACC</div><span class="st gray">과금 근거 없음</span></div>
+
+  <!-- bottleneck -->
+  <div class="rowlab"><div><span class="tg b">병목</span><small>막히면 멈춤</small></div></div>
+  <div class="cell b">두 리뷰 자료(87건·390건) 기준 통일·중복 제거 전엔 ②로 못 넘어감</div>
+  <div class="cell b">리뷰_태그 표의 파일 이름·열 미정 → 기대치 카드를 엔진에 못 넘김</div>
+  <div class="cell b"><b>전시별 관람 시간·도보 시간 없음</b> → 시간 안 코스 계산 불가</div>
+  <div class="cell b">타깃이 링크를 처음 보는 채널·담당 미정</div>
+  <div class="cell b">입력 개수 2개 vs 4종 미정 → 입력값 열 확정 불가</div>
+  <div class="cell b">관람 완료·관람시간 표 미정</div>
+  <div class="cell b">가게 리뷰 표의 출처·열 미정</div>
+  <div class="cell b">이용 기록 표(세션·단계·시각·값) 열 미정</div>
+  <div class="cell b">ACC 요일·시간대별 관람객 데이터 없음 · 과금 근거 없음</div>
+
+  <!-- opportunity -->
+  <div class="rowlab"><div><span class="tg o">기회</span><small>비슷한 기업</small></div></div>
+  <div class="cell none">—</div>
+  <div class="cell o">스파크: 작품마다 5개 분류 키워드 태그로 큐레이션<span class="src">국내서비스사례.md</span></div>
+  <div class="cell o">Smartify: 관심사 + 꼭 볼 작품 + 가진 시간 → 작품 간 거리로 경로 계산<span class="src">my-company-chain.md</span></div>
+  <div class="cell o">Smartify: 설치·로그인 없는 웹앱, 무료 요금제로 먼저 들임<span class="src">my-company-chain.md</span></div>
+  <div class="cell o">Smartify: 개인 기기로 바로 쓰는 웹앱<span class="src">my-company-chain.md</span></div>
+  <div class="cell o">Smartify: 체류 시간·이탈 지점 수집<span class="src">my-company-chain.md</span></div>
+  <div class="cell none">—</div>
+  <div class="cell o">Smartify: 앱 안 설문(NPS)·방문 후 메일로 다음 전시 알림<span class="src">my-company-chain.md</span></div>
+  <div class="cell o">Smartify: 관람 데이터 리포트가 기관 재계약 근거<span class="src">my-company-chain.md</span></div>
+
+  <!-- cost -->
+  <div class="rowlab"><div><span class="tg c">비용</span><small>팀 시간·돈</small></div></div>
+  <div class="cell c">수집 비용 미정 · 지점 간 도보 시간 <b>직접 걸어서</b> 측정 (시간)</div>
+  <div class="cell c">AI 비용 미정 · 태그 검수 시간 (신희연)</div>
+  <div class="cell c">서버·지도 API 비용 미정 · 개발 담당 미정</div>
+  <div class="cell c">미정</div>
+  <div class="cell none">— (타깃 0원 제안)</div>
+  <div class="cell none">—</div>
+  <div class="cell c">가게 리뷰 수집 (지도 API 리뷰 수 기준)</div>
+  <div class="cell c">미정</div>
+  <div class="cell c">정보공개청구(open.go.kr) 시간 · ACC 인터뷰</div>
+
+  <!-- money lane -->
+  <div class="rowlab"><div>돈의 줄<small>누가 → 누구</small></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>수집 비용</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>AI 비용</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>우리 → 외부: 서버·지도 API</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span></span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">제안</span>타깃 → 우리 <b>0원</b></span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k have">확보</span>타깃 → ACC·재단 유료 관람료</span><div class="bar"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">상상</span>타깃 → 가게 · 제휴 미정</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span></span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>ACC → 4팀 (살 의사 근거 없음)</span><div class="bar dash end"></div></div>
+
+  <!-- data lane -->
+  <div class="rowlab"><div>데이터의 줄<small>표·기록</small></div></div>
+  <div class="lane"><span class="t"><span class="k have">확보</span>blog-input · place-input · exhibition-list · place-acc</span><div class="bar"></div></div>
+  <div class="lane"><span class="t"><span class="k have">확보</span>blog-output · place-output<br><span class="k tbd">미정</span>리뷰_태그</span><div class="bar"></div></div>
+  <div class="lane"><span class="t"><span class="k need">필요</span>4표 연결 · 소요(분) 추정치 → 실측</span><div class="bar need"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>유입 경로</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>입력값</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k need">필요</span>관람 완료 · 관람시간</span><div class="bar need"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>가게 리뷰 · 근방 이동</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k tbd">미정</span>공유 기록</span><div class="bar dash"></div></div>
+  <div class="lane"><span class="t"><span class="k need">필요</span>output 집계 + 사용 기록</span><div class="bar need end"></div></div>
+</div>
+
+<div class="foot">
+  <div class="box"><h4>가장 큰 병목 — 시간 데이터</h4>
+    ③ 코스 엔진과 ⑨ 운영자 화면이 모두 <b>전시별 관람 시간·도보 시간</b>에 걸려 있다. 첫 측정 방법은 ⑧ <b>관람 후 2문항(실제 걸린 시간)</b>과 직접 걸어서 재기. 이 값이 ③으로 돌아가 코스를 고친다.</div>
+  <div class="box"><h4>돈과 데이터 — 지금 상태</h4>
+    돈: 우리에게 들어오는 돈은 <b>0곳</b>, 확보된 돈 줄은 타깃 → ACC·재단 관람료 하나뿐. 데이터: 리뷰·전시·장소 표는 <b>확보</b>, 사용 중에 생기는 기록 5개(입력값·유입 경로·관람 완료·근방 이동·공유)는 미정 → 이용 기록 표 하나로 묶을 수 있음 (to-check 제안).</div>
+</div>
+
+<div class="src-all">
+  출처: 팀 valuechain/team-chain.png · to-check.md (1번 표·2번 인사이트·3번 체크리스트, 2026-11-24, 신희연 정리) · 박대식 valuechain/my-chain.md · my-company-chain.md (Smartify) · project/국내서비스사례.md (스파크).
+  9단계·누가·돈·데이터·상태는 to-check.md 1번 표 그대로. 병목·비용은 같은 파일 2·3번에서, 기회는 Smartify·스파크 조사 파일에서만 가져옴. 파일에 없는 칸은 '—'.
+</div>
+</body>
+</html>
