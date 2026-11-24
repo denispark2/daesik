@@ -358,3 +358,12 @@
 - 키워드: Smartify 가치사슬, 주 활동 5단계, 돈·데이터 흐름, 지원 활동
 - 출처: project/해외서비스사례.md 출처 목록과 같음
 - 2026-11-24 추가: 단순화한 가치사슬 PDF를 valuechain/my-chain.pdf로 함께 올림 (git 기록에서 복원)
+
+## 2026-11-24 OUR ACC JOURNEY 가치사슬
+
+- 파일: valuechain/our-chain.md, valuechain/our-chain.pdf (Smartify my-chain과 같은 양식)
+- 근거: 팀 brand/one-page-plan.md·segments.md, project/해외서비스사례.md 1-10·2-1~2-6, 광주관광데이터랩조사.md (새 조사 없음)
+- 키워드: 우리 가치사슬, 데이터·콘텐츠 모으기, 코스 엔진, 알리기·유입, 관람 경험, 관람 이후 데이터, 무료 이용, 기관 과금 미정, 시간 데이터 공백
+- 출처:
+  - https://view.asiae.co.kr/article/2026041414571116789
+  - https://www.acc.go.kr/main/contents.do?PID=060101
