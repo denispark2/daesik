@@ -357,3 +357,4 @@
 - 가치사슬 내용은 valuechain/my-chain.md로 다시 저장 (팀: 박대식/valuechain/my-chain.md)
 - 키워드: Smartify 가치사슬, 주 활동 5단계, 돈·데이터 흐름, 지원 활동
 - 출처: project/해외서비스사례.md 출처 목록과 같음
+- 2026-11-24 추가: 단순화한 가치사슬 PDF를 valuechain/my-chain.pdf로 함께 올림 (git 기록에서 복원)
