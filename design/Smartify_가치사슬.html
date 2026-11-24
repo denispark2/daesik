@@ -12,64 +12,55 @@ body {
   font-family: "NotoKR", "Noto Sans KR", "Malgun Gothic", sans-serif;
   background: #f6f5f2; color: #111; -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
-.page { position: relative; width: 1920px; height: 1080px; padding: 52px 80px 40px; }
+.page { position: relative; width: 1920px; height: 1080px; padding: 56px 80px 40px; }
 .label { font-size: 17px; font-weight: 500; letter-spacing: .04em; color: #222; }
 .label b { margin-right: 10px; font-weight: 500; }
-h1 { margin-top: 14px; font-size: 46px; font-weight: 800; letter-spacing: -.01em; }
+h1 { margin-top: 14px; font-size: 48px; font-weight: 800; letter-spacing: -.01em; }
 h1 .bar { font-weight: 300; margin: 0 18px; }
 .accent { width: 52px; height: 4px; background: #e8cf68; margin-top: 10px; }
-.sub { margin-top: 14px; font-size: 22px; font-weight: 700; }
-.sub span { font-weight: 300; color: #555; margin-left: 14px; font-size: 18px; }
+.sub { margin-top: 16px; font-size: 25px; font-weight: 700; }
 
 /* primary chain */
-.chain { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 22px; }
-.stage { background: #fff; border: 1px solid #e3e0d8; position: relative; padding: 0 0 12px; display: flex; flex-direction: column; }
-.stage .num { margin-top: auto !important; }
-.stage .head { background: #111; color: #fff; padding: 10px 16px 10px 18px; position: relative;
-  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%); }
+.chain { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 30px; }
+.stage { background: #fff; border: 1px solid #e3e0d8; padding: 0 0 16px; display: flex; flex-direction: column; }
+.stage .head { background: #111; color: #fff; padding: 13px 20px 13px 20px;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%); }
 .stage:last-child .head { clip-path: none; }
-.stage .head .no { font-size: 13px; color: #e8cf68; font-weight: 700; letter-spacing: .05em; }
-.stage .head .t { font-size: 20px; font-weight: 700; margin-top: 1px; }
-.stage .head .e { font-size: 12px; color: #bbb; font-weight: 400; margin-left: 6px; }
-.stage .who { margin: 10px 16px 6px; font-size: 13px; color: #6b6b6b; font-weight: 500; }
-.stage ul { list-style: none; margin: 0 16px; }
-.stage li { font-size: 14.2px; line-height: 1.45; font-weight: 400; color: #333; padding: 4px 0 4px 11px; position: relative; border-top: 1px solid #efede7; }
+.stage .head .no { font-size: 14px; color: #e8cf68; font-weight: 700; letter-spacing: .05em; }
+.stage .head .t { font-size: 23px; font-weight: 700; margin-top: 2px; }
+.stage .who { margin: 14px 20px 6px; font-size: 15px; color: #6b6b6b; font-weight: 500; }
+.stage ul { list-style: none; margin: 0 20px; }
+.stage li { font-size: 17px; line-height: 1.5; color: #333; padding: 7px 0 7px 13px; position: relative; border-top: 1px solid #efede7; }
 .stage li:first-child { border-top: none; }
-.stage li::before { content: ""; position: absolute; left: 0; top: 12px; width: 4px; height: 4px; background: #c9b04c; }
+.stage li::before { content: ""; position: absolute; left: 0; top: 17px; width: 5px; height: 5px; background: #c9b04c; }
 .stage li b { font-weight: 700; color: #111; }
-.stage .num { margin: 8px 16px 0; background: #f3ebd3; padding: 7px 10px; font-size: 13.5px; line-height: 1.4; }
-.stage .num b { font-size: 17px; font-weight: 800; }
-.tag { font-size: 11px; color: #8a7a35; font-weight: 600; white-space: nowrap; }
+.stage .num { margin: auto 20px 0; background: #f3ebd3; padding: 10px 12px; font-size: 15.5px; line-height: 1.4; }
+.stage .num b { font-size: 20px; font-weight: 800; }
+.tag { font-size: 12px; color: #8a7a35; font-weight: 600; white-space: nowrap; }
 
 /* flows */
-.flows { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; }
-.flow { border-left: 4px solid #e8cf68; background: #fff; padding: 9px 14px; font-size: 14px; line-height: 1.45; border-top: 1px solid #e3e0d8; border-right: 1px solid #e3e0d8; border-bottom: 1px solid #e3e0d8; }
-.flow .ft { font-weight: 800; font-size: 16px; margin-bottom: 3px; }
-.flow .ft em { font-style: normal; font-weight: 400; color: #666; font-size: 13px; margin-left: 6px; }
-.flow .arrow { font-weight: 700; }
+.flows { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 14px; }
+.flow { background: #fff; border: 1px solid #e3e0d8; border-left: 5px solid #e8cf68; padding: 13px 18px; font-size: 17px; line-height: 1.5; }
+.flow .ft { font-weight: 800; font-size: 19px; margin-bottom: 4px; }
 .flow.dark { background: #111; color: #fff; border-color: #111; border-left-color: #e8cf68; }
-.flow.dark em { color: #bbb; }
 
 /* support */
-.support { margin-top: 12px; display: grid; grid-template-columns: 150px repeat(4, 1fr); border: 1px solid #e3e0d8; background: #fff; }
-.support .sh { background: #e8cf68; display: flex; flex-direction: column; justify-content: center; padding: 0 16px; font-weight: 800; font-size: 18px; }
-.support .sh small { font-size: 11px; font-weight: 500; color: #5a4d17; letter-spacing: .04em; }
-.support .sc { padding: 9px 14px; font-size: 13.5px; line-height: 1.45; color: #333; border-left: 1px solid #efede7; }
-.support .sc .st { font-weight: 800; font-size: 15px; color: #111; margin-bottom: 2px; }
+.support { margin-top: 14px; display: grid; grid-template-columns: 170px repeat(4, 1fr); border: 1px solid #e3e0d8; background: #fff; }
+.support .sh { background: #e8cf68; display: flex; flex-direction: column; justify-content: center; padding: 0 20px; font-weight: 800; font-size: 21px; }
+.support .sh small { font-size: 12px; font-weight: 500; color: #5a4d17; letter-spacing: .04em; }
+.support .sc { padding: 13px 18px; font-size: 16px; line-height: 1.5; color: #333; border-left: 1px solid #efede7; }
+.support .sc .st { font-weight: 800; font-size: 18px; color: #111; margin-bottom: 3px; }
 .support .sc b { color: #111; }
 
-/* bottom */
-.bottom { display: grid; grid-template-columns: 1.15fr 1fr 1.15fr; gap: 10px; margin-top: 12px; }
-.box { background: #fff; border: 1px solid #e3e0d8; padding: 11px 16px; }
-.box h3 { font-size: 17px; font-weight: 800; margin-bottom: 5px; }
-.box h3 span { font-size: 12px; font-weight: 500; color: #8a7a35; margin-left: 6px; }
-.box ol, .box ul { margin-left: 18px; }
-.box li { font-size: 14.6px; line-height: 1.6; color: #333; }
-.box li b { color: #111; }
-.box.hl { background: #f3ebd3; border-color: #e6dab3; }
+/* key point */
+.key { margin-top: 14px; background: #f3ebd3; border: 1px solid #e6dab3; padding: 14px 22px; display: grid; grid-template-columns: 210px 1fr 1fr 1fr; gap: 22px; align-items: center; }
+.key h3 { font-size: 21px; font-weight: 800; }
+.key h3 span { display: block; font-size: 12px; font-weight: 500; color: #8a7a35; }
+.key p { font-size: 17px; line-height: 1.5; color: #333; }
+.key p b { color: #111; }
 
-.src { position: absolute; left: 80px; right: 140px; bottom: 26px; font-size: 10.6px; line-height: 1.5; color: #555; }
-.pno { position: absolute; right: 80px; bottom: 28px; font-size: 13px; color: #555; }
+.src { position: absolute; left: 80px; right: 140px; bottom: 28px; font-size: 11px; line-height: 1.55; color: #555; }
+.pno { position: absolute; right: 80px; bottom: 30px; font-size: 13px; color: #555; }
 </style>
 </head>
 <body>
@@ -77,110 +68,85 @@ h1 .bar { font-weight: 300; margin: 0 18px; }
   <div class="label"><b>04</b>VALUE CHAIN</div>
   <h1>가치사슬<span class="bar">|</span>콘텐츠에서 관람 이후까지</h1>
   <div class="accent"></div>
-  <div class="sub">기관이 돈을 내고, 관람객이 쓰고, 데이터가 다시 기관으로 돌아오는 구조<span>주 활동 5단계 · 지원 활동 4가지 · 돈과 데이터의 흐름</span></div>
+  <div class="sub">기관이 돈을 내고, 관람객이 쓰고, 데이터가 다시 기관으로 돌아오는 구조</div>
 
   <div class="chain">
     <div class="stage">
-      <div class="head"><div class="no">STEP 01</div><div class="t">콘텐츠 확보·제작<span class="e">Content</span></div></div>
-      <div class="who">누가: 문화기관 + Smartify 제작팀</div>
+      <div class="head"><div class="no">STEP 01</div><div class="t">콘텐츠 제작</div></div>
+      <div class="who">문화기관 + Smartify</div>
       <ul>
-        <li>기관이 작품 정보·해설·이미지를 <b>CMS에 직접 등록</b></li>
-        <li>대본·녹음·제작, 번역, AR·게임은 <b>별도 견적</b> 부가서비스</li>
-        <li>콘텐츠 워크숍 <b>£500/회</b>, 추가 지원 <b>£90부터/시간</b> <span class="tag">[공식]</span></li>
-        <li>AI 자동번역 <b>52개 언어</b>·음성 변환(TTS) <span class="tag">[회사 발표]</span></li>
+        <li>기관이 작품 정보·해설을 <b>직접 등록</b></li>
+        <li>녹음·번역·AR 제작은 <b>유료 부가서비스</b></li>
+        <li>AI 자동번역·음성 변환으로 <b>다국어</b> 제작</li>
       </ul>
-      <div class="num">플랫폼 등록 작품 <b>600만 점+</b> <span class="tag">[영국공시·회사 설명]</span></div>
+      <div class="num">워크숍 <b>£500</b>/회 <span class="tag">[공식]</span></div>
     </div>
     <div class="stage">
-      <div class="head"><div class="no">STEP 02</div><div class="t">플랫폼·기술<span class="e">Platform</span></div></div>
-      <div class="who">누가: Smartify (SaaS 운영)</div>
+      <div class="head"><div class="no">STEP 02</div><div class="t">플랫폼·기술</div></div>
+      <div class="who">Smartify</div>
       <ul>
-        <li>작품 <b>이미지 인식</b>(시각적 지문)·번호 입력·QR·검색</li>
-        <li>기관 <b>브랜드 웹앱</b>(앱 설치 없이 개인 기기) + <b>전용 기기</b> 관리</li>
-        <li><b>AI 개인화 투어</b>: 관심사 + 꼭 볼 작품 + 가진 시간 → 작품 간 거리로 경로 계산</li>
-        <li>AR·WebXR, 접근성(수어·음성해설·화면 읽기), ISO 27001 <span class="tag">[회사 발표]</span></li>
+        <li>작품 <b>이미지 인식</b>·QR·번호 입력</li>
+        <li>기관 <b>브랜드 웹앱</b> + 전용 기기</li>
+        <li><b>AI 투어</b>: 관심사 + 꼭 볼 작품 + 시간 → 경로</li>
       </ul>
-      <div class="num">추천 알고리즘·가중치 <b>비공개</b> <span class="tag">[미확인]</span></div>
+      <div class="num">한 플랫폼을 <b>여러 기관</b>이 함께 씀</div>
     </div>
     <div class="stage">
-      <div class="head"><div class="no">STEP 03</div><div class="t">기관 영업·판매<span class="e">Sales</span></div></div>
-      <div class="who">누가: Smartify → 박물관·미술관·문화유산</div>
+      <div class="head"><div class="no">STEP 03</div><div class="t">기관 판매</div></div>
+      <div class="who">Smartify → 박물관·미술관</div>
       <ul>
-        <li>연간 구독: Free · <b>£1,800</b> · <b>£3,500</b> · <b>£9,500</b> · Bespoke <span class="tag">[공식]</span></li>
-        <li>2026-03 <b>Smartify Free</b>: 카드·조달 절차 없이 무료 시작 → 상위 요금제로 전환 유도</li>
-        <li>도입 사례 글을 매달 발행 (2026-11-12 최신), M+H 올해의 비즈니스 2026 수상(투표) <span class="tag">[주최측 확인]</span></li>
+        <li>연간 구독 <b>Free → £1,800 → £3,500 → £9,500</b></li>
+        <li><b>무료 요금제</b>로 들이고 상위 요금제로 전환</li>
+        <li>대형 기관 <b>도입 사례</b>를 영업에 활용</li>
       </ul>
-      <div class="num">제휴 기관 <b>1,200곳+</b> <span class="tag">[회사 표기]</span> · 10주년 글은 700곳+</div>
+      <div class="num">제휴 기관 <b>1,200곳+</b> <span class="tag">[회사 표기]</span></div>
     </div>
     <div class="stage">
-      <div class="head"><div class="no">STEP 04</div><div class="t">관람 경험<span class="e">Visit</span></div></div>
-      <div class="who">누가: 관람객 (기관 웹앱·Smartify 앱)</div>
+      <div class="head"><div class="no">STEP 04</div><div class="t">관람 경험</div></div>
+      <div class="who">관람객</div>
       <ul>
-        <li><b>방문 전</b>: 주변 장소 탐색, 투어 미리 구매 — 내셔널 갤러리 판매의 <b>50%</b>가 방문 전 <span class="tag">[회사 사례]</span></li>
-        <li><b>현장</b>: 오디오·AI 투어, 다국어·접근성, 개인 기기 이용 <b>35%</b> <span class="tag">[회사 사례]</span></li>
-        <li>유료 투어 보통 <b>약 £5</b>, 보들리안 트레일 <b>£5.50</b> <span class="tag">[기관 확인]</span></li>
+        <li><b>방문 전</b>: 장소 탐색, 투어 미리 구매</li>
+        <li><b>현장</b>: 오디오·AI 투어, 다국어·접근성</li>
+        <li>유료 투어 <b>약 £5</b> (기관 판매)</li>
       </ul>
-      <div class="num">내셔널 갤러리 방문객 <b>약 2%</b>가 유료 투어 구매 (하루 1만 명 중) <span class="tag">[회사 사례]</span></div>
+      <div class="num">내셔널 갤러리 방문객 <b>약 2%</b> 구매 <span class="tag">[회사 사례]</span></div>
     </div>
     <div class="stage">
-      <div class="head"><div class="no">STEP 05</div><div class="t">관람 이후·데이터<span class="e">After</span></div></div>
-      <div class="who">누가: Smartify → 기관 (분석·CRM)</div>
+      <div class="head"><div class="no">STEP 05</div><div class="t">관람 이후·데이터</div></div>
+      <div class="who">Smartify → 문화기관</div>
       <ul>
-        <li>앱 안 설문으로 <b>NPS·만족도</b> 측정 → 결과는 기관만 열람</li>
-        <li>행동 데이터: 스캔, 재생, <b>작품 앞 체류</b>, <b>투어 이탈 지점</b></li>
-        <li>방문 후 정리 메일 → 몇 주 뒤 <b>다음 전시·교육 알림</b></li>
-        <li>상점·멤버십·기부 연결 (동의는 기본값 꺼짐)</li>
+        <li><b>체류 시간·이탈 지점</b>·만족도 수집</li>
+        <li>방문 후 메일 → <b>다음 전시 알림</b></li>
+        <li>기관에 <b>분석 리포트</b> 제공</li>
       </ul>
-      <div class="num">만족도 <b>93.7%</b>, 오디오 이용 <b>+425%</b> <span class="tag">[회사 발표·외부 근거 없음]</span></div>
+      <div class="num">결과는 <b>기관만</b> 열람</div>
     </div>
   </div>
 
   <div class="flows">
-    <div class="flow dark"><div class="ft">돈의 흐름 ① <em>Smartify 매출</em></div>
-      문화기관 <span class="arrow">→</span> Smartify : 연간 구독료 + 콘텐츠·기기·연동 부가서비스. <b>반복 매출(구독) + 프로젝트 매출</b> 구조 [분석]</div>
-    <div class="flow"><div class="ft">돈의 흐름 ② <em>기관 매출</em></div>
-      관람객 <span class="arrow">→</span> 문화기관 : 유료 투어·상품·멤버십·기부. Smartify는 판매 도구를 제공. <b>Smartify 몫(수수료·배분율)은 미확인</b></div>
-    <div class="flow"><div class="ft">데이터의 흐름 <em>가치가 쌓이는 곳</em></div>
-      관람객 <span class="arrow">→</span> Smartify <span class="arrow">→</span> 문화기관 : 익명 방문객이 <b>연락처·이용 기록이 있는 1차 데이터</b>로 바뀜 → 재방문 마케팅</div>
+    <div class="flow dark"><div class="ft">돈 ① 기관 → Smartify</div>연간 구독료 + 콘텐츠·기기 부가서비스</div>
+    <div class="flow"><div class="ft">돈 ② 관람객 → 기관</div>유료 투어·상품·멤버십·기부 (Smartify 몫은 미확인)</div>
+    <div class="flow"><div class="ft">데이터 관람객 → Smartify → 기관</div>익명 방문객이 연락처·이용 기록이 있는 고객으로 바뀜</div>
   </div>
 
   <div class="support">
     <div class="sh"><small>SUPPORT</small>지원 활동</div>
-    <div class="sc"><div class="st">조직·법인</div>영국 <b>SMARTIFY CIC</b>(회사형 사회적기업, 2015 등록), 모회사 Smartify Holdings. CIC 월평균 직원 <b>13명</b>(2025) <span class="tag">[영국공시]</span> · 그룹 30명+ 7개 도시 <span class="tag">[회사 발표]</span></div>
-    <div class="sc"><div class="st">재무</div>2025-01 투자 <b>£150만</b> <span class="tag">[기사]</span>. CIC 현금 <b>£7,378</b>, 관계회사 채무 <b>£234만</b>, 자본 <b>−£257만</b> <span class="tag">[영국공시]</span>. 매출·영업이익 미공개</div>
-    <div class="sc"><div class="st">기술·보안</div>2017 작품 인식 → 2022 CRM·분석 → 2023 AI 개인화 → 2025 기기·웹 혼합 <span class="tag">[공식 연혁]</span>. ISO 27001, 데이터는 목적 끝나면 삭제 권장</div>
-    <div class="sc"><div class="st">평판·네트워크</div>내셔널 갤러리·루브르·스미소니언·아크로폴리스 등 대형 기관 사례 → 중소 기관 영업에 활용. Webby 2026 AR 부문 <b>후보</b> <span class="tag">[주최측 확인]</span></div>
+    <div class="sc"><div class="st">조직</div>영국 <b>SMARTIFY CIC</b> (회사형 사회적기업), 직원 13명 <span class="tag">[영국공시, 2025 평균]</span></div>
+    <div class="sc"><div class="st">기술 개발</div>작품 인식(2017) → CRM·분석(2022) → <b>AI 개인화</b>(2023)</div>
+    <div class="sc"><div class="st">자금</div>2025-01 투자 <b>£150만</b> <span class="tag">[기사]</span>, 매출·이익은 미공개</div>
+    <div class="sc"><div class="st">네트워크</div>내셔널 갤러리·루브르·스미소니언 등 <b>대형 기관 사례</b></div>
   </div>
 
-  <div class="bottom">
-    <div class="box hl"><h3>가치는 어디서 생기나<span>[분석]</span></h3>
-      <ol>
-        <li><b>콘텐츠는 기관이, 플랫폼은 Smartify가</b> — 기관마다 새로 만들지 않아 원가가 낮다.</li>
-        <li><b>무료 → 유료 사다리</b> — Free로 들이고, 브랜드·AI·분석이 필요해지면 £9,500 플랜으로 올린다.</li>
-        <li><b>데이터가 재계약 이유</b> — 체류·이탈·만족도 리포트가 기관의 다음 예산 근거가 된다.</li>
-      </ol>
-    </div>
-    <div class="box"><h3>확인 못한 것<span>[미확인]</span></h3>
-      <ul>
-        <li>연간 매출·영업이익, 매출원별 비중 (손익계산서 미제출)</li>
-        <li>유료 투어 수익 배분율, 실제 계약 단가·할인</li>
-        <li>이용자 600만·방문객 4,200만의 집계 기준</li>
-        <li>그룹 전체 재무 (CIC 단일 법인만 확인)</li>
-      </ul>
-    </div>
-    <div class="box"><h3>OUR ACC JOURNEY에 주는 뜻<span>[제안]</span></h3>
-      <ul>
-        <li><b>차별점</b>: '시간 맞춤'은 Smartify도 한다 → <b>기차 시간 역산 + 동행 + 건물 밖 이동</b>으로 잡는다.</li>
-        <li><b>수익</b>: 관람객 유료 구매는 대형 미술관도 약 2% → 무료로 두고 <b>기관 쪽 가치</b>로 설명.</li>
-        <li><b>데이터</b>: 처음부터 코스 이용 수·완주율·체류 시간(기준 ACC 56분)을 모아 성과로 제시.</li>
-      </ul>
-    </div>
+  <div class="key">
+    <h3>핵심 정리<span>[분석]</span></h3>
+    <p><b>콘텐츠는 기관, 플랫폼은 Smartify</b> — 기관마다 새로 만들지 않아 원가가 낮다.</p>
+    <p><b>무료 → 유료 사다리</b> — 무료로 들이고, 브랜드·AI·분석이 필요해지면 상위 요금제로.</p>
+    <p><b>데이터가 재계약 이유</b> — 관람 데이터 리포트가 기관이 다시 계약할 근거가 된다.</p>
   </div>
 
   <div class="src">
-    [공식] smartify.org/partners/pricing · /solutions/grow-revenue · /solutions/enhance-with-ai · /solutions/improve-access · /about · Smartify turns 10(2026-02-02) · Introducing Smartify Free(2026-03-16) · 개인정보처리방침 3.5 / [공식 사례·회사 발표] /case-studies/the-national-gallery<br>
-    [영국공시] SMARTIFY CIC 회계서류(2025-12-31 종료, 미감사) PDF 4·8·14쪽, Companies House 09903509 / [기사] BusinessCloud·Tech.eu 2025-01 투자 보도 / [주최측] awards.museumsandheritage.com 2026 수상자 · winners.webbyawards.com 2026 / [기관] visit.bodleian.ox.ac.uk/tours/audio-guide<br>
-    [분석]·[제안]은 작성자 해석. 회사 발표 수치는 외부 검증 전. 상세 근거: project/해외서비스사례.md 1-1~1-12 (조회 2026-11-23)
+    [공식] smartify.org/partners/pricing · /solutions/grow-revenue · /solutions/enhance-with-ai · /about / [회사 사례] /case-studies/the-national-gallery / [회사 표기] smartify.org/partners<br>
+    [영국공시] SMARTIFY CIC 회계서류(2025-12-31 종료, 미감사), Companies House 09903509 / [기사] 2025-01 투자 보도 (BusinessCloud) / 상세 근거: project/해외서비스사례.md (조회 2026-11-23)
   </div>
   <div class="pno">04</div>
 </div>
