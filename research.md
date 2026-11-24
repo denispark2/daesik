@@ -532,3 +532,4 @@
 - 출처:
   - https://www.acc.go.kr/main/exhibition.do?PID=0202
   - https://www.acc.go.kr/main/exhibition.do?PID=0206
+- 2026-11-24 추가: 짧은 전시가 자주 들어가는 문제는 나중에 박대식이 알고리즘 수정 예정. 날짜에 따라 결과가 바뀌는 건 의도한 동작
