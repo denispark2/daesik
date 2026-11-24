@@ -30,6 +30,7 @@ h1 { font-size: 34px; font-weight: 800; }
 .step { background: #fff; border: 2px solid var(--navy); border-radius: 12px; padding: 12px 13px; min-height: 168px; }
 .step.dash { border-style: dashed; }
 .step.core { border: 3px solid var(--orange); }
+.step.sub { border: 2px dashed #9aa0b0; background: #fbfaf6; opacity: .72; }
 .step .n { color: var(--orange); font-size: 13px; font-weight: 700; display: inline-block; }
 .step .mk { float: right; display: flex; gap: 3px; }
 .step .mk .tg { font-size: 10.5px; padding: 1px 5px; }
@@ -86,6 +87,7 @@ h1 { font-size: 34px; font-weight: 800; }
   <span><span class="sw dash"></span> 미정·상상</span>
   <span><span class="bx core"></span> 핵심 단계</span>
   <span><span class="bx dash"></span> 계획만 있는 단계</span>
+  <span><span class="bx dash" style="border-color:#9aa0b0;background:#fbfaf6"></span> 부가 서비스 (비중 낮음)</span>
 </div>
 
 <div class="grid">
@@ -103,7 +105,7 @@ h1 { font-size: 34px; font-weight: 800; }
   <div class="step dash"><div class="n">④</div><div class="mk"><span class="tg b">병목</span><span class="tg o">기회</span></div><h3>알리기·유입</h3><div class="who">미정</div><span class="st gray">계획만 있음</span></div>
   <div class="step"><div class="n">⑤</div><div class="mk"><span class="tg b">병목</span><span class="tg o">기회</span></div><h3>코스 받기</h3><div class="who">타깃</div><span class="st">파일에 있음</span></div>
   <div class="step"><div class="n">⑥</div><div class="mk"><span class="tg b">병목</span><span class="tg o">기회</span></div><h3>ACC 관람</h3><div class="who">타깃 · ACC · ACC재단</div><span class="st">파일에 있음</span></div>
-  <div class="step"><div class="n">⑦</div><div class="mk"><span class="tg b">병목</span><span class="tg c">비용</span></div><h3>다음 갈 곳</h3><div class="who">타깃 → 지역 가게</div><span class="st">파일에 있음</span></div>
+  <div class="step sub"><div class="n">⑦ 부가</div><div class="mk"><span class="tg b">병목</span><span class="tg c">비용</span></div><h3>다음 갈 곳</h3><div class="who">타깃 → 지역 가게</div><span class="st">파일에 있음</span></div>
   <div class="step dash"><div class="n">⑧</div><div class="mk"><span class="tg b">병목</span><span class="tg o">기회</span></div><h3>관람 후 2문항·공유</h3><div class="who">타깃</div><span class="st gray">계획</span></div>
   <div class="step core"><div class="n">⑨ 핵심</div><div class="mk"><span class="tg b">병목</span><span class="tg o">기회</span><span class="tg c">비용</span></div><h3>운영자 화면·리뷰 대시보드</h3><div class="who">4팀 → ACC</div><span class="st gray">과금 근거 없음</span></div>
 
@@ -141,7 +143,7 @@ h1 { font-size: 34px; font-weight: 800; }
       <tr><td>④ 알리기·유입</td><td>타깃이 링크를 처음 보는 채널·담당 미정</td><td>Smartify: 설치·로그인 없는 웹앱, 무료 요금제로 먼저 들임</td><td>미정</td></tr>
       <tr><td>⑤ 코스 받기</td><td>입력 개수 2개 vs 4종 미정 → 입력값 열 확정 불가</td><td>Smartify: 개인 기기로 바로 쓰는 웹앱</td><td class="x">—</td></tr>
       <tr><td>⑥ ACC 관람</td><td>관람 완료·관람시간 표 미정</td><td>Smartify: 체류 시간·이탈 지점 수집</td><td class="x">—</td></tr>
-      <tr><td>⑦ 다음 갈 곳</td><td>가게 리뷰 표의 출처·열 미정</td><td class="x">—</td><td>가게 리뷰 수집 (지도 API 리뷰 수 기준)</td></tr>
+      <tr><td>⑦ 다음 갈 곳 (부가)</td><td>가게 리뷰 표의 출처·열 미정</td><td class="x">—</td><td>가게 리뷰 수집 (지도 API 리뷰 수 기준)</td></tr>
       <tr><td>⑧ 관람 후 2문항·공유</td><td>이용 기록 표(세션·단계·시각·값) 열 미정</td><td>Smartify: 앱 안 설문(NPS)·방문 후 메일로 다음 전시 알림</td><td>미정</td></tr>
       <tr><td>⑨ 운영자 화면</td><td>ACC 요일·시간대별 관람객 데이터 없음 · 과금 근거 없음</td><td>Smartify: 관람 데이터 리포트가 기관 재계약 근거</td><td>정보공개청구(open.go.kr) 시간 · ACC 인터뷰</td></tr>
   </table>
