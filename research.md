@@ -717,3 +717,5 @@
 - 같은 날 둘 다 본 블로그 글 5개, 통합관람권 15,000원 언급 글 2개 (공식 미확인). 따로 사면 23,000원
 - 저장: `ACC현재전시_블로그리뷰취합.md` 4번
 - 출처: 로컬 `data/acc_blog/texts.jsonl` (네이버 블로그, 깃허브 미업로드)
+- 2026-11-25 공식 확인: 인상파(EM_0000009913)·식객(EM_0000009927) 공식 상세 페이지 요금표에 통합관람권 없음. 웹 검색으로도 공식 근거 없음 → 블로그 2개 근거만 있음, 문의 1899-5566
+  - 출처: https://www.acc.go.kr/main/exhibition.do?PID=0202&action=Read&bnkey=EM_0000009913 , https://www.acc.go.kr/main/exhibition.do?PID=0202&action=Read&bnkey=EM_0000009927
