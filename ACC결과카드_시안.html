@@ -88,7 +88,7 @@ const badges=(d,day)=>{
   return b;
 };
 // 새 전시: 방문일 기준 시작 후 NEW_DAYS일 이내
-const NEW_DAYS=30;
+const NEW_DAYS=14;
 const isNew=(d,day)=>d.start&&day>=d.start&&(new Date(day)-new Date(d.start))/864e5<NEW_DAYS;
 const card=(d,day,w)=>`<div class="card" style="background-image:url('${d.img}')">${isNew(d,day)?`<span class="new">새 전시</span>`:""}<div class="ov">
 <p class="t">${d.t}${badges(d,day)}</p><p class="m">${d.m}</p><p class="h">${hours(d,w)}</p>
