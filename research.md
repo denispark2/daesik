@@ -691,3 +691,11 @@
 - 출처:
   - https://www.acc.go.kr/main/exhibition.do?PID=0206&action=Read&bnkey=EM_0000006965
   - https://www.acc.go.kr/main/board/board.do?PID=0701&boardID=NOTICE&action=Read&idx=2930
+
+## 2026-11-25 추천 시뮬레이션 몬순 휴실 날짜 고침
+
+- 파일: ACC현재전시_그룹별추천_시뮬레이션.md 1-3 6번·1-5·12월 결과
+- 고친 것: 몬순 휴실 "11-30 ~ 12-10" → "11-30 ~ 12-09, 12-10 재개관". 영향받는 날 12/01(화) ~ 12/09(수)
+- 아시아이야기지도(12-01 개관)는 다음 전시 정보가 없어 추천 후보에 아직 안 넣음
+- 키워드: 몬순 휴실, 재개관일, 추천 필터, 아시아이야기지도
+- 출처: https://www.acc.go.kr/main/board/board.do?PID=0701&boardID=NOTICE&action=Read&idx=2944
