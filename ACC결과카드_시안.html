@@ -36,6 +36,10 @@ h1{font-size:20px;font-weight:700;margin:0;text-align:center}
 details{margin-top:8px;font-size:13px;color:rgba(255,255,255,.85)}
 summary{cursor:pointer;font-size:13px;color:#a9d2ff;min-height:28px;display:flex;align-items:center}
 summary:focus-visible{outline:2px solid #a9d2ff;outline-offset:2px;border-radius:4px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 4px 12px}.bar .head{margin:0}
+.pick{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.pick input{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:4px 6px;min-height:32px}
+.mo{margin:4px 0 0}
 .note{font-size:13px;color:var(--muted);text-align:center;max-width:380px;margin:0}
 </style>
 </head>
@@ -43,7 +47,7 @@ summary:focus-visible{outline:2px solid #a9d2ff;outline-offset:2px;border-radius
 <div class="wrap">
 <h1>추천 전시 결과 카드 시안</h1>
 <div class="phone">
-<p class="head" id="head">추천 전시</p>
+<div class="bar"><p class="head" id="head">추천 전시</p><label class="pick">방문일 <input type="date" id="day"></label></div>
 <div id="list"></div>
 </div>
 <p class="note">포스터 출처: ACC 국립아시아문화전당 공식 누리집 현재전시 (2026-11-25). 팀 내부 시안용.</p>
@@ -59,36 +63,46 @@ const D=[
 {img:"acc_posters/mithila.jpg",t:"미틸라 회화",m:"아시아문화박물관 · 20분 · 무료",close:[18,20],tips:["안내 영상 먼저 관람 권장","그리기 체험 대기 있음"],pos:"촘촘한 문양과 선명한 색채",neg:null,negNone:"뚜렷한 불만 후기 없음",more:"노마드·몬순과 같은 건물"},
 {img:"acc_posters/speculative.jpg",t:"사변적 공동체",end:"2026-11-29",m:"문화창조원 · 40분 · 무료",close:[18,20],tips:[],pos:"제목보다 쉬운 전시",neg:null,negNone:"부정 후기 없음"}
 ];
-// 앱에 보이는 날짜 정보는 모두 오늘(한국 시간) 기준. 시안 확인용: 주소 끝 ?date=2026-12-02
+// 날짜 정보는 모두 고른 방문일 기준 (기본: 오늘, 한국 시간). 주소 끝 ?date=2026-12-02 로도 지정 가능
 const qd=new URLSearchParams(location.search).get("date");
 const kst=new Date(Date.now()+9*3600e3).toISOString().slice(0,10);
-const today=/^\d{4}-\d{2}-\d{2}$/.test(qd||"")?qd:kst;
-const wd=new Date(today+"T00:00:00Z").getUTCDay();
-const WD="일월화수목금토"[wd];
+const ORDER=[2,3,4,5,6,0];const DN="일월화수목금토";
 const md=s=>`${+s.slice(5,7)}/${+s.slice(8,10)}`;
 const hm=m=>`${String(Math.floor(m/60)).padStart(2,"0")}:${String(m%60).padStart(2,"0")}`;
-const hours=d=>{
-  if(wd===1)return"오늘 휴관";
-  const c=(wd===3||wd===6?d.close[1]:d.close[0])*60;
-  if(typeof d.entry==="string")return`오늘 입장 마감 ${d.entry}`;
-  if(typeof d.entry==="number")return`오늘 입장 마감 ${hm(c+d.entry)}`;
-  return`오늘 ${hm(c)}까지`;
+const close=(d,w)=>(w===3||w===6?d.close[1]:d.close[0])*60;
+// 요일별 값: 입장 마감이 공지된 전시는 입장 마감, 아니면 관람 종료 시각
+const val=(d,w)=>typeof d.entry==="string"?d.entry:hm(close(d,w)+(d.entry||0));
+const label=d=>d.entry!=null?"입장 마감":"관람 마감";
+const groups=d=>{const g=[];for(const w of ORDER){const v=val(d,w);let x=g.find(y=>y.v===v);if(!x)g.push(x={v,days:[]});x.days.push(w)}
+  return g.sort((a,b)=>b.v.localeCompare(a.v)).map(x=>({v:x.v,days:x.days.length===6?"화~일":x.days.map(w=>DN[w]).join("·")}))};
+const hours=(d,w)=>{
+  if(w===1)return"월요일 휴관";
+  const v=val(d,w),o=groups(d).filter(x=>x.v!==v);
+  return`${label(d)} ${v}${o.length?` (${o.map(x=>`${x.days} ${x.v}`).join(", ")})`:""}`;
 };
-const badges=d=>{
+const week=d=>`${label(d)}: `+groups(d).map(x=>`${x.days} ${x.v}`).join(", ")+", 월 휴관";
+const badges=(d,day)=>{
   let b="";
-  if(d.closed&&today<=d.closed[1])b+=`<span class="b">${`${md(d.closed[0])}~${md(d.closed[1])} 휴실`}</span>`;
-  if(d.end)b+=`<span class="b">${today===d.end?"오늘 종료":`${md(d.end)} 종료`}</span>`;
+  if(d.closed&&day<=d.closed[1])b+=`<span class="b">${md(d.closed[0])}~${md(d.closed[1])} 휴실</span>`;
+  if(d.end)b+=`<span class="b">${day===d.end?"당일 종료":`${md(d.end)} 종료`}</span>`;
   return b;
 };
-const live=D.filter(d=>!(d.end&&today>d.end)&&!(d.closed&&today>=d.closed[0]&&today<=d.closed[1]));
-document.getElementById("head").textContent=`추천 전시 · ${md(today)} (${WD})`;
-const card=d=>`<div class="card" style="background-image:url('${d.img}')"><div class="ov">
-<p class="t">${d.t}${badges(d)}</p><p class="m">${d.m}</p><p class="h">${hours(d)}</p>
+const card=(d,day,w)=>`<div class="card" style="background-image:url('${d.img}')"><div class="ov">
+<p class="t">${d.t}${badges(d,day)}</p><p class="m">${d.m}</p><p class="h">${hours(d,w)}</p>
 ${d.tips.map(x=>`<p class="r">${x}</p>`).join("")}${d.q?`<p class="r q">${d.q}</p>`:""}
 <div class="rv"><p class="rl p"><span>좋음</span>${d.pos}</p>
 ${d.neg?`<p class="rl n"><span>아쉬움</span>${d.neg}</p>`:`<p class="rl z"><span>아쉬움</span>${d.negNone}</p>`}</div>
-${d.more?`<details><summary>더 보기</summary>${d.more}</details>`:""}</div></div>`;
-document.getElementById("list").innerHTML=live.map(card).join("");
+<details><summary>더 보기</summary><p class="mo">${week(d)}</p>${d.more?`<p class="mo">${d.more}</p>`:""}</details></div></div>`;
+const render=day=>{
+  const w=new Date(day+"T00:00:00Z").getUTCDay();
+  const live=D.filter(d=>!(d.end&&day>d.end)&&!(d.closed&&day>=d.closed[0]&&day<=d.closed[1]));
+  document.getElementById("head").textContent=`추천 전시 · ${md(day)} (${DN[w]})`;
+  document.getElementById("list").innerHTML=live.map(d=>card(d,day,w)).join("");
+};
+const inp=document.getElementById("day");
+inp.min=kst;inp.value=/^\d{4}-\d{2}-\d{2}$/.test(qd||"")?qd:kst;
+inp.addEventListener("change",()=>{if(inp.value)render(inp.value)});
+render(inp.value);
 }
 </script>
 </body>
