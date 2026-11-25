@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACC 전시 추천 설문</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 결과 카드는 ACC결과카드_최종시안.html 디자인 그대로 */
+:root{color-scheme:light dark;--bg:light-dark(#e9ecf1,#0f1218);--ink:light-dark(#151922,#e8ebf0);--muted:light-dark(#5a6170,#9aa2b1);--frame:light-dark(#ffffff,#1a1f29);--line:light-dark(#d4d9e2,#2a3140);--acc:light-dark(#1f4fd1,#8fb3ff);--accbg:light-dark(#e7eeff,#1d2a4a);--err:light-dark(#c0362c,#ff9f9f)}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Noto Sans KR",system-ui,sans-serif;overflow-x:clip}
+.wrap{padding:clamp(20px,4vw,48px) 12px;display:flex;flex-direction:column;align-items:center;gap:16px}
+h1{font-size:20px;font-weight:700;margin:0;text-align:center}
+.sub{font-size:14px;color:var(--muted);margin:-8px 0 0;text-align:center}
+.phone{width:min(380px,100%);background:var(--frame);border:1px solid var(--line);border-radius:28px;padding:18px 14px 16px}
+fieldset{border:0;margin:0 0 18px;padding:0}
+legend{font-size:15px;font-weight:700;margin-bottom:8px;padding:0}
+legend small{font-weight:400;color:var(--muted);font-size:13px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer;font-size:15px;text-align:center;user-select:none}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label:has(input:checked){border-color:var(--acc);background:var(--accbg);color:var(--acc);font-weight:700}
+.opts label:has(input:focus-visible){outline:2px solid var(--acc);outline-offset:2px}
+.opts label:has(input:disabled){cursor:default;opacity:.7}
+textarea{width:100%;min-height:90px;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px}
+.btn{display:block;width:100%;min-height:48px;border:0;border-radius:14px;background:var(--acc);color:light-dark(#fff,#0f1218);font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--line);margin-top:8px}
+.msg{color:var(--err);font-size:14px;margin:8px 0 0;min-height:1px}
+.hidden{display:none!important}
+.sum{font-size:14px;margin:0 4px 12px;color:var(--ink)}
+.sum b{font-weight:700}
+.fee{font-size:13px;color:var(--muted);margin:0 4px 12px;white-space:pre-line}
+.why{font-size:13px;color:var(--muted);margin:0 4px 6px}
+.why b{color:var(--ink)}
+.hint{font-size:12px;color:var(--muted);margin:-4px 4px 12px}
+/* 카드 */
+.card{position:relative;border-radius:14px;overflow:hidden;margin-bottom:16px;color:#fff;background:#222 top center/cover no-repeat;aspect-ratio:445/630;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
+.card:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.go{position:absolute;top:10px;right:10px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:rgba(8,10,16,.7);color:#fff}
+.ov{position:relative;background:linear-gradient(to bottom,rgba(8,10,16,0),rgba(8,10,16,.78) 28px);padding:34px 16px 14px}
+.t{font-size:16px;font-weight:700;margin:0;line-height:1.4;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.m{font-size:13px;color:rgba(255,255,255,.82);margin:2px 0 0}
+.h{font-size:13px;font-weight:500;color:#fff;margin:2px 0 10px}
+.r{font-size:14px;line-height:1.6;margin:0;display:flex;gap:8px}
+.r::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.7);margin-top:9px}
+.q{color:rgba(255,255,255,.6)}
+.b{font-size:11px;font-weight:500;padding:2px 8px;border-radius:6px;background:#ffd36b;color:#3d2a00;white-space:nowrap}
+.rv{background:rgba(255,255,255,.14);border-radius:8px;padding:8px 10px;margin-top:10px}
+.rl{font-size:13px;line-height:1.55;margin:0;display:flex;gap:8px}
+.rl span{flex:none;width:44px;font-weight:700}
+.p span{color:#a5e07a}.n span{color:#ff9f9f}.z{color:rgba(255,255,255,.6)}.z span{color:rgba(255,255,255,.6)}
+details{margin-top:8px;font-size:13px;color:rgba(255,255,255,.85);cursor:auto}
+summary{cursor:pointer;font-size:13px;color:#a9d2ff;min-height:28px;display:flex;align-items:center}
+.mo{margin:4px 0 0}
+.tg{display:flex;flex-wrap:wrap;gap:4px 6px;margin:-4px 0 10px}.tg span{font-size:12px;font-weight:500;color:#cfe6ff;background:rgba(255,255,255,.12);padding:2px 8px;border-radius:999px}
+.new{position:absolute;top:10px;left:10px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:#ff5a4e;color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+.note{font-size:13px;color:var(--muted);text-align:center;max-width:380px;margin:0}
+.done{text-align:center;padding:24px 8px}
+.done p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>ACC 전시 추천 설문</h1>
+<p class="sub">질문에 답하고 추천 전시를 확인해 주세요</p>
+<div class="phone">
+
+<form id="survey" novalidate>
+  <fieldset><legend>1. 성별</legend>
+    <div class="opts"><label><input type="radio" name="gender" value="남">남</label><label><input type="radio" name="gender" value="여">여</label></div></fieldset>
+  <fieldset><legend>2. 누구와 왔어요?</legend>
+    <div class="opts"><label><input type="radio" name="companion" value="가족">가족</label><label><input type="radio" name="companion" value="커플·친구">커플·친구</label><label><input type="radio" name="companion" value="혼자">혼자</label></div></fieldset>
+  <fieldset><legend>3. 관람 시간은요?</legend>
+    <div class="opts"><label><input type="radio" name="minutes" value="60">60분</label><label><input type="radio" name="minutes" value="120">120분</label></div></fieldset>
+  <fieldset><legend>4. 관심 주제 <small>(최대 2개, 안 골라도 돼요)</small></legend>
+    <div class="opts"><label><input type="checkbox" name="topics" value="명화·그림">명화·그림</label><label><input type="checkbox" name="topics" value="체험">체험</label><label><input type="checkbox" name="topics" value="미디어·사운드">미디어·사운드</label><label><input type="checkbox" name="topics" value="역사·문화">역사·문화</label></div></fieldset>
+  <fieldset><legend>5. 유료 전시도 괜찮아요? <small>(관심 주제를 안 고르면 무료 전시로 추천해요)</small></legend>
+    <div class="opts"><label><input type="radio" name="paid" value="괜찮음">괜찮음</label><label><input type="radio" name="paid" value="무료만">무료만</label></div></fieldset>
+  <fieldset><legend>6. 새 전시를 좋아해요? <small>(안 고르면 "예")</small></legend>
+    <div class="opts"><label><input type="radio" name="newPref" value="예">예</label><label><input type="radio" name="newPref" value="아니오">아니오</label></div></fieldset>
+  <button type="submit" class="btn" id="showBtn">결과보기</button>
+  <p class="msg" id="msg1" role="alert"></p>
+</form>
+
+<section id="result" class="hidden" aria-live="polite">
+  <hr>
+  <p class="sum" id="sum"></p>
+  <p class="fee" id="fee"></p>
+  <p class="hint">카드를 누르면 ACC 공식 전시 안내 페이지가 열려요</p>
+  <div id="list"></div>
+
+  <form id="feedback" novalidate>
+    <fieldset><legend>추천 전시가 맘에 드나요?</legend>
+      <div class="opts"><label><input type="radio" name="like" value="예">예</label><label><input type="radio" name="like" value="아니요">아니요</label></div></fieldset>
+    <fieldset><legend>이 전시를 보러 ACC에 방문할 의향이 있나요?</legend>
+      <div class="opts"><label><input type="radio" name="visit" value="예">예</label><label><input type="radio" name="visit" value="아니요">아니요</label></div></fieldset>
+    <fieldset><legend>그 외 기타 의견 <small>(선택)</small></legend>
+      <textarea name="comment" maxlength="2000" aria-label="기타 의견"></textarea></fieldset>
+    <button type="submit" class="btn" id="sendBtn">제출</button>
+    <button type="button" class="btn ghost" id="backBtn">답 다시 고르기</button>
+    <p class="msg" id="msg2" role="alert"></p>
+  </form>
+</section>
+
+<section id="done" class="hidden done" aria-live="polite">
+  <p><b>응답 고마워요!</b></p>
+  <p class="note">추천 전시 카드는 위로 올려서 다시 볼 수 있어요.</p>
+</section>
+
+</div>
+<p class="note">포스터 출처: ACC 국립아시아문화전당 공식 누리집 현재전시 (2026-11-25)</p>
+</div>
+
+<script>
+// 포스터 이미지 위치 (깃허브 공개 저장소 daesik의 acc_posters/)
+var POSTER_BASE = "https://raw.githubusercontent.com/denispark2/daesik/main/acc_posters/";
+var ACC = "https://www.acc.go.kr/main/exhibition.do?PID=0202&action=Read&bnkey=";
+// 카드 내용: ACC결과카드_최종시안.html 그대로. key = Code.gs EXHIBITIONS 이름
+var D = {
+"인상파, 찬란한 순간들":{img:"impressionism_card.jpg",url:ACC+"EM_0000009913",t:"인상파, 찬란한 순간들",tags:["명화·원화","사진·포토존","굿즈·쇼핑"],start:"2026-09-23",m:"문화창조원 · 60분 · 성인 13,000원",close:[18,20],entry:-60,tips:["주말 매표 대기, 사전 예매 권장","QR 오디오 해설, 개인 이어폰 필요"],pos:"모네·고흐 원화를 직접 봄",neg:"작품 수가 적어 금방 끝남",more:"청소년·어린이 10,000원 · 전시해설 11:00·14:00·16:00 · 메인 3점: 모네 수련, 고흐 양귀비, 르누아르 장미"},
+"길 위의 노마드":{img:"nomad_card.jpg",url:ACC+"EM_0000009132",t:"길 위의 노마드",tags:["체험형","전통공예·문양","몰입·미디어아트"],start:"2025-11-25",m:"아시아문화박물관 · 60분 · 무료",close:[18,20],tips:["넓은 규모, 구역 순서대로 관람","의복 체험 대기 있음"],q:"입구 위치 (확인 필요)",pos:"체험이 많아 지루하지 않음",neg:"붐비면 천천히 보기 어려움",more:"카라반사라이 → 바자르 → 초원 → 360도 영상"},
+"몬순으로 열린 세계":{img:"monsoon_card.jpg",url:ACC+"EM_0000007015",t:"몬순으로 열린 세계",tags:["역사·문명교류","체험형","자연·환경"],start:"2024-01-30",end:"2026-12-31",closed:["2026-11-30","2026-12-10"],m:"아시아문화박물관 · 45분 · 무료",close:[18,20],tips:["예상보다 긴 관람 시간","VR 대기 있음"],pos:"영상·VR·향 체험이 다양함",neg:"붐빌 때 차분히 보기 어려움",more:"노마드와 이어진 전시실. 항해 → 향신료 → 체험존 → VR"},
+"식객: 맛의 뒤편":{img:"sikgaek_card.jpg",url:ACC+"EM_0000009927",t:"식객: 맛의 뒤편",tags:["만화·음식","데이트·커플","굿즈·쇼핑"],start:"2026-09-17",end:"2026-12-13",m:"어린이문화원 · 45분 · 일반 10,000원",close:[18,18],entry:"17:30",tips:["한 방향 동선","할인 다수 (문화패스 5,000원)"],pos:"만화를 몰라도 쉽게 즐김",neg:"전시 규모가 작음",more:"만 6세 이하 무료 · 할인 중복 불가 · 흑백 원화 → 염전 미니어처 → QR 메뉴 추천 → 작업실"},
+"2026 ACC 미래상: 김영은":{img:"kimyoungeun_card.jpg",url:ACC+"EM_0000009929",t:"김영은 《이동하는 소리》",tags:["소리·청각","현대미술·기술","데이트·커플"],start:"2026-09-03",m:"문화창조원 · 60분 · 무료",close:[18,20],tips:["매시 정각 시작","리플렛 사전 확인 권장"],q:"입구 위치 (확인 필요)",pos:"스피커에 둘러싸인 소리 몰입",neg:"주제가 어렵게 느껴짐",more:"헤드폰 시 낭송 → 스피커 공간. 자리마다 다른 소리"},
+"미틸라 회화":{img:"mithila_card.jpg",url:ACC+"EM_0000009948",t:"미틸라 회화",tags:["여성·삶의이야기","체험형","전통공예·문양"],start:"2026-08-20",m:"아시아문화박물관 · 20분 · 무료",close:[18,20],tips:["안내 영상 먼저 관람 권장","그리기 체험 대기 있음"],pos:"촘촘한 문양과 선명한 색채",neg:null,negNone:"뚜렷한 불만 후기 없음",more:"노마드·몬순과 같은 건물"},
+"사변적 공동체":{img:"speculative_card.jpg",url:ACC+"EM_0000010284",t:"사변적 공동체",tags:["현대미술·기술","무료","재미·신기"],start:"2026-11-19",end:"2026-11-29",m:"문화창조원 · 40분 · 무료",close:[18,20],tips:[],pos:"제목보다 쉬운 전시",neg:null,negNone:"부정 후기 없음"}
+};
+
+// ── 카드 그리기 (최종시안과 같은 규칙, 날짜 = 오늘) ──
+var ORDER=[2,3,4,5,6,0],DN="일월화수목금토",NEW_DAYS=14;
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function md(s){return (+s.slice(5,7))+"/"+(+s.slice(8,10))}
+function hm(m){return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
+function closeAt(d,w){return (w===3||w===6?d.close[1]:d.close[0])*60}
+function val(d,w){return typeof d.entry==="string"?d.entry:hm(closeAt(d,w)+(d.entry||0))}
+function label(d){return d.entry!=null?"입장 마감":"관람 마감"}
+function groups(d){var g=[];ORDER.forEach(function(w){var v=val(d,w),x=g.find(function(y){return y.v===v});if(!x)g.push(x={v:v,days:[]});x.days.push(w)});
+  return g.sort(function(a,b){return b.v.localeCompare(a.v)}).map(function(x){return{v:x.v,days:x.days.length===6?"화~일":x.days.map(function(w){return DN[w]}).join("·")}})}
+function hours(d,w){return w===1?"월요일 휴관":label(d)+" "+val(d,w)}
+function week(d){return label(d)+": "+groups(d).map(function(x){return x.days+" "+x.v}).join(", ")+", 월 휴관"}
+function badges(d,day){var b="";
+  if(d.closed&&day<=d.closed[1])b+='<span class="b">'+md(d.closed[0])+"~"+md(d.closed[1])+" 휴실</span>";
+  if(d.end)b+='<span class="b">'+(day===d.end?"당일 종료":md(d.end)+" 종료")+"</span>";return b}
+function isNew(d,day){return d.start&&day>=d.start&&(new Date(day)-new Date(d.start))/864e5<NEW_DAYS}
+function card(d,day,w){
+  return '<div class="card" role="link" tabindex="0" data-url="'+esc(d.url)+'" aria-label="'+esc(d.t)+' ACC 공식 안내 열기" style="background-image:url(\''+POSTER_BASE+d.img+'\')">'+
+  (isNew(d,day)?'<span class="new">새 전시</span>':"")+'<span class="go">ACC 안내 ↗</span><div class="ov">'+
+  '<p class="t">'+esc(d.t)+badges(d,day)+'</p><p class="m">'+esc(d.m)+'</p><p class="h">'+hours(d,w)+'</p>'+
+  '<p class="tg">'+d.tags.map(function(x){return"<span>#"+esc(x)+"</span>"}).join("")+"</p>"+
+  d.tips.map(function(x){return'<p class="r">'+esc(x)+"</p>"}).join("")+(d.q?'<p class="r q">'+esc(d.q)+"</p>":"")+
+  '<div class="rv"><p class="rl p"><span>좋음</span>'+esc(d.pos)+"</p>"+
+  (d.neg?'<p class="rl n"><span>아쉬움</span>'+esc(d.neg)+"</p>":'<p class="rl z"><span>아쉬움</span>'+esc(d.negNone)+"</p>")+"</div>"+
+  "<details><summary>더 보기</summary><p class=\"mo\">"+week(d)+"</p>"+(d.more?'<p class="mo">'+esc(d.more)+"</p>":"")+"</details></div></div>";
+}
+
+// ── 화면 흐름 ──
+var $=function(id){return document.getElementById(id)};
+var survey=$("survey"),fb=$("feedback"),answers=null;
+function pick(form,name){var x=form.querySelector('input[name="'+name+'"]:checked');return x?x.value:""}
+function setLocked(form,on){form.querySelectorAll("input,textarea").forEach(function(i){i.disabled=on})}
+
+// 관심 주제 최대 2개
+survey.querySelectorAll('input[name="topics"]').forEach(function(cb){cb.addEventListener("change",function(){
+  var on=survey.querySelectorAll('input[name="topics"]:checked');
+  survey.querySelectorAll('input[name="topics"]').forEach(function(x){if(!x.checked)x.disabled=on.length>=2});
+})});
+
+survey.addEventListener("submit",function(e){
+  e.preventDefault();
+  var a={gender:pick(survey,"gender"),companion:pick(survey,"companion"),minutes:pick(survey,"minutes"),
+    topics:[].map.call(survey.querySelectorAll('input[name="topics"]:checked'),function(x){return x.value}),
+    paid:pick(survey,"paid"),newPref:pick(survey,"newPref")||"예"};
+  var miss=[];if(!a.gender)miss.push("1번");if(!a.companion)miss.push("2번");if(!a.minutes)miss.push("3번");if(!a.paid)miss.push("5번");
+  if(miss.length){$("msg1").textContent=miss.join(", ")+" 질문에 답해 주세요";return}
+  $("msg1").textContent="";$("showBtn").disabled=true;$("showBtn").textContent="추천 계산 중…";
+  google.script.run.withSuccessHandler(function(res){answers=a;showResult(res)})
+    .withFailureHandler(function(err){$("msg1").textContent="결과를 불러오지 못했어요: "+err.message;$("showBtn").disabled=false;$("showBtn").textContent="결과보기"})
+    .getRecommendation(a);
+});
+
+function showResult(res){
+  setLocked(survey,true);$("showBtn").classList.add("hidden");
+  var day=res.date,w=new Date(day+"T00:00:00Z").getUTCDay();
+  if(!res.route.length){$("sum").textContent="조건에 맞는 추천 전시가 없어요.";$("fee").textContent="";$("list").innerHTML=""}
+  else{
+    $("sum").innerHTML="<b>추천 전시 "+res.route.length+"개</b> · "+md(day)+" ("+DN[w]+") 기준 · 이동 포함 약 "+res.totalMin+"분"+
+      (res.intro?"<br>관심 주제를 안 골라서 쉽고 무료인 전시로 골랐어요":"");
+    $("fee").textContent=res.fee.replace(/^1인 합계\(성인\)/,"1인 관람료(성인)");
+    $("list").innerHTML=res.route.map(function(n,i){var d=D[n];if(!d)return"";
+      return '<p class="why"><b>'+(i+1)+".</b> "+esc(res.reasons[i]||"")+"</p>"+card(d,day,w)}).join("");
+  }
+  $("result").classList.remove("hidden");
+  $("result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+// 카드 클릭 → ACC 공식 안내 (더 보기 누를 땐 열지 않음)
+$("list").addEventListener("click",function(e){
+  if(e.target.closest("details"))return;var c=e.target.closest(".card");if(c)window.open(c.dataset.url,"_blank","noopener");
+});
+$("list").addEventListener("keydown",function(e){
+  var c=e.target.closest&&e.target.closest(".card");if(c&&e.target===c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();window.open(c.dataset.url,"_blank","noopener")}
+});
+
+$("backBtn").addEventListener("click",function(){
+  setLocked(survey,false);survey.querySelectorAll('input[name="topics"]').forEach(function(x){x.dispatchEvent(new Event("change"))});
+  $("showBtn").classList.remove("hidden");$("showBtn").disabled=false;$("showBtn").textContent="결과보기";
+  $("result").classList.add("hidden");answers=null;survey.scrollIntoView({behavior:"smooth"});
+});
+
+fb.addEventListener("submit",function(e){
+  e.preventDefault();
+  var like=pick(fb,"like"),visit=pick(fb,"visit");
+  if(!like||!visit){$("msg2").textContent="예/아니요 질문 2개에 답해 주세요";return}
+  var a=Object.assign({},answers,{like:like,visit:visit,comment:fb.comment.value.trim()});
+  $("msg2").textContent="";$("sendBtn").disabled=true;$("sendBtn").textContent="보내는 중…";$("backBtn").disabled=true;
+  google.script.run.withSuccessHandler(function(){
+      setLocked(fb,true);$("sendBtn").classList.add("hidden");$("backBtn").classList.add("hidden");
+      $("done").classList.remove("hidden");$("done").scrollIntoView({behavior:"smooth"});
+    }).withFailureHandler(function(err){$("msg2").textContent="저장하지 못했어요: "+err.message;$("sendBtn").disabled=false;$("sendBtn").textContent="제출";$("backBtn").disabled=false})
+    .submitResponse(a);
+});
+</script>
+</body>
+</html>

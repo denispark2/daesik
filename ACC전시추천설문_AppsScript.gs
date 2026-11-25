@@ -1,13 +1,14 @@
 /**
- * ACC 전시 추천 설문 (구글폼 + 응답 시트 자동 계산)
+ * ACC 전시 추천 설문 웹앱 — Code.gs (서버)
+ * 화면: ACC전시추천설문_Index.html → Apps Script 프로젝트에 'Index' 이름의 HTML 파일로 넣음
  * 알고리즘: ACC현재전시_그룹별추천_시뮬레이션.md 1번 (3판 최종, 2026-11-25 보완 포함)
  *
  * 쓰는 법 (자세한 건 ACC전시추천설문.md)
- *  1. script.google.com → 새 프로젝트 → 이 파일 내용 전체 붙여넣기 → 저장
- *  2. 위쪽 함수 선택에서 createSurvey 실행 → 권한 허용
- *  3. 실행 로그에 나온 폼 주소·시트 주소 확인
- *  - 응답이 들어오면 시트 오른쪽 열(추천 동선·이유·요금·운영시간)이 자동으로 채워짐
- *  - 이미 들어온 응답을 다시 계산하려면 recalcAll 실행
+ *  1. script.google.com → 새 프로젝트 → Code.gs에 이 파일 전체 붙여넣기
+ *  2. 파일 + → HTML → 이름 Index → ACC전시추천설문_Index.html 전체 붙여넣기 → 저장
+ *  3. 함수 선택에서 setupSheet 실행 → 권한 허용 → 로그에 응답 시트 주소
+ *  4. 배포 → 새 배포 → 웹 앱 (실행: 나, 액세스: 모든 사용자) → 웹 앱 주소가 설문 주소
+ *  - 흐름: 문항 체크 → 결과보기(추천 전시 카드, 클릭 시 ACC 공식 안내) → 추가질문 → 제출 → 시트 저장
  */
 
 // ───────────── 1. 전시 데이터 (2026-11-24 기준, 1-5번 표) ─────────────
@@ -233,98 +234,93 @@ function hoursText_(name, d) {
   return '10:00~' + close + (entry ? ' (입장 마감 ' + entry + ')' : '') + (x.note ? ' · ' + x.note : '');
 }
 
-// ───────────── 3. 구글폼 만들기 ─────────────
-var Q = {
-  companion: '1. 누구와 왔어요?',
-  minutes: '2. 관람 시간은요?',
-  topics: '3. 관심 주제를 골라 주세요 (최대 2개, 안 골라도 돼요)',
-  paid: '4. 유료 전시도 괜찮아요?',
-  newPref: '5. 새 전시를 좋아해요?'
-};
-var OUT_HEADERS = ['기준일', '추천 동선', '총 시간(분)', '추천 이유', '요금', '운영시간·입장 마감', '전시별 점수'];
+// ───────────── 3. 웹앱 (설문 화면·응답 저장) ─────────────
+var TZ = 'Asia/Seoul';
+var SHEET_HEADERS = ['타임스탬프', '성별', '동행', '관람 시간', '관심 주제', '유료 전시', '새 전시 선호',
+  '기준일', '추천 동선', '총 시간(분)', '추천 이유', '요금', '운영시간·입장 마감', '전시별 점수',
+  '추천 전시 맘에 듦', 'ACC 방문 의향', '기타 의견'];
 
-function createSurvey() {
-  var form = FormApp.create('ACC 전시 추천 설문');
-  form.setDescription('국립아시아문화전당(ACC) 전시 추천을 위한 설문입니다. 5개 질문, 1분이면 끝나요.')
-      .setCollectEmail(false).setShowLinkToRespondAgain(true)
-      .setConfirmationMessage('응답 고마워요!');
-  form.addMultipleChoiceItem().setTitle(Q.companion).setChoiceValues(['가족', '커플·친구', '혼자']).setRequired(true);
-  form.addMultipleChoiceItem().setTitle(Q.minutes).setChoiceValues(['60분', '120분']).setRequired(true);
-  var cb = form.addCheckboxItem().setTitle(Q.topics).setChoiceValues(TOPICS).setRequired(false);
-  cb.setValidation(FormApp.createCheckboxValidation().requireSelectAtMost(2)
-      .setHelpText('최대 2개까지 고를 수 있어요').build());
-  form.addMultipleChoiceItem().setTitle(Q.paid).setChoiceValues(['괜찮음', '무료만'])
-      .setHelpText('관심 주제를 안 고르면 무료 전시로 추천해요').setRequired(true);
-  form.addMultipleChoiceItem().setTitle(Q.newPref).setChoiceValues(['예', '아니오'])
-      .setHelpText('안 고르면 "예"로 쳐요').setRequired(false);
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('Index')
+    .setTitle('ACC 전시 추천 설문')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+}
 
-  var ss = SpreadsheetApp.create('ACC 전시 추천 설문 (응답)');
-  form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
-  PropertiesService.getScriptProperties().setProperty('SHEET_ID', ss.getId());
-
-  ScriptApp.getProjectTriggers().forEach(function (t) {
-    if (t.getHandlerFunction() === 'onSurveySubmit') ScriptApp.deleteTrigger(t);
-  });
-  ScriptApp.newTrigger('onSurveySubmit').forSpreadsheet(ss).onFormSubmit().create();
-
-  Logger.log('폼 (응답용): ' + form.getPublishedUrl());
-  Logger.log('폼 (편집용): ' + form.getEditUrl());
+// 응답 시트 만들기 (한 번만 실행)
+function setupSheet() {
+  var props = PropertiesService.getScriptProperties();
+  var id = props.getProperty('SHEET_ID');
+  var ss = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.create('ACC 전시 추천 설문 (응답)');
+  props.setProperty('SHEET_ID', ss.getId());
+  var sh = ss.getSheets()[0];
+  sh.setName('응답');
+  sh.getRange(1, 1, 1, SHEET_HEADERS.length).setValues([SHEET_HEADERS]).setFontWeight('bold').setBackground('#fff2cc');
+  sh.setFrozenRows(1);
   Logger.log('응답 시트: ' + ss.getUrl());
+  return ss.getUrl();
 }
 
-// ───────────── 4. 응답 시트 자동 계산 ─────────────
-function onSurveySubmit(e) {
-  var sh = e.range.getSheet();
-  writeRow_(sh, e.range.getRow());
+function todaySeoul_() {
+  var s = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd').split('-');
+  return new Date(+s[0], +s[1] - 1, +s[2], 12);
 }
 
-function recalcAll() {
-  var ss = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID'));
-  var sh = ss.getSheets().filter(function (s) { return s.getFormUrl(); })[0] || ss.getSheets()[0];
-  for (var r = 2; r <= sh.getLastRow(); r++) writeRow_(sh, r);
-}
-
-function writeRow_(sh, row) {
-  var head = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
-  var col = function (title) { return head.indexOf(title); };
-  var outCol = col(OUT_HEADERS[0]) + 1;
-  if (outCol === 0) {
-    outCol = head.filter(String).length + 1;
-    sh.getRange(1, outCol, 1, OUT_HEADERS.length).setValues([OUT_HEADERS]).setFontWeight('bold').setBackground('#fff2cc');
-  }
-  var v = sh.getRange(row, 1, 1, sh.getLastColumn()).getValues()[0];
-  var ts = v[col('타임스탬프')] || v[col('Timestamp')] || v[0];
-  var d = ts instanceof Date ? ts : new Date();
-  var topics = String(v[col(Q.topics)] || '').split(',').map(function (s) { return s.trim(); })
-      .filter(function (s) { return TOPICS.indexOf(s) >= 0; });
-
-  var res = recommend({
-    companion: v[col(Q.companion)],
-    minutes: String(v[col(Q.minutes)]).indexOf('120') >= 0 ? 120 : 60,
+function toInput_(a) {
+  var topics = (a.topics || []).filter(function (t) { return TOPICS.indexOf(t) >= 0; }).slice(0, 2);
+  return {
+    companion: COMPANION_WEIGHT[a.companion] ? a.companion : '혼자',
+    minutes: +a.minutes === 120 ? 120 : 60,
     topics: topics,
-    paidOk: v[col(Q.paid)] !== '무료만',
-    newPref: v[col(Q.newPref)] !== '아니오',
-    date: d
-  });
+    paidOk: a.paid !== '무료만',
+    newPref: a.newPref !== '아니오',
+    date: todaySeoul_()
+  };
+}
 
-  var out;
-  if (!res.route.length) {
-    out = [fmtDate_(d), '추천 전시 없음', 0, '조건에 맞는 전시가 없음', '', '', ''];
-  } else {
-    var lines = function (fn) { return res.route.map(function (n, i) { return (i + 1) + '. ' + EXHIBITIONS[n].short + ': ' + fn(n); }).join('\n'); };
-    out = [
-      fmtDate_(d),
-      res.route.map(function (n) { return EXHIBITIONS[n].short + ' (' + EXHIBITIONS[n].building + ', ' + EXHIBITIONS[n].minutes + '분)'; }).join(' → '),
-      res.totalMin,
-      (res.intro ? '[관심 주제 안 고름: 입문 모드, 무료만·새 전시 예로 계산]\n' : '') +
-        lines(function (n) { return (n === res.route[0] ? '1등 · ' : '') + (res.reasons[n].join(', ') || '점수 상위'); }),
-      feeText_(res.route, d) + '\n' + lines(function (n) { return EXHIBITIONS[n].fee; }),
-      lines(function (n) { return hoursText_(n, d); }),
-      Object.keys(res.scores).sort(function (p, q) { return res.scores[q] - res.scores[p]; })
-        .map(function (n) { return EXHIBITIONS[n].short + ' ' + res.scores[n].toFixed(1); }).join(', ')
-    ];
-  }
-  sh.getRange(row, outCol, 1, out.length).setValues([out]).setWrap(true).setVerticalAlignment('top');
+// 결과보기: 화면에서 부름 → 추천 전시 이름 순서·이유·요금 문구
+function getRecommendation(a) {
+  var inp = toInput_(a), res = recommend(inp);
+  return {
+    date: Utilities.formatDate(inp.date, TZ, 'yyyy-MM-dd'),
+    route: res.route,
+    totalMin: res.totalMin,
+    intro: res.intro,
+    reasons: res.route.map(function (n, i) { return (i === 0 ? '1등 · ' : '') + res.reasons[n].join(', '); }),
+    fee: res.route.length ? feeText_(res.route, inp.date) : ''
+  };
+}
+
+// 제출: 서버에서 추천을 다시 계산해 한 줄로 저장
+function submitResponse(a) {
+  if (['남', '여'].indexOf(a.gender) < 0) throw new Error('성별을 골라 주세요');
+  if (['예', '아니요'].indexOf(a.like) < 0 || ['예', '아니요'].indexOf(a.visit) < 0) throw new Error('추가 질문에 답해 주세요');
+  var inp = toInput_(a), res = recommend(inp), d = inp.date;
+  var out = resultCells_(res, d);
+  var sh = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID')).getSheets()[0];
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    sh.appendRow([new Date(), a.gender, inp.companion, inp.minutes + '분', inp.topics.join(', '),
+      a.paid === '무료만' ? '무료만' : '괜찮음', a.newPref === '아니오' ? '아니오' : '예']
+      .concat(out, [a.like, a.visit, String(a.comment || '').slice(0, 2000)]));
+  } finally { lock.releaseLock(); }
+  return true;
+}
+
+function resultCells_(res, d) {
+  if (!res.route.length) return [fmtDate_(d), '추천 전시 없음', 0, '조건에 맞는 전시가 없음', '', '', ''];
+  var lines = function (fn) { return res.route.map(function (n, i) { return (i + 1) + '. ' + EXHIBITIONS[n].short + ': ' + fn(n); }).join('\n'); };
+  return [
+    fmtDate_(d),
+    res.route.map(function (n) { return EXHIBITIONS[n].short + ' (' + EXHIBITIONS[n].building + ', ' + EXHIBITIONS[n].minutes + '분)'; }).join(' → '),
+    res.totalMin,
+    (res.intro ? '[관심 주제 안 고름: 입문 모드, 무료만·새 전시 예로 계산]\n' : '') +
+      lines(function (n) { return (n === res.route[0] ? '1등 · ' : '') + (res.reasons[n].join(', ') || '점수 상위'); }),
+    feeText_(res.route, d) + '\n' + lines(function (n) { return EXHIBITIONS[n].fee; }),
+    lines(function (n) { return hoursText_(n, d); }),
+    Object.keys(res.scores).sort(function (p, q) { return res.scores[q] - res.scores[p]; })
+      .map(function (n) { return EXHIBITIONS[n].short + ' ' + res.scores[n].toFixed(1); }).join(', ')
+  ];
 }
 
 function fmtDate_(d) {
