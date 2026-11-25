@@ -682,3 +682,12 @@
   - https://www.acc.go.kr/main/board/board.do?PID=0701&boardID=NOTICE&action=Read&idx=2944
   - https://www.acc.go.kr/main/board/board.do?PID=0701&boardID=NOTICE&action=Read&idx=2930
   - https://www.acc.go.kr/main/exhibition.do?PID=0202&action=Read&bnkey=EM_0000007015
+
+## 2026-11-25 아시아이야기지도 전시장
+
+- 파일: ACC_2026전시기간조사.md 6번
+- 내용: 아시아문화박물관 B3 상설 공간. 아시아 구전 서사시를 하나씩 소개 (라마야나의 길 2021 → 마나스의 길 2022 → 천일야화의 길 2024-01-08~2026-11-15). 개편 공사로 11-09~11-30 휴실, 12-01 개관, 다음 전시 미확인
+- 키워드: 아시아이야기지도, 천일야화의 길, 구전 유산, 서사시, 라이브스케치, 전시 개편
+- 출처:
+  - https://www.acc.go.kr/main/exhibition.do?PID=0206&action=Read&bnkey=EM_0000006965
+  - https://www.acc.go.kr/main/board/board.do?PID=0701&boardID=NOTICE&action=Read&idx=2930
