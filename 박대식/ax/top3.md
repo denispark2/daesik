@@ -195,7 +195,19 @@
 | IntervalCoach | 사이클·러닝·수영·근력, 그날 회복 상태로 조정 | 애플 앱스토어 확인 (안드로이드 확인 못 함) |
 | MyTrainPal | 못 한 운동 주변으로 일정 다시 짬 | 세부 확인 못 함 |
 
-- 검색 결과에 **삼성헬스 연동은 한 곳도 안 나옴** (대부분 Garmin·Strava·애플 건강)
+- 위 5개는 해외 앱 (만든 나라는 확인 못 함)
+
+**국내 (2026-11-26 추가 검색)** — 대부분 **헬스(근력) 루틴 추천**
+| 서비스 | 하는 것 | 이 아이디어와 차이 |
+|---|---|---|
+| 플랜핏 | 운동 데이터로 AI 루틴·코칭, 건강 앱 연동 | 헬스 중심. 삼성헬스 연동 범위 확인 못 함 |
+| Onul | AI 맞춤 루틴, 운동량·근육 피로도 분석 (기본 무료) | 헬스 중심 |
+| 짐워크 | 목표·빈도·부위 넣으면 AI 프로그램 | 헬스 중심 |
+| 헬스매치 | AI 코치 (월 9,900원·연 49,500원) | 헬스 중심 |
+| 삼성헬스·갤럭시 워치8 러닝 코치 | 수준별 러닝 훈련 | 러닝만 |
+
+- 국내에서 **수영 맞춤 계획·날씨 반영·여러 종목 섞기**를 하는 앱은 검색에서 안 나옴
+- 검색 결과에 **삼성헬스 연동을 밝힌 곳은 없음** (해외는 대부분 Garmin·Strava·애플 건강)
 - 확인 못 함: 각 앱의 안드로이드 지원, 한국어, 가격, 수영 강습 같은 고정 일정·"하체 다음 날 러닝 금지" 같은 개인 규칙 설정 가능 여부
 - **차별점 후보 (제안)**: 갤럭시 워치·삼성헬스 사용자 + 한국 날씨(비·눈·영하) + 수영장 운영시간·강습 고정 + 헬스 부위 규칙을 한 번에 → 해외 지구력 앱이 잘 안 다루는 부분
 
@@ -204,6 +216,11 @@
 - TrainAsONE: https://apps.apple.com/pa/app/trainasone-ai-running-plans/id1541355896?l=en-GB
 - 2PEAK: https://apps.apple.com/us/app/id1053397362
 - IntervalCoach: https://apps.apple.com/app/id6760976369 , https://the5krunner.com/2026/06/23/intervalcoach-ai-training-app/
+- 플랜핏: https://apps.apple.com/kr/app/id1511876936
+- Onul: https://apps.apple.com/kr/app/id6742204496
+- 짐워크: https://apps.apple.com/kr/app/id1563624436
+- 헬스매치: https://apps.apple.com/kr/app/id6497951331
+- 갤럭시 워치 러닝 코치 (삼성 뉴스룸): https://news.samsung.com/kr/%ec%9b%8c%ec%b9%98%ea%b0%80-%ec%8b%9c%ed%82%a4%eb%8a%94-%eb%8c%80%eb%a1%9c-%ed%95%98%eb%a9%b4-%ed%95%98%ed%94%84-%eb%a7%88%eb%9d%bc%ed%86%a4-%ea%b0%80%eb%8a%a5%ed%95%a0%ea%b9%8c
 
 ---
 
