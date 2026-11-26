@@ -192,6 +192,12 @@
 - 확인 못 함: 삼성헬스가 Health Connect로 넘기는 항목 범위 (골격근량은 Health Connect에 항목이 없는 것으로 앎), 삼성 자체 SDK 사용 조건
 - 주의: 운동 조언까지만. 건강 판단·진단은 안 함. 워치 체성분(BIA) 측정은 오차가 있어 4주 이상 추세로만 봄
 
+### 3-9. 공개 배포할 때 드는 것 (2026-11-26 검색)
+- 구글 플레이 개발자 등록비 1회 (25달러로 앎 — 이번 검색에서 확인 안 함)
+- Health Connect 권한 사용 신고(Health apps declaration): 앱 심사에 같이 들어감. 수수료 언급은 검색에서 안 나옴. 쓰는 데이터 종류·이유(예: 피트니스 코칭)를 적고, 필요한 데이터만 요청해야 함
+- 개인정보처리방침: 플레이 스토어 페이지에 꼭 올려야 함. 건강 데이터는 민감정보라 폰 안에서만 처리하면 부담이 줄어듦
+- 출처: https://developer.android.com/health-and-fitness/guides/health-connect/publish/declare-access , https://support.google.com/googleplay/android-developer/answer/12991134
+
 ### 3-6. 비슷한 서비스 (2026-11-26 검색)
 있음. 대부분 **지구력 운동(철인3종·러닝·사이클) 해외 앱**이고, 못 한 운동을 다시 짜 주는 기능까지는 흔함.
 
