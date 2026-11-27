@@ -89,6 +89,21 @@
 6. 나온 **웹 앱 주소**가 설문 주소 (응답자는 구글 로그인 없이 응답)
 - 코드를 고친 뒤에는 **배포 관리 → 수정 → 새 버전**으로 다시 배포해야 반영됨
 
+### 실제 배포 (2026-11-27)
+- 박대식 구글 계정, Apps Script 프로젝트 '제목 없는 프로젝트'에 4차 코드로 배포 (ego 브라우저로 진행, 권한 승인은 박대식이 직접)
+- 웹앱 버전 2 (2026-11-27 12:48), 실행: 나, 액세스: 모든 사용자
+- 설문 주소: https://script.google.com/macros/s/AKfycbxOfJDg2Bqsbnnb0zlNJxplrzdTw4ooe4LduVvCXFETbj1B6h-Y_A3a6CiBaRwFLEid/exec
+- 링크 (유입 경로별)
+
+| 쓰는 곳 | 링크 |
+|---|---|
+| **블로그** | https://script.google.com/macros/s/AKfycbxOfJDg2Bqsbnnb0zlNJxplrzdTw4ooe4LduVvCXFETbj1B6h-Y_A3a6CiBaRwFLEid/exec?src=blog |
+| 인스타 | 같은 주소 끝 `?src=insta` |
+| ACC 현장 QR | 같은 주소 끝 `?src=acc` |
+
+- 응답 시트는 `setupSheet`로 만듦 (주소는 공개 저장소에 적지 않음, Apps Script 실행 로그에서 확인)
+- 확인한 것: 블로그 링크로 들어가면 4차 화면(1번 방문 여부, 관심 주제 5개, 새 전시 질문 없음)이 뜸. 로그인한 상태에서만 열어 봄 → **로그인 안 한 사람 화면, 실제 제출·시트 저장은 아직 확인 안 함**
+
 ## 7. 검증 (2026-11-25)
 - 로컬 테스트 서버에서 Apps Script를 흉내 내고 실제 `Code.gs`·`Index.html`을 돌려 확인
   - 빈 답으로 결과보기 → "1번, 2번, 3번, 5번 질문에 답해 주세요"
