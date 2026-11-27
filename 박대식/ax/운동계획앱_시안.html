@@ -1,332 +1,1398 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>주간 운동 계획 앱 — 화면 시안</title>
-<style>
-  /* One UI(삼성헬스) 느낌: 회색 바탕 + 흰 둥근 카드, 큰 제목, 초록 강조, 알약 버튼 */
-  :root{
-    --bg:#f4f4f6; --card:#fff; --ink:#1a1a1a; --sub:#8a8a8e; --line:#ededf0;
-    --run:#f2793d; --swim:#2f9ae0; --gym:#7b61d9; --leg:#d9468a;
-    --ok:#1fa463; --miss:#e5484d; --warn:#e8a317; --accent:#1fa463;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:#e9e9ec;color:var(--ink);font-family:"SamsungOne","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;letter-spacing:-.2px}
-  header{max-width:1460px;margin:0 auto;padding:28px 20px 8px}
-  header h1{margin:0 0 6px;font-size:22px}
-  header p{margin:0;color:#555;font-size:14px;line-height:1.6}
-  .flow{max-width:1460px;margin:0 auto;padding:16px 20px 40px;display:flex;gap:24px;overflow-x:auto;align-items:flex-start}
-  .screen{flex:0 0 340px}
-  .label{font-size:13px;font-weight:700;color:#555;margin:0 0 8px 4px}
-  .label b{color:var(--accent)}
-  .phone{width:340px;height:720px;background:var(--bg);border:9px solid #111;border-radius:42px;overflow:hidden;display:flex;flex-direction:column}
-  .status{display:flex;justify-content:space-between;font-size:11px;padding:10px 22px 0;color:#333}
-  /* One UI 큰 제목 영역 */
-  .top{padding:46px 22px 18px}
-  .top h2{margin:0;font-size:26px;font-weight:700}
-  .top .d{font-size:13px;color:var(--sub);margin-top:6px}
-  .body{flex:1;overflow-y:auto;padding:0 12px 14px}
-  /* 하단 탭: 글자만, 선택은 굵게 */
-  .nav{display:flex;background:var(--bg);padding:4px 8px 14px}
-  .nav div{flex:1;text-align:center;font-size:12px;padding:10px 0;color:#9a9a9e}
-  .nav div.on{color:var(--ink);font-weight:700}
-  .nav i{display:none}
-  .card{background:var(--card);border-radius:26px;padding:16px;margin-bottom:10px}
-  .wx{display:flex;gap:12px;align-items:center}
-  .wx .ic{font-size:30px}
-  .wx .t{font-size:13px;line-height:1.5;color:#444}
-  .wx .t b{font-size:17px;color:var(--ink)}
-  .item{display:flex;gap:12px;align-items:center;padding:10px 0}
-  .item + .item{border-top:1px solid var(--line)}
-  .time{width:44px;font-size:13px;font-weight:700;color:#444}
-  /* 운동 아이콘: 색 동그라미 */
-  .dot{width:38px;height:38px;border-radius:50%;flex:0 0 38px;display:flex;align-items:center;justify-content:center;font-size:18px}
-  .dot.run::after{content:"🏃"} .dot.swim::after{content:"🏊"} .dot.gym::after{content:"🏋"} .dot.leg::after{content:"🦵"}
-  .dot.run{background:#fdebe1} .dot.swim{background:#e2f1fc} .dot.gym{background:#ece8fb} .dot.leg{background:#fbe5ef}
-  .what{flex:1;font-size:15px;font-weight:600}
-  .what small{display:block;color:var(--sub);font-size:12px;font-weight:400;margin-top:2px}
-  .chip{font-size:11px;padding:4px 9px;border-radius:99px;white-space:nowrap;font-weight:600}
-  .c-ok{background:#e3f5eb;color:var(--ok)} .c-miss{background:#fde8e8;color:var(--miss)}
-  .c-plan{background:#eef0f3;color:#555} .c-warn{background:#fdf3dc;color:#b7800f}
-  .why{font-size:12.5px;color:#444;background:#f6f7f8;padding:10px 12px;border-radius:16px;margin-top:10px;line-height:1.55}
-  .why::before{content:"💡 "}
-  /* 알약 버튼 */
-  .btn{display:block;width:100%;border:0;border-radius:99px;padding:14px;font-size:15px;font-weight:700;background:var(--accent);color:#fff;margin-top:8px;font-family:inherit}
-  .btn.ghost{background:#fff;color:var(--ink)}
-  table.week{width:100%;border-collapse:collapse;font-size:11px}
-  table.week td{padding:8px 2px;vertical-align:middle}
-  table.week tr + tr td{border-top:1px solid var(--line)}
-  table.week td.day{width:46px;font-weight:700;color:#333;font-size:13px}
-  table.week td.day small{display:block;font-weight:400;color:var(--sub);font-size:11px}
-  .pill{display:inline-block;color:#fff;border-radius:99px;padding:4px 9px;margin:2px 3px 2px 0;font-size:11px;font-weight:600}
-  .pill.done::after{content:" ✓"} .pill.missed{opacity:.45;text-decoration:line-through}
-  .pill.run{background:var(--run)} .pill.swim{background:var(--swim)} .pill.gym{background:var(--gym)} .pill.leg{background:var(--leg)}
-  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--sub);margin:0 6px 10px}
-  .legend span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle;background:var(--c)}
-  .cmp{width:100%;border-collapse:collapse;font-size:11.5px}
-  .cmp th{text-align:left;color:var(--sub);font-weight:600;padding:4px 3px 8px}
-  .cmp td{padding:9px 3px;border-top:1px solid var(--line)}
-  /* 요약: 삼성헬스 숫자 카드 */
-  .sum{display:flex;gap:8px;margin-bottom:10px}
-  .sum div{flex:1;background:#fff;border-radius:22px;padding:12px 6px;text-align:center;font-size:12px;color:var(--sub)}
-  .sum b{display:block;font-size:24px;color:var(--ink)}
-  .diff{font-size:13px;line-height:1.6}
-  .diff .old{color:var(--sub);text-decoration:line-through}
-  .diff .new{color:var(--ok);font-weight:700}
-  .rule{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;padding:11px 0}
-  .rule + .rule{border-top:1px solid var(--line)}
-  .rule .v{font-weight:600;color:var(--accent);font-size:12.5px;text-align:right}
-  .sec{font-size:12px;font-weight:700;color:var(--sub);margin:14px 10px 6px}
-  .notif{background:#fff;border-radius:22px;padding:12px 14px;font-size:13px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-  .notif small{color:var(--sub);display:block;font-size:11px;margin-bottom:3px}
-  /* 주간 목표 링 (삼성헬스 활동 링 느낌) */
-  .rings{display:flex;justify-content:space-around;text-align:center;font-size:11px;color:var(--sub)}
-  .ring{width:62px;height:62px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--c) calc(var(--p)*1%),#eceef1 0)}
-  .ring span{width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ink)}
-  .stat{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:#444}
-  .stat b{color:var(--ink)}
-  /* 목표 달성 축하 */
-  .phone{position:relative}
-  .cel{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(244,244,246,.0);pointer-events:none;opacity:0;transition:opacity .25s, background .25s}
-  .cel.show{opacity:1;background:rgba(20,20,24,.45);pointer-events:auto}
-  .cel .badge{background:#fff;border-radius:30px;padding:26px 22px 20px;width:250px;text-align:center;transform:scale(.4);opacity:0}
-  .cel.show .badge{animation:pop .55s cubic-bezier(.2,1.6,.4,1) forwards}
-  .cel .medal{font-size:58px;display:inline-block;animation:none}
-  .cel.show .medal{animation:spin 1.1s ease-out .15s}
-  .cel h3{margin:10px 0 4px;font-size:20px}
-  .cel p{margin:0 0 14px;font-size:13px;color:var(--sub);line-height:1.5}
-  .cel .btn{margin:0;pointer-events:auto}
-  .conf{position:absolute;top:-12px;width:8px;height:13px;border-radius:2px;opacity:.95;animation:fall linear forwards}
-  .ring.burst{animation:burst .6s ease-out}
-  @keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
-  @keyframes spin{0%{transform:rotateY(0) scale(.6)}60%{transform:rotateY(540deg) scale(1.15)}100%{transform:rotateY(720deg) scale(1)}}
-  @keyframes fall{to{transform:translate(var(--dx),760px) rotate(var(--r));opacity:.9}}
-  @keyframes burst{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
-  footer{max-width:1460px;margin:0 auto;padding:0 20px 30px;color:#666;font-size:12px;line-height:1.7}
-</style>
-</head>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#f3f3f3"><meta name="description" content="삼성 헬스의 카드 중심 디자인을 참고한 주간 운동 플래너 시안. 모든 데이터는 원본의 예시입니다."><title>운동 플래너 — 주간 운동 계획 시안</title><!-- Bundled Lucide icons: https://lucide.dev
+ISC License
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+---
+
+The following Lucide icons are derived from the Feather project:
+
+airplay, alert-circle, alert-octagon, alert-triangle, aperture, arrow-down-circle, arrow-down-left, arrow-down-right, arrow-down, arrow-left-circle, arrow-left, arrow-right-circle, arrow-right, arrow-up-circle, arrow-up-left, arrow-up-right, arrow-up, at-sign, calendar, cast, check, chevron-down, chevron-left, chevron-right, chevron-up, chevrons-down, chevrons-left, chevrons-right, chevrons-up, circle, clipboard, clock, code, columns, command, compass, corner-down-left, corner-down-right, corner-left-down, corner-left-up, corner-right-down, corner-right-up, corner-up-left, corner-up-right, crosshair, database, divide-circle, divide-square, dollar-sign, download, external-link, feather, frown, hash, headphones, help-circle, info, italic, key, layout, life-buoy, link-2, link, loader, lock, log-in, log-out, maximize, meh, minimize, minimize-2, minus-circle, minus-square, minus, monitor, moon, more-horizontal, more-vertical, move, music, navigation-2, navigation, octagon, pause-circle, percent, plus-circle, plus-square, plus, power, radio, rss, search, server, share, shopping-bag, sidebar, smartphone, smile, square, table-2, tablet, target, terminal, trash-2, trash, triangle, tv, type, upload, x-circle, x-octagon, x-square, x, zoom-in, zoom-out
+
+The MIT License (MIT) (for the icons listed above)
+
+Copyright (c) 2013-present Cole Bemis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--><style>:root{--bg:#f3f3f3;--card:#fff;--ink:#17191c;--sub:#74777d;--line:#eef0f1;--accent:#31823c;--ok:#328244;--miss:#bf4946;--run:#dd7040;--swim:#3585cb;--gym:#7561b7;--leg:#b65c89}
+*{box-sizing:border-box}body{margin:0;background:#f7f8fa;color:var(--ink);font-family:"SamsungOne","Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;letter-spacing:-.45px;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #3285dd;outline-offset:3px}button{touch-action:manipulation}svg.icon{width:22px;height:22px;display:inline-block;vertical-align:middle;flex-shrink:0;stroke-width:1.8}button svg{pointer-events:none}header{padding:25px 36px 22px;background:#fff;border-bottom:1px solid #e7e9ec;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{height:43px;width:43px;background:#eaf4e7;color:#398539;border-radius:15px;display:grid;place-items:center}.brand-mark svg{width:25px;height:25px}.brand h1{font-size:21px;letter-spacing:-.8px;margin:0 0 4px;font-weight:750}.brand p{margin:0;color:var(--sub);font-size:12px}.prototype-badge{font-size:11px;color:#636a72;background:#f3f5f7;padding:8px 12px;border-radius:20px;white-space:nowrap}.board-tools{padding:23px 36px 4px;display:flex;gap:14px;justify-content:space-between;align-items:center}.screen-links{display:flex;gap:5px;flex-wrap:wrap}.screen-links button{border:0;background:transparent;color:#7e838a;padding:9px 12px;font-size:12px;font-weight:600;border-radius:18px}.screen-links button.is-active{background:#e8ece8;color:#2d6637}.screen-links button span{font-size:10px;opacity:.7;margin-right:6px}.view-switch{background:#e9ebee;display:flex;padding:3px;border-radius:20px;flex-shrink:0}.view-switch button{border:0;border-radius:17px;background:none;color:#747981;font-size:11px;padding:8px 13px}.view-switch button[aria-pressed=true]{background:white;color:#20252a;box-shadow:0 1px 4px #0000000b}.flow{padding:21px 36px 30px;display:flex;gap:26px;overflow:auto;align-items:flex-start;scroll-snap-type:x proximity;scroll-padding-left:36px;scrollbar-width:thin;scrollbar-color:#cdd1d5 transparent}.screen{flex:0 0 374px;scroll-snap-align:start}.label{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:650;color:#4b535b;padding:0 6px;margin:0 0 12px}.label span{color:#91979c;font-weight:400;font-size:11px}.label b{font-size:10px;font-weight:600;color:#9ba0a6;margin-right:7px}.phone{width:374px;height:816px;background:var(--bg);border:6px solid #272a2e;border-radius:43px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 12px 24px #1b25320b,inset 0 0 0 1px #fff}.status{display:flex;justify-content:space-between;padding:12px 23px 0;font-size:11px;font-weight:700;height:37px;flex-shrink:0;position:relative;letter-spacing:0}.status::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:#202326;left:calc(50% - 4.5px);top:13px}.status span:last-child{font-size:10px;font-weight:600;letter-spacing:.2px}.top{padding:20px 22px 21px;flex-shrink:0}.title-line{display:flex;align-items:center;justify-content:space-between;gap:10px}.top h2{font-size:28px;font-weight:750;letter-spacing:-1.3px;margin:0}.top .d{color:#797d81;font-size:12px;margin-top:7px}.top-action{display:inline-flex;color:#858a8f}.top-action svg{width:19px;height:19px}.body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 13px 18px;scrollbar-width:none}.body::-webkit-scrollbar{display:none}.card{background:#fff;border-radius:25px;padding:20px;margin-bottom:12px;overflow:hidden}.card-title{font-size:14px;font-weight:700;margin:0 0 17px;display:flex;align-items:center;justify-content:space-between}.card-title .icon{width:16px;height:16px;color:#9a9da2}.muted{color:var(--sub)}.eyebrow{font-size:11px;font-weight:650;color:#7d8389}.chip{font-size:10px;line-height:1.4;padding:5px 9px;border-radius:12px;white-space:nowrap;font-weight:650;display:inline-flex;align-items:center;gap:4px}.chip .icon{width:12px;height:12px}.c-ok{background:#edf5e9;color:#3c7d33}.c-miss{background:#fbeceb;color:#b74c49}.c-plan{background:#f0f1f4;color:#72777d}.c-warn{background:#fff4e3;color:#a57622}.c-blue{background:#e9f2ff;color:#4b7dae}.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;border:0;border-radius:26px;padding:13px 16px;font-size:14px;font-weight:700;background:var(--accent);color:#fff;margin-top:10px;transition:background .15s,transform .15s}.btn:active{transform:scale(.985)}.btn:disabled{cursor:default;background:#e8eee7;color:#567452}.btn.ghost{background:#e9ebec;color:#5d636a;margin-top:9px;font-size:13px}.btn .icon{width:17px;height:17px}.text-btn{border:0;background:none;color:#5d656c;padding:12px 3px;font-size:12px;font-weight:650}.wide{width:100%;text-align:center}.section-label{font-size:12px;font-weight:650;color:#878b90;margin:23px 9px 10px}.weather{display:flex;align-items:center;gap:11px;background:#e9eef4;border-radius:18px;padding:13px 16px;margin-bottom:12px}.weather>.icon{width:30px;height:30px;color:#758da7}.weather b{font-size:13px}.weather p{font-size:10px;color:#7c8791;margin:4px 0 0}.weather .temperature{margin-left:auto;font-size:26px;color:#5d7187;font-weight:500;letter-spacing:-1.3px}.session{position:relative;padding:21px}.session .card-title{margin-bottom:19px}.session-main{display:flex;align-items:center;gap:12px}.sport-icon{width:45px;height:45px;flex-shrink:0;border-radius:16px;display:grid;place-items:center;background:#fcf0e8;color:var(--run)}.sport-icon .icon{width:25px;height:25px}.sport-icon.gym{background:#f0ecf8;color:var(--gym)}.sport-icon.swim{background:#eaf3fb;color:var(--swim)}.sport-icon.leg{background:#faedf3;color:var(--leg)}.session-main h3{font-size:15px;margin:0 0 4px;font-weight:700}.session-main p{font-size:11px;color:var(--sub);margin:0}.distance{font-size:47px;line-height:1.2;font-weight:650;letter-spacing:-2.2px;margin:20px 0 4px}.distance small{font-size:20px;font-weight:500;letter-spacing:-.7px;margin-left:5px;color:#73767c}.session-meta{display:flex;gap:16px;font-size:11px;color:#858990}.session-meta b{color:#4e555b;font-weight:600;margin-right:4px}.insight{font-size:11px;color:#747b74;line-height:1.7;background:#f1f6ee;border-radius:14px;padding:11px 13px;margin-top:17px}.insight strong{font-weight:650;color:#55734c}.insight .icon{height:14px;width:14px;margin-right:4px;color:#6c8d61}.goals-card .card-title{margin-bottom:13px}.goal-heading{display:flex;align-items:end;justify-content:space-between;margin:0 0 18px}.goal-heading b{font-size:30px;line-height:1;font-weight:650;letter-spacing:-1px}.goal-heading b small{font-size:13px;font-weight:500;letter-spacing:0;color:#9a9da2;margin-left:5px}.goal-heading p{font-size:11px;color:#8b9094;margin:0 0 2px}.rings{display:flex;justify-content:space-between;text-align:center;font-size:11px;color:#83878c}.ring{width:65px;height:65px;border-radius:50%;margin:0 auto 7px;display:grid;place-items:center;background:conic-gradient(var(--c) calc(var(--p)*1%),#f0f1f2 0);transform:rotate(-90deg)}.ring span{width:54px;height:54px;border-radius:50%;background:white;display:grid;place-items:center;font-size:17px;font-weight:600;color:var(--c);transform:rotate(90deg);letter-spacing:-.7px}.rings small{color:#8c9197;font-size:10px;font-weight:400}.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}.health-grid .card{padding:18px 15px;margin:0;border-radius:23px}.health-grid .icon{width:20px;height:20px;color:#8d7db7;margin-bottom:10px}.health-grid .recovery .icon{color:#d78381}.health-grid h3{font-size:12px;margin:0 0 10px;font-weight:650}.health-value{font-size:23px;letter-spacing:-1px;font-weight:650;white-space:nowrap}.health-value small{font-size:10px;font-weight:400;color:#8d9096;margin:0 3px;letter-spacing:0}.health-value.recovery-text{font-size:20px;color:#589047}.health-grid p{font-size:10px;color:#91959a;margin:8px 0 0}.item{display:flex;gap:12px;align-items:center;padding:10px 0}.item+.item{border-top:1px solid var(--line)}.item .sport-icon{width:37px;height:37px;border-radius:13px}.item .sport-icon .icon{width:20px;height:20px}.item h3{margin:0 0 4px;font-size:13px}.item p{margin:0;color:#8c9298;font-size:10px;line-height:1.6}.item .item-copy{flex:1;min-width:0}.hint{font-size:11px;line-height:1.8;color:#858b90;margin:12px 7px}.hint strong{font-weight:600;color:#59626b}.week-summary{padding:17px 20px;display:flex;align-items:center;justify-content:space-between}.week-summary b{font-size:25px;font-weight:650;letter-spacing:-1px}.week-summary small{font-size:11px;color:#90949a;font-weight:400;margin-left:5px;letter-spacing:0}.week-summary p{font-size:11px;color:#8a8f95;margin:7px 0 0}.week-summary .icon{color:#829b75;width:31px;height:31px}.legend{display:flex;gap:14px;font-size:10px;color:#858a90;margin:18px 6px 12px}.legend span::before{content:"";width:6px;height:6px;background:var(--c);display:inline-block;border-radius:50%;margin-right:5px;vertical-align:middle}.week-card{padding:6px 17px}.week{width:100%;border-collapse:collapse}.week td{padding:13px 0;vertical-align:top}.week tr+tr td{border-top:1px solid var(--line)}.week td.day{width:50px;font-size:13px;font-weight:650;padding-top:16px;color:#6e747c}.week td.day small{font-size:10px;font-weight:400;color:#a1a5aa;display:block;margin-top:4px}.week td.day .icon{width:12px;height:12px;margin-top:5px;color:#b3b6bc}.week tr.today .day{color:#438648}.week tr.today .day strong{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#428a44;color:white;margin-top:-6px;margin-bottom:2px}.pill{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:10px;font-weight:600;border-radius:9px;padding:7px 9px;margin:0 0 5px;color:var(--gym);background:#f1edf8;min-height:27px}.pill:last-child{margin:0}.pill.run{color:#bc7043;background:#fcf0e7}.pill.swim{color:#4c87b7;background:#eaf3fa}.pill.leg{color:#af668b;background:#f8eaf2}.pill .icon{width:12px;height:12px}.checks{display:flex;gap:7px;flex-wrap:wrap}.checks .chip{font-size:10px}.compact-title{font-size:12px;font-weight:650;margin:0 0 12px}.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}.sum div{background:white;border-radius:22px;padding:19px 5px 16px;text-align:center;font-size:11px;color:#8c9096}.sum b{display:block;font-size:30px;font-weight:650;color:#45863c;margin-bottom:5px;line-height:1.1}.sum .missed{color:#ce7169}.sum .remaining{color:#687b97}.record-card{padding:7px 17px}.record-row{padding:15px 0;display:flex;gap:10px;align-items:flex-start}.record-row+.record-row{border-top:1px solid var(--line)}.record-row .sport-icon{width:34px;height:34px;border-radius:12px;margin-top:2px}.record-row .sport-icon .icon{width:18px;height:18px}.record-row .record-copy{flex:1;min-width:0}.record-copy h3{font-size:12px;margin:0 0 6px;font-weight:650;line-height:1.4}.record-copy p{font-size:10px;color:#8b9096;line-height:1.6;margin:0}.record-row .chip{font-size:9px;padding:4px 7px}.question{background:#fff;padding:20px;border-radius:24px;margin:12px 0}.question h3{font-size:14px;margin:0 0 8px}.question p{font-size:11px;line-height:1.8;color:#7d838b;margin:0}.replan-banner{background:#e8f0e4;border-radius:22px;padding:20px;margin-bottom:12px;display:flex;gap:12px;align-items:center}.replan-banner>.icon{color:#619656;width:29px;height:29px}.replan-banner h3{font-size:14px;margin:0 0 5px}.replan-banner p{font-size:11px;line-height:1.6;color:#7f8f7a;margin:0}.change-card .change-title{display:flex;align-items:center;gap:9px;margin-bottom:20px;font-size:13px;font-weight:700}.change-card .change-title>.icon{color:#c27a4c}.change-card .step{display:flex;align-items:flex-start;gap:12px;font-size:11px;margin-top:13px}.change-card .step .tag{width:31px;flex-shrink:0;font-size:10px;color:#969ba0;padding-top:2px}.change-card .step s{color:#a2a6ab;font-size:11px}.change-card .step b{font-size:14px;font-weight:650;color:#48803e}.change-card .step small{display:block;font-size:10px;color:#81878e;margin-top:5px}.change-card .insight{margin-top:19px}.sec{font-size:11px;font-weight:650;color:#8b9096;margin:18px 9px 9px}.sec:first-child{margin-top:2px}.rules-card{padding:4px 19px}.rule{display:flex;justify-content:space-between;align-items:center;gap:13px;font-size:12px;padding:17px 0;line-height:1.6}.rule+.rule{border-top:1px solid var(--line)}.rule .v{max-width:58%;color:#767d85;text-align:right;font-weight:500;font-size:11px;overflow-wrap:anywhere}.rule .v.green{color:#5a8a4f}.rule .icon{width:15px;height:15px;margin-right:5px;color:#858e98}.rule .row-label{display:flex;align-items:center;min-width:85px}.connected .chip{font-size:9px}.details{font-size:11px;line-height:1.8;color:#828991;background:#eaeef0;border-radius:15px;padding:10px 13px;margin:12px 0}.details summary{cursor:pointer;font-weight:650;color:#6b747d}.details p{margin:9px 0 3px}.nav{flex-shrink:0;background:#f3f3f3;display:flex;border-top:1px solid #e6e7e8;padding:9px 13px 15px;position:relative}.nav button{background:none;border:0;flex:1;min-width:0;color:#969a9f;display:flex;align-items:center;flex-direction:column;gap:5px;font-size:10px;font-weight:500;padding:4px 0}.nav button .icon{width:21px;height:21px}.nav button.on{color:#29362a;font-weight:750}.nav button.on .icon{stroke-width:2.5}.nav::after{content:"";height:4px;width:85px;border-radius:4px;background:#202326;position:absolute;bottom:4px;left:calc(50% - 42.5px)}footer{display:flex;justify-content:space-between;gap:20px;font-size:10px;line-height:1.8;color:#8c9299;padding:15px 38px 25px}footer a{color:#7b8794;text-decoration:none}footer p{margin:0}.cel{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:#111a154d;padding:25px;backdrop-filter:blur(4px)}.cel[hidden]{display:none}.badge{background:white;border-radius:31px;padding:29px 22px 21px;width:100%;text-align:center;box-shadow:0 15px 70px #132d1529;animation:pop .45s cubic-bezier(.2,1.3,.4,1)}.medal{height:78px;width:78px;border-radius:50%;background:#f0f5df;color:#7e9b32;margin:auto;display:grid;place-items:center}.medal .icon{width:40px;height:40px}.badge h3{font-size:21px;margin:22px 0 10px}.badge p{font-size:12px;color:#838a85;line-height:1.8;margin:0 0 22px}.conf{position:absolute;top:-15px;width:6px;height:10px;border-radius:2px;animation:fall linear forwards;pointer-events:none}.toast{position:absolute;bottom:85px;left:20px;right:20px;background:#303b32ed;color:#fff;font-size:12px;line-height:1.6;border-radius:18px;padding:14px 17px;text-align:center;z-index:30;box-shadow:0 7px 20px #0001}.app-mode .flow{justify-content:center}.app-mode .screen{display:none}.app-mode .screen.active{display:block}.app-mode .screen .label{display:none}.app-mode .flow{padding-top:20px}.app-mode .phone{height:min(816px,calc(100dvh - 210px));min-height:620px}.app-mode footer{justify-content:center}.app-mode footer .foot-reference{display:none}@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}@keyframes fall{to{transform:translate(var(--dx),840px) rotate(var(--r));opacity:.2}}@keyframes burst{50%{filter:brightness(1.3)}}.ring.burst{animation:burst .6s ease-out}
+[hidden]{display:none!important}
+@media(min-width:601px){.phone{height:min(816px,calc(100dvh - 230px));min-height:620px}.app-mode .phone{height:min(816px,calc(100dvh - 210px));min-height:620px}}
+@media(min-width:1600px){.flow{gap:32px}.screen,.phone{width:390px}.screen{flex-basis:390px}}
+@media(max-width:600px){body{background:var(--bg)}header{padding:14px 18px;background:var(--bg);border:0}.brand-mark{height:34px;width:34px;border-radius:12px}.brand-mark .icon{width:20px;height:20px}.brand{gap:9px}.brand h1{font-size:16px;margin:0}.brand p{display:none}.prototype-badge{font-size:9px;padding:6px 9px;background:#e8eae9}.board-tools{display:none}.flow,.app-mode .flow{padding:0;display:block;overflow:visible}.screen,.app-mode .screen{display:none;width:100%}.screen.active,.app-mode .screen.active{display:block}.label{display:none}.phone,.app-mode .phone{width:100%;height:calc(100dvh - 63px);min-height:0;border:0;border-radius:0;box-shadow:none}.status{display:none}.top{padding:17px 23px 22px}.top h2{font-size:29px}.body{padding:0 15px 18px}.nav{padding-bottom:max(18px,env(safe-area-inset-bottom))}.nav::after{display:none}.nav button{font-size:11px}.nav button .icon{width:22px;height:22px}footer{display:none}.card{border-radius:26px}.cel{position:fixed;top:63px}.toast{bottom:90px}.app-mode .phone{min-height:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.conf{display:none}}
+</style></head>
 <body>
-<header>
-  <h1>주간 운동 계획 앱 — 화면 시안 (AX 아이디어 3번)</h1>
-  <p>날씨 · 운동 기록(삼성헬스) · 내 일정을 보고 수영·헬스·러닝 주간 계획을 짜고, 실제 기록과 비교해 못 한 운동이 있으면 남은 날을 다시 짜 주는 앱.<br>
-  화면 흐름: ① 오늘 → ② 이번 주 → ③ 기록 비교 → ④ 다시 짠 계획 → ⑤ 내 규칙. <b>데이터는 모두 예시.</b> 옆으로 넘겨 보기. ①의 「러닝 끝!」, ②의 「주간 목표 달성 보기」를 누르면 목표 달성 축하 모션이 나와요.</p>
-</header>
-
-<div class="flow">
-
-  <!-- ① 오늘 -->
-  <div class="screen">
-    <p class="label"><b>①</b> 오늘 — 알림 받고 바로 확인</p>
-    <div class="phone">
-      <div class="status"><span>18:30</span><span>▮▮▮ 82%</span></div>
-      <div class="top"><h2>오늘 할 운동</h2><div class="d">12월 9일 (수) · 주간 계획 3일째</div></div>
-      <div class="body">
-        <div class="notif"><small>운동 알림 · 30분 전</small>19:00 러닝 5km — 비 없음, 6℃. 출발 준비하세요</div>
-        <div class="card">
-          <div class="rings">
-            <div><div class="ring" style="--c:var(--gym);--p:60"><span>3/5</span></div>헬스</div>
-            <div><div class="ring" style="--c:var(--run);--p:50"><span>1/2</span></div>러닝</div>
-            <div><div class="ring" style="--c:var(--swim);--p:0"><span>0/3</span></div>수영</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="stat"><span>😴 어젯밤 수면</span><b>6시간 48분</b></div>
-          <div class="stat"><span>💓 회복 (HRV)</span><b style="color:var(--ok)">평소 수준</b></div>
-          <div class="why">회복 상태가 괜찮아서 계획대로 러닝 5km 그대로 가요.</div>
-        </div>
-        <div class="card wx">
-          <div class="ic">⛅</div>
-          <div class="t"><b>6℃ · 비 10%</b><br>19~21시 비·눈 없음 → 러닝 가능</div>
-        </div>
-        <div class="card">
-          <div class="item"><div class="time">06:30</div><div class="dot gym"></div><div class="what">헬스 · 상체<small>준비 포함 60분 (기록 45분까지)</small></div><span class="chip c-ok">완료</span></div>
-          <div class="item"><div class="time">19:00</div><div class="dot run"></div><div class="what">러닝 5km<small>최근 평균 6분/km → 약 30분</small></div><span class="chip c-plan">예정</span></div>
-          <div class="why">왜 오늘 러닝? 목·금에 비 예보가 있고, 어제·그제 하체를 안 해서 오늘이 이번 주에 뛰기 가장 좋은 날이에요.</div>
-        </div>
-        <button class="btn" onclick="dailyDone(this)">러닝 끝! (예시: 워치 기록 들어옴)</button>
-        <button class="btn ghost">오늘은 못 해요 → 다시 짜기</button>
-      </div>
-      <div class="nav"><div class="on"><i>●</i>오늘</div><div><i>▦</i>주간</div><div><i>⇄</i>기록</div><div><i>⚙</i>규칙</div></div>
-    </div>
-  </div>
-
-  <!-- ② 이번 주 -->
-  <div class="screen">
-    <p class="label"><b>②</b> 이번 주 — 날씨·일정 반영한 계획</p>
-    <div class="phone">
-      <div class="status"><span>21:10</span><span>▮▮▮ 64%</span></div>
-      <div class="top"><h2>이번 주 계획</h2><div class="d">12/7 ~ 12/13 · 헬스 5 · 하체 2 · 러닝 2 · 수영 3</div></div>
-      <div class="body">
-        <div class="legend">
-          <span style="--c:var(--gym)">헬스</span><span style="--c:var(--leg)">헬스 하체</span>
-          <span style="--c:var(--run)">러닝</span><span style="--c:var(--swim)">수영</span><span>✔ 기록 확인</span>
-        </div>
-        <div class="card" style="padding:6px 10px">
-          <table class="week">
-            <tr><td class="day">월<small>12/7 ☀️</small></td><td><span class="pill run done">19:00 러닝</span></td></tr>
-            <tr><td class="day">화<small>12/8 ☀️</small></td><td><span class="pill gym done">19:00 상체</span></td></tr>
-            <tr><td class="day">수<small>12/9 ⛅</small></td><td><span class="pill gym done">06:30 상체</span><span class="pill run">19:00 러닝</span></td></tr>
-            <tr><td class="day">목<small>12/10 🌧</small></td><td><span class="pill leg">19:00 하체</span></td></tr>
-            <tr><td class="day">금<small>12/11 🌧</small></td><td><span class="pill gym">06:30 상체</span><span class="pill swim">20:00 강습</span></td></tr>
-            <tr><td class="day">토<small>12/12 ⛅</small></td><td><span class="pill swim">10:00 자유수영</span><span class="pill leg">17:00 하체</span></td></tr>
-            <tr><td class="day">일<small>12/13 ☀️</small></td><td><span class="pill swim">10:00 자유수영</span></td></tr>
-          </table>
-        </div>
-        <div class="why">비 오는 목·금엔 실내 운동만. 하체(목·토) 다음 날엔 러닝을 넣지 않았어요. 금 수영 강습은 고정 시간.</div>
-        <div class="card" style="font-size:12px;line-height:1.6">
-          <b>규칙 확인</b><br>
-          <span class="chip c-ok">헬스 5회 ✔</span> <span class="chip c-ok">하체 2회 ✔</span> <span class="chip c-ok">러닝 비·눈 0 ✔</span><br>
-          <span class="chip c-ok">운동 사이 2시간 ✔</span> <span class="chip c-ok">평일 2개 2회 ✔</span>
-        </div>
-        <button class="btn" onclick="celebrate(this,'🏆','이번 주 목표 달성!','헬스 5 · 하체 2 · 러닝 2 · 수영 3<br>연속 3주째 달성이에요')">주간 목표 달성 보기 (예시)</button>
-      </div>
-      <div class="nav"><div><i>●</i>오늘</div><div class="on"><i>▦</i>주간</div><div><i>⇄</i>기록</div><div><i>⚙</i>규칙</div></div>
-    </div>
-  </div>
-
-  <!-- ③ 기록 비교 -->
-  <div class="screen">
-    <p class="label"><b>③</b> 기록 비교 — 삼성헬스 기록과 자동 대조</p>
-    <div class="phone">
-      <div class="status"><span>21:00</span><span>▮▮▮ 51%</span></div>
-      <div class="top"><h2>계획 vs 실제</h2><div class="d">삼성헬스 기록 21:00 동기화 · 걷기는 제외</div></div>
-      <div class="body">
-        <div class="sum"><div><b>4</b>완료</div><div><b style="color:var(--miss)">1</b>못 함</div><div><b>5</b>남음</div></div>
-        <div class="card">
-          <table class="cmp">
-            <tr><th>계획</th><th>삼성헬스 기록</th><th></th></tr>
-            <tr><td>월 19:00 러닝</td><td>19:12 러닝 5.1km 31분</td><td><span class="chip c-ok">일치</span></td></tr>
-            <tr><td>화 19:00 상체</td><td>19:09 웨이트 48분</td><td><span class="chip c-ok">일치</span></td></tr>
-            <tr><td>수 06:30 상체</td><td>06:41 웨이트 42분</td><td><span class="chip c-ok">일치</span></td></tr>
-            <tr><td>수 19:00 러닝</td><td style="color:var(--sub)">기록 없음</td><td><span class="chip c-miss">못 함</span></td></tr>
-            <tr><td>-</td><td>21:30 러닝 3.0km 19분</td><td><span class="chip c-warn">계획 밖</span></td></tr>
-          </table>
-        </div>
-        <div class="why">기록 시작이 계획보다 10~15분 늦은 건 준비 시간으로 보고 '일치'로 처리해요. 21:30 러닝은 저녁 21시 이후라 계획 밖 운동으로 표시.</div>
-        <div class="card" style="font-size:12px;line-height:1.6">
-          <b>수 19:00 러닝을 못 했어요.</b><br>이번 주 러닝 목표 2회 중 계획 밖 기록 1회를 인정할까요?
-        </div>
-        <button class="btn">인정하고 그대로 두기</button>
-        <button class="btn ghost">러닝 다시 넣어서 계획 다시 짜기</button>
-      </div>
-      <div class="nav"><div><i>●</i>오늘</div><div><i>▦</i>주간</div><div class="on"><i>⇄</i>기록</div><div><i>⚙</i>규칙</div></div>
-    </div>
-  </div>
-
-  <!-- ④ 다시 짠 계획 -->
-  <div class="screen">
-    <p class="label"><b>④</b> 다시 짠 계획 — 남은 날만 바꾸고 이유 설명</p>
-    <div class="phone">
-      <div class="status"><span>21:02</span><span>▮▮▮ 50%</span></div>
-      <div class="top"><h2>계획을 다시 짰어요</h2><div class="d">바뀐 것 2개 · 캘린더·알림 자동 반영</div></div>
-      <div class="body">
-        <div class="card diff">
-          <b>러닝 → 일요일로</b><br>
-          <span class="old">수 12/9 19:00 러닝</span><br>
-          <span class="new">일 12/13 14:00 러닝</span>
-          <div class="why">목·금은 비, 토는 하체 다음 날이라 안 돼요. 일요일 낮이 맑고 가장 따뜻해요 (8℃).</div>
-        </div>
-        <div class="card diff">
-          <b>토요일 하체 → 금요일 아침으로</b><br>
-          <span class="old">토 12/12 17:00 하체</span><br>
-          <span class="new">금 12/11 06:30 하체</span> · <span class="new">토 17:00 상체</span>
-          <div class="why">토 하체를 그대로 두면 일요일 러닝을 못 해요. 금 아침으로 당겨도 하체는 주 2회 그대로예요.</div>
-        </div>
-        <div class="card" style="font-size:12px;line-height:1.6">
-          <b>바뀐 뒤 규칙 확인</b><br>
-          <span class="chip c-ok">헬스 5회 ✔</span> <span class="chip c-ok">하체 2회 ✔</span> <span class="chip c-ok">러닝 2회 ✔</span><br>
-          <span class="chip c-ok">하체 다음 날 러닝 없음 ✔</span> <span class="chip c-ok">비·눈 러닝 없음 ✔</span>
-        </div>
-        <button class="btn">이대로 확정</button>
-        <button class="btn ghost">다른 안 보기</button>
-      </div>
-      <div class="nav"><div><i>●</i>오늘</div><div class="on"><i>▦</i>주간</div><div><i>⇄</i>기록</div><div><i>⚙</i>규칙</div></div>
-    </div>
-  </div>
-
-  <!-- ⑤ 내 규칙 -->
-  <div class="screen">
-    <p class="label"><b>⑤</b> 내 규칙 — 처음 한 번 설정</p>
-    <div class="phone">
-      <div class="status"><span>09:00</span><span>▮▮▮ 99%</span></div>
-      <div class="top"><h2>내 규칙</h2><div class="d">계획은 이 규칙을 항상 지켜요</div></div>
-      <div class="body">
-        <p class="sec">운동 가능 시간</p>
-        <div class="card">
-          <div class="rule"><span>평일 아침</span><span class="v">06:30 ~ 07:30</span></div>
-          <div class="rule"><span>평일 저녁</span><span class="v">19:00 ~ 21:00</span></div>
-          <div class="rule"><span>주말</span><span class="v">10:00 ~ 20:00</span></div>
-          <div class="rule"><span>예외 일정</span><span class="v">+ 추가</span></div>
-        </div>
-        <p class="sec">공통</p>
-        <div class="card">
-          <div class="rule"><span>하루 최대</span><span class="v">2개</span></div>
-          <div class="rule"><span>운동 사이</span><span class="v">2시간 이상</span></div>
-          <div class="rule"><span>기록 + 준비 시간</span><span class="v">+15분</span></div>
-        </div>
-        <p class="sec">종목</p>
-        <div class="card">
-          <div class="rule"><span>🏃 러닝 · 비·눈</span><span class="v">절대 안 함</span></div>
-          <div class="rule"><span>🏃 러닝 · 영하</span><span class="v">주 1회 우선</span></div>
-          <div class="rule"><span>🏋️ 헬스</span><span class="v">주 5회 이상</span></div>
-          <div class="rule"><span>🏋️ 하체</span><span class="v">주 2회 · 다음 날 러닝 X</span></div>
-          <div class="rule"><span>🏊 수영 강습</span><span class="v">금 20:00 고정</span></div>
-          <div class="rule"><span>🏊 수영장</span><span class="v">매시 50분 휴식 · 12~13시 휴장</span></div>
-        </div>
-        <p class="sec">연결</p>
-        <div class="card">
-          <div class="rule"><span>삼성헬스 (Health Connect)</span><span class="chip c-ok">연결됨</span></div>
-          <div class="rule"><span>날씨 (기상청)</span><span class="chip c-ok">연결됨</span></div>
-          <div class="rule"><span>캘린더</span><span class="chip c-ok">연결됨</span></div>
-        </div>
-      </div>
-      <div class="nav"><div><i>●</i>오늘</div><div><i>▦</i>주간</div><div><i>⇄</i>기록</div><div class="on"><i>⚙</i>규칙</div></div>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  시안 2026-11-26 · 박대식 (Claude 보조) · 화면 디자인만 있음, 실제 동작 안 함. 날씨·기록·일정은 예시 데이터.<br>
-  연결 계획: 삼성헬스 → Health Connect로 운동 기록 읽기 · 날씨 → 기상청 단기·중기예보 API · 알림 → 폰 알림 + 캘린더. 근거와 병목은 <code>박대식/ax/top3.md</code> 3번.
-</footer>
-<script>
-// 목표 달성 축하: 폰 화면 안에 꽃가루 + 메달 팝업 (시안용)
-function celebrate(btn, medal, title, sub){
-  const phone = btn.closest('.phone');
-  let cel = phone.querySelector('.cel');
-  if(!cel){
-    cel = document.createElement('div'); cel.className = 'cel';
-    cel.innerHTML = '<div class="badge"><span class="medal"></span><h3></h3><p></p><button class="btn">좋아요</button></div>';
-    cel.querySelector('.btn').onclick = () => { cel.classList.remove('show'); cel.querySelectorAll('.conf').forEach(c=>c.remove()); };
-    phone.appendChild(cel);
+<header><div class="brand"><span class="brand-mark"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+  <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+</svg>
+</span><div><h1>운동 플래너</h1><p>날씨와 컨디션에 맞춰, 무리 없이 꾸준하게.</p></div></div><span class="prototype-badge">인터랙티브 시안 · 예시 데이터</span></header>
+<div class="board-tools"><div class="screen-links" aria-label="화면 바로가기"><button data-screen="0" class="is-active" aria-current="page"><span>01</span>오늘</button><button data-screen="1" class="" ><span>02</span>이번 주</button><button data-screen="2" class="" ><span>03</span>기록 비교</button><button data-screen="3" class="" ><span>04</span>다시 짠 계획</button><button data-screen="4" class="" ><span>05</span>내 규칙</button></div><div class="view-switch" aria-label="보기 방식"><button data-view="gallery" aria-pressed="true">전체 화면</button><button data-view="app" aria-pressed="false">앱처럼 보기</button></div></div>
+<main class="flow" aria-label="운동 계획 앱 5개 화면"><section class="screen active" id="screen-0" aria-label="오늘"><p class="label"><span><b>01</b>오늘</span><span>다음 운동과 컨디션</span></p><div class="phone"><div class="status"><span>18:30</span><span>LTE &nbsp; 82%</span></div><div class="top"><div class="title-line"><h2>오늘</h2><span class="top-action" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+  <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+</svg>
+</span></div><div class="d">12월 9일 수요일 · 주간 계획 3일째</div></div><div class="body" tabindex="0" aria-label="오늘 내용">
+<div class="weather"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="M20 12h2" />
+  <path d="m19.07 4.93-1.41 1.41" />
+  <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+  <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+</svg>
+<div><b>오늘 저녁, 달리기 좋아요</b><p>19~21시 비·눈 없음 · 강수 확률 10%</p></div><span class="temperature">6°</span></div>
+<section class="card session">
+ <h3 class="card-title">다음 운동<span class="chip c-blue">19:00 예정</span></h3>
+ <div class="session-main"><span class="sport-icon run"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+</span><div><h3>야외 러닝</h3><p>오늘의 마지막 운동</p></div></div>
+ <div class="distance">5.0<small>km</small></div>
+ <div class="session-meta"><span><b>30분</b> 예상 시간</span><span><b>6′00″</b> /km</span></div>
+ <div class="insight"><strong>오늘이 뛰기 좋은 날이에요.</strong><br>목·금은 비 예보가 있고, 최근 이틀은 하체 운동을 쉬었어요.</div>
+ <button class="btn" data-action="daily"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+ 러닝 완료하기</button>
+ <button class="text-btn wide" data-action="replan">오늘은 어려워요 · 계획 다시 짜기</button>
+</section>
+<section class="card goals-card"><h3 class="card-title">이번 주 목표<svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</h3><div class="goal-heading"><b id="goal-count">4<small>/ 10회</small></b><p>내 페이스대로, 차근차근</p></div>
+<div class="rings"><div><div class="ring" style="--c:var(--gym);--p:60"><span>3/5</span></div>헬스</div><div><div class="ring" style="--c:var(--run);--p:50"><span>1/2</span></div>러닝</div><div><div class="ring" style="--c:var(--swim);--p:0"><span>0/3</span></div>수영</div></div></section>
+<div class="health-grid"><section class="card"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+<h3>어젯밤 수면</h3><div class="health-value">6<small>시간</small>48<small>분</small></div><p>어젯밤의 수면 기록</p></section><section class="card recovery"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+  <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+</svg>
+<h3>회복 · HRV</h3><div class="health-value recovery-text">평소 수준</div><p>계획대로 운동 가능</p></section></div>
+<section class="card"><h3 class="card-title">오늘 운동 기록<svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</h3><div class="item"><span class="sport-icon gym"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" />
+  <path d="m2.5 21.5 1.4-1.4" />
+  <path d="m20.1 3.9 1.4-1.4" />
+  <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" />
+  <path d="m9.6 14.4 4.8-4.8" />
+</svg>
+</span><div class="item-copy"><h3>헬스 · 상체</h3><p>06:30 · 준비 포함 60분<br>운동 기록 45분까지</p></div><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+완료</span></div><div class="item" id="daily-running"><span class="sport-icon run"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+</span><div class="item-copy"><h3>러닝 5km</h3><p>19:00 · 약 30분</p></div><span class="chip c-plan">예정</span></div></section>
+<details class="details"><summary>오늘 계획의 근거</summary><p>어젯밤 수면 6시간 48분, 회복 상태는 평소 수준이에요. 최근 평균 페이스는 6분/km라 러닝 5km에 약 30분이 필요해요. 운동 알림은 18:30에 받는 예시입니다.</p></details></div><nav class="nav" aria-label="앱 내비게이션"><button data-screen="0" class="on" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+오늘</button><button data-screen="1"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M8 13h.01" />
+  <path d="M12 13h.01" />
+  <path d="M16 13h.01" />
+  <path d="M8 17h.01" />
+  <path d="M12 17h.01" />
+  <path d="M16 17h.01" />
+</svg>
+주간</button><button data-screen="2"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16v5" />
+  <path d="M16 14.639V21" />
+  <path d="M20 10.656V21" />
+  <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+  <path d="M4 18.463V21" />
+  <path d="M8 14.656V21" />
+</svg>
+기록</button><button data-screen="4"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" />
+</svg>
+규칙</button></nav></div></section><section class="screen" id="screen-1" aria-label="이번 주"><p class="label"><span><b>02</b>이번 주</span><span>날씨를 반영한 주간 일정</span></p><div class="phone"><div class="status"><span>21:10</span><span>LTE &nbsp; 64%</span></div><div class="top"><div class="title-line"><h2>이번 주 계획</h2><span class="top-action" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M8 13h.01" />
+  <path d="M12 13h.01" />
+  <path d="M16 13h.01" />
+  <path d="M8 17h.01" />
+  <path d="M12 17h.01" />
+  <path d="M16 17h.01" />
+</svg>
+</span></div><div class="d">12월 7일 — 12월 13일</div></div><div class="body" tabindex="0" aria-label="이번 주 내용"><section class="card week-summary"><div><b>12.07 — 12.13</b><p>헬스 5회 · 하체 2회 · 러닝 2회 · 수영 3회</p></div><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="m9 15 2 2 4-4" />
+</svg>
+</section>
+<div class="legend"><span style="--c:var(--gym)">헬스</span><span style="--c:var(--leg)">하체</span><span style="--c:var(--run)">러닝</span><span style="--c:var(--swim)">수영</span></div>
+<section class="card week-card"><table class="week" aria-label="이번 주 운동 일정"><tbody><tr data-day="0" ><td class="day">월<small>12.07</small><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+</td><td class="sessions"><span class="pill run"><span>19:00 &nbsp;러닝</span><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+</span></td></tr><tr data-day="1" ><td class="day">화<small>12.08</small><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+</td><td class="sessions"><span class="pill gym"><span>19:00 &nbsp;상체</span><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+</span></td></tr><tr data-day="2" class="today" aria-current="date"><td class="day"><strong>수</strong><small>12.09</small><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="M20 12h2" />
+  <path d="m19.07 4.93-1.41 1.41" />
+  <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+  <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+</svg>
+</td><td class="sessions"><span class="pill gym"><span>06:30 &nbsp;상체</span><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+</span><span class="pill run"><span>19:00 &nbsp;러닝</span></span></td></tr><tr data-day="3" ><td class="day">목<small>12.10</small><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+  <path d="M16 14v6" />
+  <path d="M8 14v6" />
+  <path d="M12 16v6" />
+</svg>
+</td><td class="sessions"><span class="pill leg"><span>19:00 &nbsp;하체</span></span></td></tr><tr data-day="4" ><td class="day">금<small>12.11</small><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+  <path d="M16 14v6" />
+  <path d="M8 14v6" />
+  <path d="M12 16v6" />
+</svg>
+</td><td class="sessions"><span class="pill gym"><span>06:30 &nbsp;상체</span></span><span class="pill swim"><span>20:00 &nbsp;수영 강습</span></span></td></tr><tr data-day="5" ><td class="day">토<small>12.12</small><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 2v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="M20 12h2" />
+  <path d="m19.07 4.93-1.41 1.41" />
+  <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+  <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+</svg>
+</td><td class="sessions"><span class="pill swim"><span>10:00 &nbsp;자유수영</span></span><span class="pill leg"><span>17:00 &nbsp;하체</span></span></td></tr><tr data-day="6" ><td class="day">일<small>12.13</small><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+</td><td class="sessions"><span class="pill swim"><span>10:00 &nbsp;자유수영</span></span></td></tr></tbody></table></section>
+<details class="details"><summary>날씨와 운동 규칙을 반영했어요</summary><p>비 오는 목·금엔 실내 운동만 배치했어요. 하체 운동이 있는 목·토요일의 다음 날에는 러닝을 넣지 않았어요. 금요일 20시 수영 강습은 고정 일정이에요.</p></details>
+<section class="card"><h3 class="compact-title">내 규칙에 잘 맞는 계획이에요</h3><div class="checks"><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+헬스 5회</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+하체 2회</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+비·눈 러닝 없음</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+운동 사이 2시간</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+평일 2개 운동 2회</span></div><p class="hint">체크 아이콘은 확인된 운동 기록이에요.</p></section>
+<button class="btn" data-action="weekly"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2" />
+  <path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2" />
+  <path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3" />
+</svg>
+ 주간 목표 달성 미리 보기</button></div><nav class="nav" aria-label="앱 내비게이션"><button data-screen="0"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+오늘</button><button data-screen="1" class="on" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M8 13h.01" />
+  <path d="M12 13h.01" />
+  <path d="M16 13h.01" />
+  <path d="M8 17h.01" />
+  <path d="M12 17h.01" />
+  <path d="M16 17h.01" />
+</svg>
+주간</button><button data-screen="2"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16v5" />
+  <path d="M16 14.639V21" />
+  <path d="M20 10.656V21" />
+  <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+  <path d="M4 18.463V21" />
+  <path d="M8 14.656V21" />
+</svg>
+기록</button><button data-screen="4"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" />
+</svg>
+규칙</button></nav></div></section><section class="screen" id="screen-2" aria-label="기록 비교"><p class="label"><span><b>03</b>기록 비교</span><span>계획과 실제 운동 기록</span></p><div class="phone"><div class="status"><span>21:00</span><span>LTE &nbsp; 51%</span></div><div class="top"><div class="title-line"><h2>운동 기록</h2><span class="top-action" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M8 13h.01" />
+  <path d="M12 13h.01" />
+  <path d="M16 13h.01" />
+  <path d="M8 17h.01" />
+  <path d="M12 17h.01" />
+  <path d="M16 17h.01" />
+</svg>
+</span></div><div class="d">삼성헬스 기록 · 21:00 동기화 예시</div></div><div class="body" tabindex="0" aria-label="기록 비교 내용"><div class="sum"><div><b id="record-done">4</b>완료</div><div><b class="missed" id="record-missed">1</b>못 함</div><div><b class="remaining">5</b>남은 운동</div></div>
+<p class="section-label">이번 주 운동 · 삼성헬스 기록 대조</p><section class="card record-card"><div class="record-row" data-record="0"><span class="sport-icon run"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+</span><div class="record-copy"><h3>월 19:00 · 러닝</h3><p>19:12 · 러닝 5.1km · 31분</p></div><span class="chip c-ok">일치</span></div><div class="record-row" data-record="1"><span class="sport-icon gym"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" />
+  <path d="m2.5 21.5 1.4-1.4" />
+  <path d="m20.1 3.9 1.4-1.4" />
+  <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" />
+  <path d="m9.6 14.4 4.8-4.8" />
+</svg>
+</span><div class="record-copy"><h3>화 19:00 · 상체</h3><p>19:09 · 웨이트 · 48분</p></div><span class="chip c-ok">일치</span></div><div class="record-row" data-record="2"><span class="sport-icon gym"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" />
+  <path d="m2.5 21.5 1.4-1.4" />
+  <path d="m20.1 3.9 1.4-1.4" />
+  <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" />
+  <path d="m9.6 14.4 4.8-4.8" />
+</svg>
+</span><div class="record-copy"><h3>수 06:30 · 상체</h3><p>06:41 · 웨이트 · 42분</p></div><span class="chip c-ok">일치</span></div><div class="record-row" data-record="3"><span class="sport-icon run"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+</span><div class="record-copy"><h3>수 19:00 · 러닝</h3><p>운동 기록이 없어요</p></div><span class="chip c-miss">못 함</span></div><div class="record-row" data-record="4"><span class="sport-icon run"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+</span><div class="record-copy"><h3>계획 밖 · 야간 러닝</h3><p>21:30 · 러닝 3.0km · 19분</p></div><span class="chip c-warn">계획 밖</span></div></section>
+<details class="details"><summary>기록은 이렇게 비교해요</summary><p>계획보다 10~15분 늦게 시작한 기록은 준비 시간으로 보고 일치로 처리해요. 21:30 러닝은 운동 가능 시간인 21시 이후라 계획 밖 운동이에요. 걷기는 비교에서 제외해요.</p></details>
+<section class="question" id="record-question"><h3>계획 밖 러닝을 인정할까요?</h3><p>수요일 19시 러닝 기록이 없어요.<br>21:30 러닝을 이번 주 러닝 목표 2회 중<br>1회로 인정할 수 있어요.</p><button class="btn" data-action="accept">인정하고 계획 유지</button><button class="btn ghost" data-action="replan">러닝 다시 넣기</button></section></div><nav class="nav" aria-label="앱 내비게이션"><button data-screen="0"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+오늘</button><button data-screen="1"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M8 13h.01" />
+  <path d="M12 13h.01" />
+  <path d="M16 13h.01" />
+  <path d="M8 17h.01" />
+  <path d="M12 17h.01" />
+  <path d="M16 17h.01" />
+</svg>
+주간</button><button data-screen="2" class="on" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16v5" />
+  <path d="M16 14.639V21" />
+  <path d="M20 10.656V21" />
+  <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+  <path d="M4 18.463V21" />
+  <path d="M8 14.656V21" />
+</svg>
+기록</button><button data-screen="4"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" />
+</svg>
+규칙</button></nav></div></section><section class="screen" id="screen-3" aria-label="다시 짠 계획"><p class="label"><span><b>04</b>다시 짠 계획</span><span>일정이 바뀌어도 유연하게</span></p><div class="phone"><div class="status"><span>21:02</span><span>LTE &nbsp; 50%</span></div><div class="top"><div class="title-line"><h2>계획 다시 짜기</h2><span class="top-action" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+  <path d="M21 3v5h-5" />
+  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+  <path d="M8 16H3v5" />
+</svg>
+</span></div><div class="d">수요일에 못 한 러닝을 다시 배치해요</div></div><div class="body" tabindex="0" aria-label="다시 짠 계획 내용"><section class="replan-banner"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+  <path d="M21 3v5h-5" />
+  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+  <path d="M8 16H3v5" />
+</svg>
+<div><h3>남은 날만 조정했어요</h3><p>완료한 운동은 그대로 두고,<br>바뀐 일정 2개를 확인해 보세요.</p></div></section>
+<section class="card change-card" id="change-running"><div class="change-title"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+러닝 일정 변경</div><div class="step"><span class="tag">이전</span><s>수 12.09 · 19:00 러닝</s></div><div class="step"><span class="tag">변경</span><div><b>일 12.13 · 14:00 러닝</b><small>맑음 · 8℃ · 러닝 5km</small></div></div><div class="insight">목·금은 비 예보가 있고 토요일은 하체 운동이 있어요. 일요일 낮이 맑고 가장 따뜻해요.</div></section>
+<section class="card change-card" id="change-leg"><div class="change-title"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" />
+  <path d="m2.5 21.5 1.4-1.4" />
+  <path d="m20.1 3.9 1.4-1.4" />
+  <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" />
+  <path d="m9.6 14.4 4.8-4.8" />
+</svg>
+하체 일정 변경</div><div class="step"><span class="tag">이전</span><s>토 12.12 · 17:00 하체</s></div><div class="step"><span class="tag">변경</span><div><b>금 12.11 · 06:30 하체</b><small>토요일 17시는 상체로 변경</small></div></div><div class="insight">하체 다음 날 러닝을 피하도록 금요일 아침으로 옮겼어요. 하체 주 2회는 그대로예요.</div></section>
+<section class="card"><h3 class="compact-title">바뀐 뒤에도 규칙을 지켜요</h3><div class="checks"><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+헬스 5회</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+하체 2회</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+러닝 2회</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+하체 다음 날 러닝 없음</span><span class="chip c-ok"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 6 9 17l-5-5" />
+</svg>
+비·눈 러닝 없음</span></div></section>
+<button class="btn" data-action="confirm">이 계획으로 확정</button><button class="btn ghost" data-action="alternative">다른 안 보기</button><p class="hint">확정 후 캘린더·알림 반영을 보여주는 예시예요.</p></div><nav class="nav" aria-label="앱 내비게이션"><button data-screen="0"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+오늘</button><button data-screen="1" class="on" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M8 13h.01" />
+  <path d="M12 13h.01" />
+  <path d="M16 13h.01" />
+  <path d="M8 17h.01" />
+  <path d="M12 17h.01" />
+  <path d="M16 17h.01" />
+</svg>
+주간</button><button data-screen="2"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16v5" />
+  <path d="M16 14.639V21" />
+  <path d="M20 10.656V21" />
+  <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+  <path d="M4 18.463V21" />
+  <path d="M8 14.656V21" />
+</svg>
+기록</button><button data-screen="4"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" />
+</svg>
+규칙</button></nav></div></section><section class="screen" id="screen-4" aria-label="내 규칙"><p class="label"><span><b>05</b>내 규칙</span><span>나에게 맞는 운동 기준</span></p><div class="phone"><div class="status"><span>09:00</span><span>LTE &nbsp; 99%</span></div><div class="top"><div class="title-line"><h2>내 규칙</h2><span class="top-action" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" />
+</svg>
+</span></div><div class="d">내 생활에 맞게, 무리하지 않도록</div></div><div class="body" tabindex="0" aria-label="내 규칙 내용"><p class="sec">운동 가능 시간</p><section class="card rules-card"><div class="rule"><span class="row-label">평일 아침</span><span class="v ">06:30 ~ 07:30</span></div><div class="rule"><span class="row-label">평일 저녁</span><span class="v ">19:00 ~ 21:00</span></div><div class="rule"><span class="row-label">주말</span><span class="v ">10:00 ~ 20:00</span></div><div class="rule"><span class="row-label">예외 일정</span><span class="v ">추가 가능 · 설정 예시</span></div></section>
+<p class="sec">공통 규칙</p><section class="card rules-card"><div class="rule"><span class="row-label">하루 최대</span><span class="v ">운동 2개</span></div><div class="rule"><span class="row-label">운동 사이</span><span class="v ">2시간 이상</span></div><div class="rule"><span class="row-label">기록 + 준비 시간</span><span class="v ">15분 추가</span></div></section>
+<p class="sec">종목별 규칙</p><section class="card rules-card"><div class="rule"><span class="row-label"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+러닝 · 비·눈</span><span class="v ">실외 러닝 안 함</span></div><div class="rule"><span class="row-label"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+  <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+  <path d="M16 17h4" />
+  <path d="M4 13h4" />
+</svg>
+러닝 · 영하</span><span class="v ">주 1회 우선</span></div><div class="rule"><span class="row-label"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" />
+  <path d="m2.5 21.5 1.4-1.4" />
+  <path d="m20.1 3.9 1.4-1.4" />
+  <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" />
+  <path d="m9.6 14.4 4.8-4.8" />
+</svg>
+헬스</span><span class="v ">주 5회 이상</span></div><div class="rule"><span class="row-label"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" />
+  <path d="m2.5 21.5 1.4-1.4" />
+  <path d="m20.1 3.9 1.4-1.4" />
+  <path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" />
+  <path d="m9.6 14.4 4.8-4.8" />
+</svg>
+하체</span><span class="v ">주 2회<br>다음 날 러닝 안 함</span></div><div class="rule"><span class="row-label"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" />
+  <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" />
+</svg>
+수영 강습</span><span class="v ">금요일 20:00 고정</span></div><div class="rule"><span class="row-label"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" />
+  <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" />
+</svg>
+수영장</span><span class="v ">매시 50분 휴식<br>12:00 ~ 13:00 휴장</span></div></section>
+<p class="sec">연결 서비스 · 시연용 상태</p><section class="card rules-card connected"><div class="rule"><span class="row-label">삼성헬스</span><span class="v "><span class="chip c-ok">연결 예시</span></span></div><div class="rule"><span class="row-label">기상청 날씨</span><span class="v "><span class="chip c-ok">연결 예시</span></span></div><div class="rule"><span class="row-label">캘린더</span><span class="v "><span class="chip c-ok">연결 예시</span></span></div></section><p class="hint">Health Connect, 기상청, 캘린더 연동을 가정한 시안이에요. 실제 연결된 서비스는 없어요.</p></div><nav class="nav" aria-label="앱 내비게이션"><button data-screen="0"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+오늘</button><button data-screen="1"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v3" />
+  <path d="M16 2v3" />
+  <rect x="3" y="3" width="18" height="18" rx="2" />
+  <path d="M3 9h18" />
+  <path d="M8 13h.01" />
+  <path d="M12 13h.01" />
+  <path d="M16 13h.01" />
+  <path d="M8 17h.01" />
+  <path d="M12 17h.01" />
+  <path d="M16 17h.01" />
+</svg>
+주간</button><button data-screen="2"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 16v5" />
+  <path d="M16 14.639V21" />
+  <path d="M20 10.656V21" />
+  <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+  <path d="M4 18.463V21" />
+  <path d="M8 14.656V21" />
+</svg>
+기록</button><button data-screen="4" class="on" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 5H3" />
+  <path d="M12 19H3" />
+  <path d="M14 3v4" />
+  <path d="M16 17v4" />
+  <path d="M21 12h-9" />
+  <path d="M21 19h-5" />
+  <path d="M21 5h-7" />
+  <path d="M8 10v4" />
+  <path d="M8 12H3" />
+</svg>
+규칙</button></nav></div></section></main>
+<footer><p>박대식 · AX 아이디어 03<br>날씨·건강 기록·일정은 모두 예시입니다. 실제 건강 데이터 연동이나 캘린더 변경은 이루어지지 않습니다.</p><p class="foot-reference">디자인 참고: <a href="https://www.samsung.com/sec/apps/samsung-health/" target="_blank" rel="noopener noreferrer">Samsung Health</a><br>수치·규칙 출처: 원본 운동계획앱_시안.html · 2026.11.26</p></footer>
+<script>/* Prototype only. No health, weather or calendar service is connected. */
+(()=>{
+ 'use strict';
+ const screens=[...document.querySelectorAll('.screen')];
+ const flow=document.querySelector('.flow');
+ const motion=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth';
+ let active=0, completed=false, accepted=false, alternative=false, confirmed=false;
+ let lastFocus=null, modal=null;
+ const checkIcon=document.querySelector('.btn[data-action="daily"] svg').outerHTML;
+ const trophyIcon=document.querySelector('[data-action="weekly"] svg').outerHTML;
+ function go(index){
+  closeModal();
+  active=index;
+  screens.forEach((screen,i)=>screen.classList.toggle('active',i===active));
+  document.querySelectorAll('.screen-links [data-screen]').forEach(button=>{
+   const selected=Number(button.dataset.screen)===active;
+   button.classList.toggle('is-active',selected);
+   if(selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
+  });
+  if(!document.body.classList.contains('app-mode')&&!matchMedia('(max-width:600px)').matches){flow.scrollTo({left:screens[index].offsetLeft-flow.offsetLeft-36,behavior:motion()});}
+  const heading=screens[index].querySelector('h2');heading.tabIndex=-1;heading.focus({preventScroll:true});
+ }
+ function toast(phone,text){
+  phone.querySelector('.toast')?.remove();
+  const element=document.createElement('div');element.className='toast';element.role='status';element.textContent=text;phone.append(element);
+  setTimeout(()=>element.remove(),4000);
+ }
+ function closeModal(){
+  if(!modal)return;
+  const parent=modal.closest('.phone');parent.querySelectorAll('.conf').forEach(el=>el.remove());
+  modal.remove();modal=null;
+  [...parent.children].forEach(child=>{child.inert=false;});
+  const focusTarget=lastFocus?.disabled?parent.querySelector('.nav button.on'):lastFocus;
+  focusTarget?.focus({preventScroll:true});
+ }
+ function celebrate(button,title,description){
+  closeModal();
+  const phone=button.closest('.phone');lastFocus=button;
+  const dialog=document.createElement('div');dialog.className='cel';dialog.role='dialog';dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label',title);
+  dialog.innerHTML='<div class="badge"><div class="medal">'+trophyIcon+'</div><h3></h3><p></p><button class="btn" data-action="close">좋아요</button></div>';
+  dialog.querySelector('h3').textContent=title;
+  description.split('\n').forEach((line,i)=>{if(i)dialog.querySelector('p').append(document.createElement('br'));dialog.querySelector('p').append(document.createTextNode(line));});
+  [...phone.children].forEach(child=>{child.inert=true;});phone.append(dialog);modal=dialog;
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+   const colors=['#89b86b','#e6b56e','#719fc2','#ae9bc7','#d9a1af'];
+   for(let i=0;i<38;i++){
+    const conf=document.createElement('i');conf.className='conf';conf.style.left=Math.random()*100+'%';conf.style.background=colors[i%colors.length];
+    conf.style.setProperty('--dx',(Math.random()*130-65)+'px');conf.style.setProperty('--r',(Math.random()*600-300)+'deg');conf.style.animationDuration=(1.5+Math.random()*1.5)+'s';conf.style.animationDelay=Math.random()*.3+'s';dialog.append(conf);
+   }
   }
-  cel.querySelector('.medal').textContent = medal;
-  cel.querySelector('h3').textContent = title;
-  cel.querySelector('p').innerHTML = sub;
-  cel.classList.remove('show'); void cel.offsetWidth; cel.classList.add('show');
-  const colors = ['#1fa463','#f2793d','#2f9ae0','#7b61d9','#d9468a','#f5c518'];
-  for(let i=0;i<70;i++){
-    const c = document.createElement('i'); c.className = 'conf';
-    c.style.left = Math.random()*100 + '%';
-    c.style.background = colors[i % colors.length];
-    c.style.setProperty('--dx', (Math.random()*120-60) + 'px');
-    c.style.setProperty('--r', (Math.random()*720-360) + 'deg');
-    c.style.animationDuration = (1.6 + Math.random()*1.4) + 's';
-    c.style.animationDelay = (Math.random()*0.4) + 's';
-    cel.appendChild(c);
+  dialog.querySelector('button').focus();
+ }
+ function updateWeek(){
+  const rows=document.querySelectorAll('.week tr');
+  rows[2].querySelector('.sessions .pill.run')?.remove();
+  const running=rows[0].querySelector('.pill.run').cloneNode(true);running.querySelector('svg')?.remove();running.firstElementChild.textContent='14:00  러닝';
+  if(alternative){
+   rows[5].querySelector('.pill.leg')?.remove();rows[5].querySelector('.sessions').append(running);
+   const leg=document.createElement('span');leg.className='pill leg';leg.innerHTML='<span>17:00  하체</span>';rows[6].querySelector('.sessions').append(leg);
+  }else{
+   const fri=rows[4].querySelector('.pill.gym');fri.className='pill leg';fri.firstElementChild.textContent='06:30  하체';
+   const sat=rows[5].querySelector('.pill.leg');sat.className='pill gym';sat.firstElementChild.textContent='17:00  상체';rows[6].querySelector('.sessions').append(running);
   }
-}
-// 오늘 목표: 러닝 링 1/2 → 2/2로 채운 뒤 축하
-function dailyDone(btn){
-  const phone = btn.closest('.phone');
-  const ring = phone.querySelectorAll('.ring')[1];
-  ring.style.setProperty('--p', 100); ring.querySelector('span').textContent = '2/2';
-  ring.classList.remove('burst'); void ring.offsetWidth; ring.classList.add('burst');
-  phone.querySelectorAll('.chip.c-plan').forEach(c => { c.className = 'chip c-ok'; c.textContent = '완료'; });
-  setTimeout(() => celebrate(btn, '🎉', '오늘 목표 달성!', '상체 + 러닝 5km 모두 끝<br>이번 주 러닝 목표도 채웠어요'), 450);
-}
-</script>
-</body>
-</html>
+  const rationale=screens[1].querySelector('.details p');rationale.textContent=alternative?'러닝은 토요일 14시, 하체는 일요일 17시로 옮겼어요. 목요일 하체 이후 금요일에는 상체만 진행하고, 토·일은 하루 운동 2개를 유지해요.':'러닝은 일요일 14시로, 토요일 하체는 금요일 아침으로 옮겼어요. 금요일 오전은 하체, 토요일 17시는 상체로 바뀌었어요. 금요일 수영 강습은 그대로예요.';
+ }
+ document.addEventListener('click',event=>{
+  const button=event.target.closest('button');if(!button)return;
+  if(button.dataset.screen!==undefined){go(Number(button.dataset.screen));return;}
+  if(button.dataset.view){
+   closeModal();
+   document.body.classList.toggle('app-mode',button.dataset.view==='app');
+   document.querySelectorAll('[data-view]').forEach(el=>el.setAttribute('aria-pressed',el===button?'true':'false'));
+   if(button.dataset.view==='gallery')requestAnimationFrame(()=>go(active));
+   return;
+  }
+  const phone=button.closest('.phone');
+  switch(button.dataset.action){
+   case 'daily':{
+    if(completed)return;completed=true;
+    const ring=screens[0].querySelectorAll('.ring')[1];ring.style.setProperty('--p',100);ring.querySelector('span').textContent='2/2';ring.classList.add('burst');
+    document.querySelector('#goal-count').innerHTML='5<small>/ 10회</small>';
+    const chip=document.querySelector('#daily-running .chip');chip.className='chip c-ok';chip.innerHTML=checkIcon+'완료';
+    screens[0].querySelector('.session .chip').textContent='완료';screens[0].querySelector('.session .chip').className='chip c-ok';
+    button.innerHTML=checkIcon+' 러닝 완료';button.disabled=true;
+    screens[0].querySelector('[data-action="replan"]').hidden=true;
+    celebrate(button,'오늘 목표 달성!','상체 + 러닝 5km 모두 끝냈어요.\n이번 주 러닝 목표도 채웠어요.');
+    break;
+   }
+   case 'weekly':celebrate(button,'이번 주 목표 달성!','헬스 5 · 하체 2 · 러닝 2 · 수영 3\n연속 3주째 달성한 모습의 예시예요.');break;
+   case 'close':closeModal();break;
+   case 'replan':go(3);break;
+   case 'accept':{
+    if(accepted)return;accepted=true;
+    document.querySelector('#record-done').textContent='5';document.querySelector('#record-missed').textContent='0';
+    const missed=document.querySelector('[data-record="3"] .chip');missed.className='chip c-ok';missed.textContent='대체 인정';
+    const extra=document.querySelector('[data-record="4"] .chip');extra.className='chip c-ok';extra.textContent='목표 반영';
+    document.querySelector('#record-question').innerHTML='<h3>러닝 기록을 인정했어요</h3><p>21:30 러닝을 이번 주 러닝 1회로 반영했어요.<br>기존 계획을 유지합니다. · 시연 결과</p>';
+    toast(phone,'계획 밖 러닝을 인정했어요 · 예시');break;
+   }
+   case 'alternative':{
+    if(confirmed)return;alternative=!alternative;
+    const run=document.querySelector('#change-running');run.querySelector('.step b').textContent=alternative?'토 12.12 · 14:00 러닝':'일 12.13 · 14:00 러닝';
+    run.querySelector('.step small').textContent=alternative?'흐림 · 러닝 5km':'맑음 · 8℃ · 러닝 5km';
+    run.querySelector('.insight').textContent=alternative?'금요일 상체는 그대로 유지하고, 토요일 수영 뒤 충분히 쉬고 러닝해요.':'목·금은 비 예보가 있고 토요일은 하체 운동이 있어요. 일요일 낮이 맑고 가장 따뜻해요.';
+    const leg=document.querySelector('#change-leg');leg.querySelector('.step b').textContent=alternative?'일 12.13 · 17:00 하체':'금 12.11 · 06:30 하체';leg.querySelector('.step small').textContent=alternative?'금요일 06:30 상체는 그대로 유지':'토요일 17시는 상체로 변경';leg.querySelector('.insight').textContent=alternative?'토요일 하체를 일요일로 옮겨, 하체 다음 날 러닝을 피했어요. 토·일요일 운동은 하루 2개예요.':'하체 다음 날 러닝을 피하도록 금요일 아침으로 옮겼어요. 하체 주 2회는 그대로예요.';
+    button.textContent=alternative?'처음 제안으로 돌아가기':'다른 안 보기';toast(phone,alternative?'다른 안: 토요일 러닝 · 일요일 하체':'처음 제안: 일요일 러닝 · 금요일 하체');break;
+   }
+   case 'confirm':{
+    if(confirmed)return;confirmed=true;updateWeek();button.disabled=true;button.innerHTML=checkIcon+' 계획 확정 완료';
+    screens[3].querySelector('[data-action="alternative"]').hidden=true;
+    const banner=screens[3].querySelector('.replan-banner');banner.querySelector('h3').textContent='새 계획을 확정했어요';banner.querySelector('p').textContent='주간 화면에서 바뀐 일정을 확인하세요. 실제 캘린더·알림 연동은 예시예요.';
+    const open=document.createElement('button');open.className='btn ghost';open.dataset.screen='1';open.textContent='이번 주 계획 확인';button.after(open);toast(phone,'주간 화면에 새 계획을 반영했어요 · 예시');break;
+   }
+  }
+ });
+ document.addEventListener('keydown',event=>{if(!modal)return;if(event.key==='Escape'){event.preventDefault();closeModal();}else if(event.key==='Tab'){event.preventDefault();modal.querySelector('button').focus();}});
+ // Gallery panels illustrate independent example states, as in the original mockup.
+})();
+</script></body></html>
