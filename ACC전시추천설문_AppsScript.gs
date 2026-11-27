@@ -14,14 +14,14 @@
 // ───────────── 1. 전시 데이터 (2026-11-24 기준, 1-5번 표) ─────────────
 var EXHIBITIONS = {
   '인상파, 찬란한 순간들': { short: '인상파', building: '문화창조원', minutes: 60, paid: true,
-    start: '2026-09-23', end: '2027-02-21', reviews: 232, tags: { '명화·그림': 2, '체험': 1, '미디어·사운드': 1 },
+    start: '2026-09-23', end: '2027-02-21', reviews: 232, tags: { '명화·그림': 2, '체험': 1, '미디어·사운드': 1, '포토존·인증': 2 },
     fee: '유료: 성인 13,000원 · 청소년·어린이 10,000원 (할인은 예매처 확인)',
     hours: 'both', entry: 'minus60' },
   '길 위의 노마드': { short: '노마드', building: '아시아문화박물관', minutes: 60, paid: false,
-    start: '2025-11-25', end: '2027-11-24', reviews: 121, tags: { '체험': 2, '미디어·사운드': 1, '역사·문화': 2 },
+    start: '2025-11-25', end: '2027-11-24', reviews: 121, tags: { '체험': 2, '미디어·사운드': 1, '역사·문화': 2, '포토존·인증': 2 },
     fee: '무료', hours: 'both', entry: null },
   '식객: 맛의 뒤편': { short: '식객', building: '어린이문화원', minutes: 45, paid: true,
-    start: '2026-09-17', end: '2026-12-13', reviews: 89, tags: { '체험': 1, '미디어·사운드': 1 },
+    start: '2026-09-17', end: '2026-12-13', reviews: 89, tags: { '체험': 1, '미디어·사운드': 1, '포토존·인증': 1 },
     fee: '유료: 일반 10,000원 · 만 6세 이하 무료 (광주·전남 8,000원, 문화패스·문화누리·경로 5,000원, 중복 할인 없음)',
     hours: 'day', entry: '17:30' },
   '몬순으로 열린 세계': { short: '몬순', building: '아시아문화박물관', minutes: 45, paid: false,
@@ -75,8 +75,8 @@ var VISITOR_ADJ = { '쉬움·입문': 1, '명화·원화': 0.5, '붐빔': -1, '�
 var TASTE_KEYS = ['명화·원화', '현대미술·기술', '몰입·미디어아트', '해설·도슨트', '읽을거리·설명', '역사·문명 교류', '굿즈·쇼핑'];
 var INTRO_ADD = { '재미·신기': 1, '체험형': 1, '쉬움·입문': 1, '어려움·난해': -2 }; // 입문 모드 (1-4)
 
-var TOPICS = ['명화·그림', '체험', '미디어·사운드', '역사·문화'];
-var SHRINK = 30, TAG_REP = 50, TAG_SUB = 20, NEW_BONUS = 20, END_BONUS = 20, WINDOW_DAYS = 28, MOVE_MIN = 10;
+var TOPICS = ['명화·그림', '체험', '미디어·사운드', '역사·문화', '포토존·인증']; // 포토존·인증 2026-11-26 추가
+var SHRINK = 30, TAG_REP = 50, TAG_SUB = 20, NEW_BONUS = 20, END_BONUS = 20, PAID_BONUS = 10, WINDOW_DAYS = 28, MOVE_MIN = 10;
 
 // ───────────── 2. 추천 계산 ─────────────
 function ratio_(name, key) { return (RATIO[key] ? RATIO[key][EX_ORDER.indexOf(name)] : 0) / 100; }
@@ -91,7 +91,7 @@ function companionMatch_(comp, name) {
 }
 
 /**
- * @param a {companion, minutes(60|120), topics[], paidOk(bool), newPref(bool), date(Date)}
+ * @param a {companion, minutes(60|120), topics[], paidOk(bool), date(Date)}
  * @return {route[], totalMin, scores{}, reasons{}, intro}
  */
 function recommend(a) {
@@ -99,7 +99,7 @@ function recommend(a) {
   var topics = a.topics || [];
   var intro = topics.length === 0;
   var paidOk = intro ? false : a.paidOk;
-  var newPref = intro ? true : a.newPref;
+  // 새 전시 질문은 2026-11-26 삭제 → 새 전시면 항상 가점
 
   // 필터 (1-3의 5·6번)
   var cands = EX_ORDER.filter(function (n) {
@@ -151,7 +151,8 @@ function recommend(a) {
         Math.round(ratio_(n, '재미·신기') * 100) + '% · 어려움 ' + Math.round(ratio_(n, '어려움·난해') * 100) + '%)');
     var isNew = diffDays_(today, day_(x.start)) < WINDOW_DAYS;
     var ending = diffDays_(day_(x.end), today) < WINDOW_DAYS;
-    if (isNew && newPref) { s += NEW_BONUS; m += 1; why.push('새 전시 (' + md_(x.start) + ' 시작)'); flag[n] = 1; }
+    if (x.paid && paidOk) s += PAID_BONUS;   // 유료 괜찮음이면 유료 전시 +10 (2026-11-26, 일치 수에는 안 셈)
+    if (isNew) { s += NEW_BONUS; m += 1; why.push('새 전시 (' + md_(x.start) + ' 시작)'); flag[n] = 1; }
     else if (ending) { s += END_BONUS; m += 1; why.push(md_(x.end) + ' 종료, 놓치기 전에'); flag[n] = 1; }
     score[n] = s; match[n] = m; reasons[n] = why;
   });
@@ -236,7 +237,7 @@ function hoursText_(name, d) {
 
 // ───────────── 3. 웹앱 (설문 화면·응답 저장) ─────────────
 var TZ = 'Asia/Seoul';
-var SHEET_HEADERS = ['타임스탬프', '성별', '동행', '관람 시간', '관심 주제', '유료 전시', '새 전시 선호',
+var SHEET_HEADERS = ['타임스탬프', '성별', '동행', '관람 시간', '관심 주제', '유료 전시', '새 전시 선호',   // 새 전시 질문 삭제(2026-11-26) 뒤에는 '질문 없음'으로 저장 (열 순서 유지)
   '기준일', '추천 동선', '총 시간(분)', '추천 이유', '요금', '운영시간·입장 마감', '전시별 점수',
   '추천 전시 맘에 듦', 'ACC 방문 의향', '기타 의견',
   '방문 여부', '응답 시간(초)', '유입 경로'];   // 2026-11-27 추가 (뒤에 붙여 기존 열 순서 유지)
@@ -274,7 +275,6 @@ function toInput_(a) {
     minutes: +a.minutes === 120 ? 120 : 60,
     topics: topics,
     paidOk: a.paid !== '무료만',
-    newPref: a.newPref !== '아니오',
     date: todaySeoul_()
   };
 }
@@ -315,7 +315,7 @@ function submitResponse(a) {
   try {
     if (rid && cache.get('rid_' + rid)) return true;   // 이미 저장된 응답
     sh.appendRow([new Date(), a.gender, inp.companion, inp.minutes + '분', inp.topics.join(', '),
-      a.paid === '무료만' ? '무료만' : '괜찮음', a.newPref === '아니오' ? '아니오' : '예']
+      a.paid === '무료만' ? '무료만' : '괜찮음', '질문 없음']
       .concat(out, [a.like, a.visit, safeText_(a.comment), a.visited, sec, src]));
     if (rid) cache.put('rid_' + rid, '1', 21600);
   } finally { lock.releaseLock(); }

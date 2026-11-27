@@ -90,11 +90,9 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <fieldset><legend>4. 관람 시간은요?</legend>
     <div class="opts"><label><input type="radio" name="minutes" value="60">60분</label><label><input type="radio" name="minutes" value="120">120분</label></div></fieldset>
   <fieldset><legend>5. 관심 주제 <small>(최대 2개, 안 골라도 돼요)</small></legend>
-    <div class="opts"><label><input type="checkbox" name="topics" value="명화·그림">명화·그림</label><label><input type="checkbox" name="topics" value="체험">체험</label><label><input type="checkbox" name="topics" value="미디어·사운드">미디어·사운드</label><label><input type="checkbox" name="topics" value="역사·문화">역사·문화</label></div></fieldset>
+    <div class="opts"><label><input type="checkbox" name="topics" value="명화·그림">명화·그림</label><label><input type="checkbox" name="topics" value="체험">체험</label><label><input type="checkbox" name="topics" value="미디어·사운드">미디어·사운드</label><label><input type="checkbox" name="topics" value="역사·문화">역사·문화</label><label><input type="checkbox" name="topics" value="포토존·인증">포토존·인증</label></div></fieldset>
   <fieldset><legend>6. 유료 전시도 괜찮아요? <small>(관심 주제를 안 고르면 무료 전시로 추천해요)</small></legend>
     <div class="opts"><label><input type="radio" name="paid" value="괜찮음">괜찮음</label><label><input type="radio" name="paid" value="무료만">무료만</label></div></fieldset>
-  <fieldset><legend>7. 새 전시를 좋아해요? <small>(안 고르면 "예")</small></legend>
-    <div class="opts"><label><input type="radio" name="newPref" value="예">예</label><label><input type="radio" name="newPref" value="아니오">아니오</label></div></fieldset>
   <button type="submit" class="btn" id="showBtn">결과보기</button>
   <p class="msg" id="msg1" role="alert"></p>
 </form>
@@ -216,7 +214,7 @@ survey.addEventListener("submit",function(e){
   e.preventDefault();
   var a={visited:pick(survey,"visited"),gender:pick(survey,"gender"),companion:pick(survey,"companion"),minutes:pick(survey,"minutes"),
     topics:[].map.call(survey.querySelectorAll('input[name="topics"]:checked'),function(x){return x.value}),
-    paid:pick(survey,"paid"),newPref:pick(survey,"newPref")||"예"};
+    paid:pick(survey,"paid")};
   var miss=[];if(!a.visited)miss.push("1번");if(!a.gender)miss.push("2번");if(!a.companion)miss.push("3번");if(!a.minutes)miss.push("4번");if(!a.paid)miss.push("6번");
   if(miss.length){$("msg1").textContent=miss.join(", ")+" 질문에 답해 주세요";return}
   $("msg1").textContent="";$("showBtn").disabled=true;$("showBtn").textContent="추천 계산 중…";
