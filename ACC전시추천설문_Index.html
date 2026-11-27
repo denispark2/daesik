@@ -61,6 +61,10 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 .note{font-size:13px;color:var(--muted);text-align:center;max-width:380px;margin:0}
 .done{text-align:center;padding:24px 8px}
 .done p{margin:6px 0}
+.opts.col label{flex:1 1 100%}
+.notice{font-size:14px;background:var(--accbg);border-radius:12px;padding:10px 12px;margin:0 0 16px}
+.notice p{margin:0 0 8px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 </style>
 </head>
 <body>
@@ -69,18 +73,27 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 <p class="sub">질문에 답하고 추천 전시를 확인해 주세요</p>
 <div class="phone">
 
+<p class="notice hidden" id="already">이미 응답했어요. 추천 결과는 다시 볼 수 있지만, 제출은 한 번만 돼요.</p>
+<div class="notice hidden" id="pending">
+  <p>지난번에 보내지 못한 응답이 있어요.</p>
+  <button type="button" class="btn" id="pendingBtn">지난 응답 보내기</button>
+  <p class="msg" id="msg0" role="alert"></p>
+</div>
+
 <form id="survey" novalidate>
-  <fieldset><legend>1. 성별</legend>
+  <fieldset><legend>1. ACC에 와 봤나요?</legend>
+    <div class="opts col"><label><input type="radio" name="visited" value="지금 ACC에 있어요">지금 ACC에 있어요</label><label><input type="radio" name="visited" value="전에 와 봤어요">전에 와 봤어요</label><label><input type="radio" name="visited" value="아직 안 왔지만 올 예정이에요">아직 안 왔지만 올 예정이에요</label><label><input type="radio" name="visited" value="올 계획은 없어요">올 계획은 없어요</label></div></fieldset>
+  <fieldset><legend>2. 성별</legend>
     <div class="opts"><label><input type="radio" name="gender" value="남">남</label><label><input type="radio" name="gender" value="여">여</label></div></fieldset>
-  <fieldset><legend>2. 누구와 왔어요?</legend>
+  <fieldset><legend>3. 누구와 왔어요? <small>(올 예정이면 같이 올 사람)</small></legend>
     <div class="opts"><label><input type="radio" name="companion" value="가족">가족</label><label><input type="radio" name="companion" value="커플·친구">커플·친구</label><label><input type="radio" name="companion" value="혼자">혼자</label></div></fieldset>
-  <fieldset><legend>3. 관람 시간은요?</legend>
+  <fieldset><legend>4. 관람 시간은요?</legend>
     <div class="opts"><label><input type="radio" name="minutes" value="60">60분</label><label><input type="radio" name="minutes" value="120">120분</label></div></fieldset>
-  <fieldset><legend>4. 관심 주제 <small>(최대 2개, 안 골라도 돼요)</small></legend>
+  <fieldset><legend>5. 관심 주제 <small>(최대 2개, 안 골라도 돼요)</small></legend>
     <div class="opts"><label><input type="checkbox" name="topics" value="명화·그림">명화·그림</label><label><input type="checkbox" name="topics" value="체험">체험</label><label><input type="checkbox" name="topics" value="미디어·사운드">미디어·사운드</label><label><input type="checkbox" name="topics" value="역사·문화">역사·문화</label></div></fieldset>
-  <fieldset><legend>5. 유료 전시도 괜찮아요? <small>(관심 주제를 안 고르면 무료 전시로 추천해요)</small></legend>
+  <fieldset><legend>6. 유료 전시도 괜찮아요? <small>(관심 주제를 안 고르면 무료 전시로 추천해요)</small></legend>
     <div class="opts"><label><input type="radio" name="paid" value="괜찮음">괜찮음</label><label><input type="radio" name="paid" value="무료만">무료만</label></div></fieldset>
-  <fieldset><legend>6. 새 전시를 좋아해요? <small>(안 고르면 "예")</small></legend>
+  <fieldset><legend>7. 새 전시를 좋아해요? <small>(안 고르면 "예")</small></legend>
     <div class="opts"><label><input type="radio" name="newPref" value="예">예</label><label><input type="radio" name="newPref" value="아니오">아니오</label></div></fieldset>
   <button type="submit" class="btn" id="showBtn">결과보기</button>
   <p class="msg" id="msg1" role="alert"></p>
@@ -94,12 +107,13 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
   <div id="list"></div>
 
   <form id="feedback" novalidate>
-    <fieldset><legend>추천 전시가 맘에 드나요?</legend>
+    <fieldset><legend id="likeQ">추천 전시가 맘에 드나요?</legend>
       <div class="opts"><label><input type="radio" name="like" value="예">예</label><label><input type="radio" name="like" value="아니요">아니요</label></div></fieldset>
     <fieldset><legend>이 전시를 보러 ACC에 방문할 의향이 있나요?</legend>
       <div class="opts"><label><input type="radio" name="visit" value="예">예</label><label><input type="radio" name="visit" value="아니요">아니요</label></div></fieldset>
     <fieldset><legend>그 외 기타 의견 <small>(선택)</small></legend>
-      <textarea name="comment" maxlength="2000" aria-label="기타 의견"></textarea></fieldset>
+      <textarea name="comment" maxlength="2000" aria-label="기타 의견" placeholder="이름·연락처 같은 개인 정보는 적지 말아 주세요"></textarea></fieldset>
+    <div class="hp" aria-hidden="true"><label>홈페이지 <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
     <button type="submit" class="btn" id="sendBtn">제출</button>
     <button type="button" class="btn ghost" id="backBtn">답 다시 고르기</button>
     <p class="msg" id="msg2" role="alert"></p>
@@ -163,6 +177,35 @@ var survey=$("survey"),fb=$("feedback"),answers=null;
 function pick(form,name){var x=form.querySelector('input[name="'+name+'"]:checked');return x?x.value:""}
 function setLocked(form,on){form.querySelectorAll("input,textarea").forEach(function(i){i.disabled=on})}
 
+// ── 2026-11-27: 응답 시간 · 유입 경로 · 중복 · 다시 보내기 ──
+var T0=Date.now(),SRC="";
+var K_DONE="accSurveyDone",K_PEND="accSurveyPending";
+function store(k,v){try{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}}
+function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function newRid(){var s="";for(var i=0;i<16;i++)s+="abcdefghijklmnopqrstuvwxyz0123456789"[Math.floor(Math.random()*36)];return s}
+// 링크 끝 ?src=acc 처럼 붙인 값 (웹앱 화면은 iframe 안이라 google.script.url로 읽음)
+try{google.script.url.getLocation(function(loc){SRC=(loc&&loc.parameter&&loc.parameter.src)||""})}catch(e){}
+var already=!!load(K_DONE);
+if(already)$("already").classList.remove("hidden");
+// 저장 실패 시 1초, 3초 뒤 자동으로 다시 보냄 (총 3번). 같은 응답 번호라 서버는 한 번만 저장
+function send(a,ok,fail,tries){
+  tries=tries||0;
+  google.script.run.withSuccessHandler(ok).withFailureHandler(function(err){
+    if(tries<2)setTimeout(function(){send(a,ok,fail,tries+1)},tries?3000:1000);else fail(err);
+  }).submitResponse(a);
+}
+function sent(){store(K_PEND,null);store(K_DONE,String(Date.now()));already=true}
+var pend=load(K_PEND);
+if(pend&&!already){$("pending").classList.remove("hidden");
+  $("pendingBtn").addEventListener("click",function(){
+    var b=this;b.disabled=true;b.textContent="보내는 중…";$("msg0").textContent="";
+    var a;try{a=JSON.parse(load(K_PEND))}catch(e){a=null}
+    if(!a){store(K_PEND,null);$("pending").classList.add("hidden");return}
+    send(a,function(){sent();$("pending").innerHTML="<p><b>지난 응답을 보냈어요. 고마워요!</b></p>";$("already").classList.remove("hidden")},
+      function(err){b.disabled=false;b.textContent="지난 응답 보내기";$("msg0").textContent="아직 보내지 못했어요: "+err.message});
+  });
+}
+
 // 관심 주제 최대 2개
 survey.querySelectorAll('input[name="topics"]').forEach(function(cb){cb.addEventListener("change",function(){
   var on=survey.querySelectorAll('input[name="topics"]:checked');
@@ -171,10 +214,10 @@ survey.querySelectorAll('input[name="topics"]').forEach(function(cb){cb.addEvent
 
 survey.addEventListener("submit",function(e){
   e.preventDefault();
-  var a={gender:pick(survey,"gender"),companion:pick(survey,"companion"),minutes:pick(survey,"minutes"),
+  var a={visited:pick(survey,"visited"),gender:pick(survey,"gender"),companion:pick(survey,"companion"),minutes:pick(survey,"minutes"),
     topics:[].map.call(survey.querySelectorAll('input[name="topics"]:checked'),function(x){return x.value}),
     paid:pick(survey,"paid"),newPref:pick(survey,"newPref")||"예"};
-  var miss=[];if(!a.gender)miss.push("1번");if(!a.companion)miss.push("2번");if(!a.minutes)miss.push("3번");if(!a.paid)miss.push("5번");
+  var miss=[];if(!a.visited)miss.push("1번");if(!a.gender)miss.push("2번");if(!a.companion)miss.push("3번");if(!a.minutes)miss.push("4번");if(!a.paid)miss.push("6번");
   if(miss.length){$("msg1").textContent=miss.join(", ")+" 질문에 답해 주세요";return}
   $("msg1").textContent="";$("showBtn").disabled=true;$("showBtn").textContent="추천 계산 중…";
   google.script.run.withSuccessHandler(function(res){answers=a;showResult(res)})
@@ -193,6 +236,11 @@ function showResult(res){
     $("list").innerHTML=res.route.map(function(n,i){var d=D[n];if(!d)return"";
       return '<p class="why"><b>'+(i+1)+".</b> "+esc(res.reasons[i]||"")+"</p>"+card(d,day,w)}).join("");
   }
+  // 아직 안 와 본 사람에게는 "끌리나요?"로 물음 (같은 열에 저장, 방문 여부 열로 나눠 봄)
+  var seen=answers&&(answers.visited==="지금 ACC에 있어요"||answers.visited==="전에 와 봤어요");
+  $("likeQ").textContent=seen?"추천 전시가 맘에 드나요?":"이 추천이 끌리나요?";
+  // 이미 응답했으면 결과만 보여 주고 제출은 막음
+  fb.classList.toggle("hidden",already);
   $("result").classList.remove("hidden");
   $("result").scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -215,13 +263,18 @@ fb.addEventListener("submit",function(e){
   e.preventDefault();
   var like=pick(fb,"like"),visit=pick(fb,"visit");
   if(!like||!visit){$("msg2").textContent="예/아니요 질문 2개에 답해 주세요";return}
-  var a=Object.assign({},answers,{like:like,visit:visit,comment:fb.comment.value.trim()});
+  if(already){fb.classList.add("hidden");return}
+  // 응답 번호는 한 번 정하면 다시 보내기에도 그대로 씀
+  if(!fb.dataset.rid)fb.dataset.rid=newRid();
+  var a=Object.assign({},answers,{like:like,visit:visit,comment:fb.comment.value.trim(),
+    rid:fb.dataset.rid,seconds:Math.round((Date.now()-T0)/1000),src:SRC,hp:fb.website.value});
+  store(K_PEND,JSON.stringify(a));
   $("msg2").textContent="";$("sendBtn").disabled=true;$("sendBtn").textContent="보내는 중…";$("backBtn").disabled=true;
-  google.script.run.withSuccessHandler(function(){
-      setLocked(fb,true);$("sendBtn").classList.add("hidden");$("backBtn").classList.add("hidden");
+  send(a,function(){
+      sent();setLocked(fb,true);$("sendBtn").classList.add("hidden");$("backBtn").classList.add("hidden");
       $("done").classList.remove("hidden");$("done").scrollIntoView({behavior:"smooth"});
-    }).withFailureHandler(function(err){$("msg2").textContent="저장하지 못했어요: "+err.message;$("sendBtn").disabled=false;$("sendBtn").textContent="제출";$("backBtn").disabled=false})
-    .submitResponse(a);
+    },function(err){$("msg2").textContent="저장하지 못했어요 ("+err.message+"). 답은 이 폰에 남겨 뒀어요. 잠시 뒤 '다시 보내기'를 눌러 주세요.";
+      $("sendBtn").disabled=false;$("sendBtn").textContent="다시 보내기";$("backBtn").disabled=false});
 });
 </script>
 </body>

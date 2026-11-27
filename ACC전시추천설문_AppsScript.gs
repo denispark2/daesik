@@ -238,7 +238,9 @@ function hoursText_(name, d) {
 var TZ = 'Asia/Seoul';
 var SHEET_HEADERS = ['타임스탬프', '성별', '동행', '관람 시간', '관심 주제', '유료 전시', '새 전시 선호',
   '기준일', '추천 동선', '총 시간(분)', '추천 이유', '요금', '운영시간·입장 마감', '전시별 점수',
-  '추천 전시 맘에 듦', 'ACC 방문 의향', '기타 의견'];
+  '추천 전시 맘에 듦', 'ACC 방문 의향', '기타 의견',
+  '방문 여부', '응답 시간(초)', '유입 경로'];   // 2026-11-27 추가 (뒤에 붙여 기존 열 순서 유지)
+var VISITED = ['지금 ACC에 있어요', '전에 와 봤어요', '아직 안 왔지만 올 예정이에요', '올 계획은 없어요'];
 
 function doGet() {
   return HtmlService.createHtmlOutputFromFile('Index')
@@ -291,20 +293,39 @@ function getRecommendation(a) {
 }
 
 // 제출: 서버에서 추천을 다시 계산해 한 줄로 저장
+// 2026-11-27 추가
+//  - 숨은 칸(hp)에 값이 있으면 봇으로 보고 저장하지 않음 (봇에게는 성공처럼 보임)
+//  - 응답 번호(rid)를 6시간 기억해, 화면이 다시 보내도 같은 응답은 한 번만 저장
+//  - 차례 기다리는 시간 10초 → 30초
 function submitResponse(a) {
+  if (a.hp) return true;
   if (['남', '여'].indexOf(a.gender) < 0) throw new Error('성별을 골라 주세요');
+  if (VISITED.indexOf(a.visited) < 0) throw new Error('ACC에 와 봤는지 골라 주세요');
   if (['예', '아니요'].indexOf(a.like) < 0 || ['예', '아니요'].indexOf(a.visit) < 0) throw new Error('추가 질문에 답해 주세요');
   var inp = toInput_(a), res = recommend(inp), d = inp.date;
   var out = resultCells_(res, d);
+  var rid = /^[a-z0-9]{8,40}$/.test(a.rid || '') ? a.rid : '';
+  var sec = Math.round(+a.seconds);
+  sec = isFinite(sec) && sec >= 0 ? Math.min(sec, 86400) : '';
+  var src = /^[A-Za-z0-9_-]{1,30}$/.test(a.src || '') ? a.src.toLowerCase() : (a.src ? '기타' : '직접');
+  var cache = CacheService.getScriptCache();
   var sh = SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SHEET_ID')).getSheets()[0];
   var lock = LockService.getScriptLock();
-  lock.waitLock(10000);
+  lock.waitLock(30000);
   try {
+    if (rid && cache.get('rid_' + rid)) return true;   // 이미 저장된 응답
     sh.appendRow([new Date(), a.gender, inp.companion, inp.minutes + '분', inp.topics.join(', '),
       a.paid === '무료만' ? '무료만' : '괜찮음', a.newPref === '아니오' ? '아니오' : '예']
-      .concat(out, [a.like, a.visit, String(a.comment || '').slice(0, 2000)]));
+      .concat(out, [a.like, a.visit, safeText_(a.comment), a.visited, sec, src]));
+    if (rid) cache.put('rid_' + rid, '1', 21600);
   } finally { lock.releaseLock(); }
   return true;
+}
+
+// 기타 의견: 2,000자까지, =·+·-·@로 시작하면 시트가 수식으로 읽지 않게 앞에 ' 붙임
+function safeText_(s) {
+  s = String(s || '').slice(0, 2000);
+  return /^[=+\-@]/.test(s) ? "'" + s : s;
 }
 
 function resultCells_(res, d) {
