@@ -832,3 +832,15 @@
 - 출처:
   - https://www.acc.go.kr/main/menu.do?PID=070902
   - https://www.acc.go.kr/main/contents.do?PID=900201
+
+## 2026-11-27 OUR ACC JOURNEY 수익화 후보
+
+- 파일: 박대식/bm/my-revenue.md
+- 키워드: 예비관광벤처 사업화 지원금 3,000만~7,000만 원(제17회), 제18회 금액 미확인, 관광벤처 100개 선정, 서울·부산 관광스타트업 공모, 국중박 비공식 앱 오디오가이드 7,700원/주, 공식 전시안내 앱 무료
+- 출처:
+  - https://eopla.net/magazines/39058
+  - https://hoyjckszljqxplxxpzcl.supabase.co/storage/v1/object/public/program-attachments/crawl/kstartup/76/76119824863f562a548676b9c224f5f909b311a66ef2a52168a88c6204e2abb6.pdf
+  - https://www.newsis.com/view/NISX20260422_0003601678
+  - https://mediahub.seoul.go.kr/gongmo/2000762
+  - https://www.heraldk.com/article/2026030516313028904
+  - https://apps.apple.com/kr/app/id6748075210
