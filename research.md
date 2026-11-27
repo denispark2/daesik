@@ -824,3 +824,11 @@
 - 출처:
   - https://www.acc.go.kr/main/organization.do?PID=080401
   - https://www.acc.go.kr/main/contents.do?PID=900202
+
+## 2026-11-27 ACC 글로 문의하는 방법
+
+- 파일: 아시아문화전당조사.md '전화 말고 글로 문의·의견 보내는 방법'
+- 키워드: 국민신문고 묻고 답하기, 1:1 문의 통합, 정보공개청구 10일, 전시기획과 이메일 비공개
+- 출처:
+  - https://www.acc.go.kr/main/menu.do?PID=070902
+  - https://www.acc.go.kr/main/contents.do?PID=900201
