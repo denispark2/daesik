@@ -844,3 +844,8 @@
   - https://mediahub.seoul.go.kr/gongmo/2000762
   - https://www.heraldk.com/article/2026030516313028904
   - https://apps.apple.com/kr/app/id6748075210
+
+
+## 식객 공식 관람안내 재확인 (ACC현재전시_블로그리뷰취합.md 4번, 2026-11-27)
+- 키워드: 통합관람권(식객+인상파) 15,000원 현장발권만 공식 확인, 전남·광주통합특별시민 8,000원(증빙 지참 현장발권), ACC 문화패스(만 7~24세) 5,000원, 문화누리카드, 만 6세 이하 무료, 입장마감 17:30, 월요일 휴관
+- 출처: https://www.acc.go.kr/main/exhibition.do?PID=0202&action=Read&bnkey=EM_0000009927
